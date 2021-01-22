@@ -1,33 +1,11 @@
-# server
+# How to start up this server
+`cd server` ==> make sure that path ends with `13\server`
+`npm install`
+`npm start`
 
-## Setup
+## Server init for typescript server (this server)
+followed https://blog.logrocket.com/typescript-with-node-js-and-express/
 
-1. Go to project folder
-
-> cd server
-
-2. Install Dependencies
-
-> npm run setup
-
-3. Create .env with following content
-
-````
-DB_HOST=
-DB_DATABASE=
-DB_USER=
-DB_PASSWORD=
-
-PORT=3000
-SECRET=AAA
-````
-
-## Run
-
-1. Start Server
-
-> npm start
-
-2. Open in url or using an Endpoint tester (postman)
-
-> http://127.0.0.1:3000/
+## Server init for javascript server
+`npm install express-generator -g`
+`express server`
