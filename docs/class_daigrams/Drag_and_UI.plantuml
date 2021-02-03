@@ -1,0 +1,73 @@
+@startuml Drag_and_Drop_UI
+
+interface IDraggable {
+
+}
+
+interface IDroppable {
+    + void ItemLeft(GameObject item)
+    + void ItemCame(GameObject item)
+    + IDraggable GetCurrentItem()
+}
+IDroppable ..> IDraggable
+
+class ProtoDrive implements IDraggable, IPointerDownHandler, IPointerUpHandler {
+    - currentSeat: IDroppable
+    - isDragged: IDraggable
+    - currentDiff: Vector2 = Vector2.zero
+    - dropRange: float
+    + myCanvas: Canvas
+
+    - Vector2 GetMousePosInCanvas()
+    + void OnPointerDown(PointerEventData eventData)
+    + void OnPointerUp(PointerEventData eventData)
+}
+ProtoDrive o-- "1" IDroppable 
+
+class ProtoSeat implements IDroppable {
+    - currentItem: IDraggable
+    + void ItemLeft(GameObject item)
+    + void ItemCame(GameObject item)
+}
+
+' class Employee implements CaffeineAddict {
+'     + drinkCoffee(): void
+'     + discussImportantStuff(): void
+' }
+
+' Employee *--"1" Salary
+
+' class Salary {
+'     + salary: int
+' }
+
+' enum SeniorityLevel {
+'     L1
+'     L2
+'     L3
+' }
+
+' class JuniorEmployee extends Employee {
+'     + seniorityLevel: SeniorityLevel = L2
+' }
+
+' class SeniorEmployee extends Employee {
+'     + seniorityLevel: SeniorityLevel = L3
+' }
+
+' class Company {
+'     + hustle(): void 
+'     + getEmptyMeetingRoom(): MeetingRoom
+' }
+' Company *-- "*" MeetingRoom
+' Company o-- "*" Employee
+
+' class MeetingRoom {
+'     - isOccupied: boolean = false
+'     + getOccupied(): boolean 
+'     + setOccupied(val: boolean): void 
+'     + useMeetingRoom(employee: Employee): void 
+' }
+' MeetingRoom ..> Employee
+
+@enduml
