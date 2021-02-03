@@ -9,4 +9,5 @@ public interface IDroppable
     void ItemCame(GameObject item);
     GameObject GetCurrentItem();
     bool IsOccupied();
+    string GetLayer();
 }

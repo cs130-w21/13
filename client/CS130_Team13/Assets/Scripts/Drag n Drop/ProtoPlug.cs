@@ -9,6 +9,8 @@ public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointe
     
     [SerializeField] private bool isDragged = false;
 
+    [SerializeField] private string myLayer;
+
     // temporary states related to "drag"
     private Vector2 mouseLockPos = Vector2.zero;
     private Vector2 myLockPos = Vector2.zero;
@@ -28,8 +30,6 @@ public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointe
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        isDragged = false;
-
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
             Debug.Log("seat found and updating");
@@ -50,6 +50,8 @@ public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointe
         // reset position states
         mouseLockPos = Vector2.zero;
         myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
+
+        isDragged = false;
     }
 
 
@@ -83,13 +85,15 @@ public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointe
 
             // loop all seats for an overlap (or the closest overlap)
             foreach (GameObject seatObject in seatObjects) {
+                IDroppable seat = seatObject.GetComponent<IDroppable>();
                 Vector2 seatDimensions = seatObject.GetComponent<RectTransform>().sizeDelta;
 
                 Vector2 diff = JohnnyUITools.GetCanvasCoord(gameObject) - JohnnyUITools.GetCanvasCoord(seatObject);
 
+                // if overlapping, and not occupied, and under the same layer
                 if (diff.x > - myDimensions.x && diff.x < seatDimensions.x 
-                    && diff.y > - myDimensions.y && diff.y < seatDimensions.y) {
-                    // overlapping found!
+                    && diff.y > - myDimensions.y && diff.y < seatDimensions.y
+                    && !seat.IsOccupied() && seat.GetLayer() == myLayer) {
                     if (closestSeat == null) {
                         // when this is the only seat so far
                         closestSeat = seatObject;

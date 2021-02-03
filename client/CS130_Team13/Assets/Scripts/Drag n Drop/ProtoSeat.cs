@@ -7,6 +7,8 @@ public class ProtoSeat : MonoBehaviour, IDroppable {
     private GameObject currentItem = null;
     private RectTransform myTransform;
 
+    [SerializeField] string myLayer;
+
     public GameObject GetCurrentItem() {
         return currentItem;
     }
@@ -43,4 +45,7 @@ public class ProtoSeat : MonoBehaviour, IDroppable {
         currentItem = null;
     }
 
+    public string GetLayer() {
+        return myLayer;
+    }
 }
