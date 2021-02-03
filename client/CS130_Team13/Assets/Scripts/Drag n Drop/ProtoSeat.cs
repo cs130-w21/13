@@ -11,6 +11,10 @@ public class ProtoSeat : MonoBehaviour, IDroppable {
         return currentItem;
     }
 
+    public bool IsOccupied() {
+        return currentItem != null;
+    }
+
 
     private void Start() {
         myTransform = gameObject.GetComponent<RectTransform>();

@@ -30,10 +30,6 @@ public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointe
     public void OnPointerUp(PointerEventData eventData) {
         isDragged = false;
 
-        // reset position states
-        mouseLockPos = Vector2.zero;
-        myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
-
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
             Debug.Log("seat found and updating");
@@ -46,6 +42,14 @@ public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointe
             // update lock position to new anchored position
             myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
         }
+        else if (currentSeat) {
+            // when there's no change in seat, resume to old position
+            gameObject.GetComponent<RectTransform>().anchoredPosition = myLockPos;
+        }
+
+        // reset position states
+        mouseLockPos = Vector2.zero;
+        myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
 
 
@@ -85,7 +89,7 @@ public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointe
 
                 if (diff.x > - myDimensions.x && diff.x < seatDimensions.x 
                     && diff.y > - myDimensions.y && diff.y < seatDimensions.y) {
-                    // overlapping
+                    // overlapping found!
                     if (closestSeat == null) {
                         // when this is the only seat so far
                         closestSeat = seatObject;

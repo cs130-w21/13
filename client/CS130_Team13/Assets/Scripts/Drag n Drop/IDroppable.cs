@@ -8,4 +8,5 @@ public interface IDroppable
     void ItemLeft(GameObject item);
     void ItemCame(GameObject item);
     GameObject GetCurrentItem();
+    bool IsOccupied();
 }
