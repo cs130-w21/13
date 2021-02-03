@@ -153,10 +153,10 @@ RectTransform:
   m_Father: {fileID: 1990610675}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 267, y: 328}
-  m_SizeDelta: {x: 324.0364, y: 134.75531}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000015795, y: 0.000000089407}
+  m_SizeDelta: {x: 324.03638, y: 134.75531}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &997477690
 MonoBehaviour:
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragged: 0
-  myContainer: {fileID: 997477688}
+  myCanvas: {fileID: 1990610674}
 --- !u!114 &1762919576
 MonoBehaviour:
   m_ObjectHideFlags: 0
