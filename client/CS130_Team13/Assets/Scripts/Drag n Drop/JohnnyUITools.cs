@@ -13,18 +13,25 @@ public class JohnnyUITools
         Vector2 result = Vector2.zero;
 
         GameObject me = gameObject;
-        GameObject parent = gameObject.GetComponent<RectTransform>().parent.gameObject;
+        // GameObject parent = gameObject.GetComponent<RectTransform>().parent.gameObject;
 
         // while it's not directly under canvas yet
-        while (parent.GetComponent<Canvas>() == null) {
-            Vector2 myCenterPos = me.GetComponent<RectTransform>().anchoredPosition;
-            Vector2 myDimension = me.GetComponent<RectTransform>().sizeDelta;
-            Vector2 myPivot = me.GetComponent<RectTransform>().pivot;
+        while (me.GetComponent<Canvas>() == null) {
+            RectTransform myTransform = me.GetComponent<RectTransform>();
+            RectTransform parentTransform = me.transform.parent.gameObject.GetComponent<RectTransform>();
+
+            Vector2 myCenterPos = myTransform.anchoredPosition;
+            Vector2 myDimension = myTransform.sizeDelta;
+            Vector2 myPivot = myTransform.pivot;
 
             result += myCenterPos - new Vector2(myDimension.x * myPivot.x, myDimension.y * myPivot.y);
 
-            me = parent;
-            parent = me.GetComponent<RectTransform>().parent.gameObject;
+            // don't use stretch anchor for this
+            Vector2 myAnchorPoint = myTransform.anchorMax;
+            result += new Vector2(parentTransform.sizeDelta.x * myAnchorPoint.x, parentTransform.sizeDelta.y * myAnchorPoint.y);
+
+            me = me.GetComponent<RectTransform>().parent.gameObject;
+            // parent = me.GetComponent<RectTransform>().parent.gameObject;
         }
 
         return result;
