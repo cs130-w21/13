@@ -6,14 +6,16 @@ using UnityEngine.EventSystems;
 public class ProtoDrive : MonoBehaviour, IDraggable, IPointerDownHandler, IPointerUpHandler {
 
     [SerializeField] private IDroppable currentSeat = null;
-
+    
     [SerializeField] private bool isDragged = false;
 
     private Vector2 currentDiff = Vector2.zero;
+    private Vector2 mouseLockPos = Vector2.zero;
+    private Vector2 myLockPos = Vector2.zero;
 
+    // public GameObject myContainer;
     public Canvas myCanvas;
 
-    // shortcuts to mouse position translation ////////////////////////////////
     private Vector2 GetMousePosInCanvas() {
         float mousePosX = Input.mousePosition.x;
         float mousePosY = Input.mousePosition.y;
@@ -27,6 +29,7 @@ public class ProtoDrive : MonoBehaviour, IDraggable, IPointerDownHandler, IPoint
         return new Vector2(mousePosInCanvasX, mousePosInCanvasY);
     }
 
+
     // UI event handlers //////////////////////////////////////////////////////
     public void OnPointerDown(PointerEventData eventData) {
         Debug.Log("hello");
@@ -34,7 +37,8 @@ public class ProtoDrive : MonoBehaviour, IDraggable, IPointerDownHandler, IPoint
         isDragged = true;
 
         // update diff
-        currentDiff = gameObject.GetComponent<RectTransform>().anchoredPosition - GetMousePosInCanvas();
+        // currentDiff = gameObject.GetComponent<RectTransform>().anchoredPosition - myContainer.GetComponent<IContainer>().GetMousePosInMe();
+        mouseLockPos = GetMousePosInCanvas();
     }
 
     public void OnPointerUp(PointerEventData eventData) {
@@ -42,14 +46,20 @@ public class ProtoDrive : MonoBehaviour, IDraggable, IPointerDownHandler, IPoint
 
         // reset diff
         currentDiff = Vector2.zero;
+        mouseLockPos = Vector2.zero;
+        myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
+
 
     // start //////////////////////////////////////////////////////////////////
     private void Start() {
         Debug.Log(Screen.width);
         Debug.Log(Screen.height);
-        Debug.Log(myCanvas.GetComponent<RectTransform>().sizeDelta);
+        // Debug.Log(myContainer.GetComponent<RectTransform>().sizeDelta);
+
+        myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
+
 
     // update /////////////////////////////////////////////////////////////////
     public void Update() {
@@ -58,7 +68,8 @@ public class ProtoDrive : MonoBehaviour, IDraggable, IPointerDownHandler, IPoint
             // move it with the mouse
 
             // set rect transform position
-            gameObject.GetComponent<RectTransform>().anchoredPosition = GetMousePosInCanvas() + currentDiff;
+            // gameObject.GetComponent<RectTransform>().anchoredPosition = myContainer.GetComponent<IContainer>().GetMousePosInMe() + currentDiff;
+            gameObject.GetComponent<RectTransform>().anchoredPosition = GetMousePosInCanvas() - mouseLockPos + myLockPos;
         }
     }
 }

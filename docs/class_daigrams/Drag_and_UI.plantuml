@@ -16,19 +16,26 @@ class ProtoDrive implements IDraggable, IPointerDownHandler, IPointerUpHandler {
     - isDragged: IDraggable
     - currentDiff: Vector2 = Vector2.zero
     - dropRange: float
+    ' + myComtainer: IContainer
     + myCanvas: Canvas
 
     - Vector2 GetMousePosInCanvas()
     + void OnPointerDown(PointerEventData eventData)
     + void OnPointerUp(PointerEventData eventData)
 }
-ProtoDrive o-- "1" IDroppable 
+ProtoDrive "1" <--> "1" IDroppable 
+' ProtoDrive --> "1" IContainer
 
 class ProtoSeat implements IDroppable {
     - currentItem: IDraggable
     + void ItemLeft(GameObject item)
     + void ItemCame(GameObject item)
 }
+
+' interface IContainer {
+'     + bool IsCanvas()
+'     + Vector2 GetMousePosInMe()
+' }
 
 ' class Employee implements CaffeineAddict {
 '     + drinkCoffee(): void
