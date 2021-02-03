@@ -4,76 +4,95 @@ interface IDraggable {
 
 }
 
+
 interface IDroppable {
     + void ItemLeft(GameObject item)
     + void ItemCame(GameObject item)
-    + IDraggable GetCurrentItem()
+    + GameObject GetCurrentItem()
+    + bool IsOccupied()
+    + string GetLayer()
 }
-IDroppable ..> IDraggable
 
-class ProtoDrive implements IDraggable, IPointerDownHandler, IPointerUpHandler {
-    - currentSeat: IDroppable
-    - isDragged: IDraggable
-    - currentDiff: Vector2 = Vector2.zero
-    - dropRange: float
-    ' + myComtainer: IContainer
-    + myCanvas: Canvas
 
-    - Vector2 GetMousePosInCanvas()
+class ProtoPlug implements IDraggable, IPointerDownHandler, IPointerUpHandler {
+    - currentSeat: GameObject
+    - isDragged: bool
+    - myLayer: string
+    - mouseLockPos: Vector2 = zero
+    - myLockPos: Vector2.zero
+    - candidateSeat: GameObject = null
+
     + void OnPointerDown(PointerEventData eventData)
     + void OnPointerUp(PointerEventData eventData)
 }
-ProtoDrive "1" <--> "1" IDroppable 
-' ProtoDrive --> "1" IContainer
+ProtoPlug "1" <--> "1" IDroppable
+
 
 class ProtoSeat implements IDroppable {
-    - currentItem: IDraggable
+    - currentItem: GameObject
+    - myTransform: RectTransform
+    - myLayer: string
     + void ItemLeft(GameObject item)
     + void ItemCame(GameObject item)
+    + GameObject GetCurrentItem()
+    + bool IsOccupied()
+    + string GetLayer()
 }
 
-' interface IContainer {
-'     + bool IsCanvas()
-'     + Vector2 GetMousePosInMe()
-' }
+
+class JohnnyUITools {
+    + {static} Vector2 GetCanvasCoord(GameObject gameObject)
+    + {static} Canvas GetMyCanvas(GameObject gameObject)
+    + {static} Vector2 GetMousePosInMyCanvas(GameObject gameObject)
+}
+ProtoPlug ..> JohnnyUITools
+ProtoSeat ..> JohnnyUITools
+
 
 ' class Employee implements CaffeineAddict {
-'     + drinkCoffee(): void
-'     + discussImportantStuff(): void
+    '     + drinkCoffee(): void
+    '     + discussImportantStuff(): void
+    '
 ' }
 
 ' Employee *--"1" Salary
 
 ' class Salary {
-'     + salary: int
+    '     + salary: int
+    '
 ' }
 
 ' enum SeniorityLevel {
-'     L1
-'     L2
-'     L3
+    '     L1
+    '     L2
+    '     L3
+    '
 ' }
 
 ' class JuniorEmployee extends Employee {
-'     + seniorityLevel: SeniorityLevel = L2
+    '     + seniorityLevel: SeniorityLevel = L2
+    '
 ' }
 
 ' class SeniorEmployee extends Employee {
-'     + seniorityLevel: SeniorityLevel = L3
+    '     + seniorityLevel: SeniorityLevel = L3
+    '
 ' }
 
 ' class Company {
-'     + hustle(): void 
-'     + getEmptyMeetingRoom(): MeetingRoom
+    '     + hustle(): void
+    '     + getEmptyMeetingRoom(): MeetingRoom
+    '
 ' }
 ' Company *-- "*" MeetingRoom
 ' Company o-- "*" Employee
 
 ' class MeetingRoom {
-'     - isOccupied: boolean = false
-'     + getOccupied(): boolean 
-'     + setOccupied(val: boolean): void 
-'     + useMeetingRoom(employee: Employee): void 
+    '     - isOccupied: boolean = false
+    '     + getOccupied(): boolean
+    '     + setOccupied(val: boolean): void
+    '     + useMeetingRoom(employee: Employee): void
+    '
 ' }
 ' MeetingRoom ..> Employee
 
