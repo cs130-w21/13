@@ -1,6 +1,6 @@
 @startuml Drag_and_Drop_UI
 
-interface IDraggable {
+interface IDraggable implements IPointerDownHandler, IPointerUpHandler {
 
 }
 
@@ -14,7 +14,7 @@ interface IDroppable {
 }
 
 
-class ProtoPlug implements IDraggable, IPointerDownHandler, IPointerUpHandler {
+class ProtoPlug implements IDraggable {
     - currentSeat: GameObject
     - isDragged: bool
     - myLayer: string
@@ -25,7 +25,7 @@ class ProtoPlug implements IDraggable, IPointerDownHandler, IPointerUpHandler {
     + void OnPointerDown(PointerEventData eventData)
     + void OnPointerUp(PointerEventData eventData)
 }
-ProtoPlug "1" <--> "1" IDroppable
+ProtoPlug --> "1" IDroppable
 
 
 class ProtoSeat implements IDroppable {
@@ -38,15 +38,15 @@ class ProtoSeat implements IDroppable {
     + bool IsOccupied()
     + string GetLayer()
 }
-
+ProtoSeat --> "1" IDraggable
 
 class JohnnyUITools {
     + {static} Vector2 GetCanvasCoord(GameObject gameObject)
     + {static} Canvas GetMyCanvas(GameObject gameObject)
     + {static} Vector2 GetMousePosInMyCanvas(GameObject gameObject)
 }
-ProtoPlug ..> JohnnyUITools
-ProtoSeat ..> JohnnyUITools
+' ProtoPlug ..> JohnnyUITools
+' ProtoSeat ..> JohnnyUITools
 
 
 ' class Employee implements CaffeineAddict {

@@ -1,4 +1,5 @@
-﻿public interface IDraggable
-{
+﻿using UnityEngine.EventSystems;
+
+public interface IDraggable: IPointerDownHandler, IPointerUpHandler {
 
 }

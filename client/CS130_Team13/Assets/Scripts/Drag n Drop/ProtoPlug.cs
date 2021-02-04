@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ProtoPlug : MonoBehaviour, IDraggable, IPointerDownHandler, IPointerUpHandler {
+public class ProtoPlug : MonoBehaviour, IDraggable {
 
     [SerializeField] private GameObject currentSeat = null;
     
