@@ -1,0 +1,99 @@
+@startuml Drag_and_Drop_UI
+
+interface IDraggable implements IPointerDownHandler, IPointerUpHandler {
+
+}
+
+
+interface IDroppable {
+    + void ItemLeft(GameObject item)
+    + void ItemCame(GameObject item)
+    + GameObject GetCurrentItem()
+    + bool IsOccupied()
+    + string GetLayer()
+}
+
+
+class ProtoPlug implements IDraggable {
+    - currentSeat: GameObject
+    - isDragged: bool
+    - myLayer: string
+    - mouseLockPos: Vector2 = zero
+    - myLockPos: Vector2.zero
+    - candidateSeat: GameObject = null
+
+    + void OnPointerDown(PointerEventData eventData)
+    + void OnPointerUp(PointerEventData eventData)
+}
+ProtoPlug --> "1" IDroppable
+
+
+class ProtoSeat implements IDroppable {
+    - currentItem: GameObject
+    - myTransform: RectTransform
+    - myLayer: string
+    + void ItemLeft(GameObject item)
+    + void ItemCame(GameObject item)
+    + GameObject GetCurrentItem()
+    + bool IsOccupied()
+    + string GetLayer()
+}
+ProtoSeat --> "1" IDraggable
+
+class JohnnyUITools {
+    + {static} Vector2 GetCanvasCoord(GameObject gameObject)
+    + {static} Canvas GetMyCanvas(GameObject gameObject)
+    + {static} Vector2 GetMousePosInMyCanvas(GameObject gameObject)
+}
+' ProtoPlug ..> JohnnyUITools
+' ProtoSeat ..> JohnnyUITools
+
+
+' class Employee implements CaffeineAddict {
+    '     + drinkCoffee(): void
+    '     + discussImportantStuff(): void
+    '
+' }
+
+' Employee *--"1" Salary
+
+' class Salary {
+    '     + salary: int
+    '
+' }
+
+' enum SeniorityLevel {
+    '     L1
+    '     L2
+    '     L3
+    '
+' }
+
+' class JuniorEmployee extends Employee {
+    '     + seniorityLevel: SeniorityLevel = L2
+    '
+' }
+
+' class SeniorEmployee extends Employee {
+    '     + seniorityLevel: SeniorityLevel = L3
+    '
+' }
+
+' class Company {
+    '     + hustle(): void
+    '     + getEmptyMeetingRoom(): MeetingRoom
+    '
+' }
+' Company *-- "*" MeetingRoom
+' Company o-- "*" Employee
+
+' class MeetingRoom {
+    '     - isOccupied: boolean = false
+    '     + getOccupied(): boolean
+    '     + setOccupied(val: boolean): void
+    '     + useMeetingRoom(employee: Employee): void
+    '
+' }
+' MeetingRoom ..> Employee
+
+@enduml
