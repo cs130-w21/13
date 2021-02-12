@@ -177,3 +177,6 @@ server/.dynamodb/
 
 # TernJS port file
 server/.tern-port
+
+# package lock file
+server/package-lock.json
