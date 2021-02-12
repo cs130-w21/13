@@ -1,8 +1,18 @@
-import express from 'express';
-// rest of the code remains same
-const app = express();
-const PORT = 8000;
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+http.listen(3000, () => {
+  console.log('Connected at 3000');
 });
