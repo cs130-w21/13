@@ -9,9 +9,11 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
 
     [SerializeField] private string myLayer;
 
+    
     public GameObject GetCurrentItem() {
         return currentItem;
     }
+
 
     public bool IsOccupied() {
         return currentItem != null;
@@ -39,12 +41,14 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
         );
     }
 
+
     public void ItemLeft(GameObject item) {
         // release the item from this object's hierarchy
         item.transform.SetParent(JohnnyUITools.GetMyCanvas(gameObject).transform);
 
         currentItem = null;
     }
+
 
     public string GetLayer() {
         return myLayer;

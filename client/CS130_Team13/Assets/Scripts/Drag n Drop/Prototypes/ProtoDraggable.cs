@@ -26,7 +26,11 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
         isDragged = true;
 
+        // put this object on top
+        gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
+
         // update diff
+        myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
         mouseLockPos = JohnnyUITools.GetMousePosInMyCanvas(gameObject);
     }
 
@@ -46,6 +50,9 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
         else if (currentSeat) {
             // when there's no change in seat, resume to old position
             gameObject.GetComponent<RectTransform>().anchoredPosition = myLockPos;
+
+            // resume old parent transform
+            transform.SetParent(currentSeat.transform);
         }
 
         // reset position states
@@ -75,6 +82,10 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
     // update //////////////////////////////////////////////////////////////////////////
     public void Update() {
+        if (!isDragged && currentSeat == null && transform.parent != DragDropManager.instance.GetDraggingContainer()) {
+            gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
+        }
+
         if (isDragged) {
             // set rect transform position
             gameObject.GetComponent<RectTransform>().anchoredPosition =
