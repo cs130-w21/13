@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtoSeat : MonoBehaviour, IDroppable {
+public class ProtoDroppable : MonoBehaviour, IDroppable {
 
     private GameObject currentItem = null;
     private RectTransform myTransform;
