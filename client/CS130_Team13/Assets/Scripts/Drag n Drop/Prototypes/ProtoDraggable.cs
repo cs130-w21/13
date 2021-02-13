@@ -20,7 +20,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
     private GameObject candidateSeat = null;
 
 
-    // UI event handlers //////////////////////////////////////////////////////
+    // UI event handlers ///////////////////////////////////////////////////////////////
     public void OnPointerDown(PointerEventData eventData) {
         Debug.Log("hello");
 
@@ -56,7 +56,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
     }
 
 
-    // start //////////////////////////////////////////////////////////////////
+    // start ///////////////////////////////////////////////////////////////////////////
     private void Start() {
         // some debug messages to check if the position translation worked
         Debug.Log(Screen.width);
@@ -73,7 +73,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
     }
 
 
-    // update /////////////////////////////////////////////////////////////////
+    // update //////////////////////////////////////////////////////////////////////////
     public void Update() {
         if (isDragged) {
             // set rect transform position
@@ -94,16 +94,17 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
                 Vector2 diff = JohnnyUITools.GetCanvasCoord(gameObject) - JohnnyUITools.GetCanvasCoord(seatObject);
 
-                // if overlapping, and not occupied, and under the same layer
+                // if overlapping, and not occupied, and within the correct layer
                 if (diff.x > -myDimensions.x && diff.x < seatDimensions.x
                     && diff.y > -myDimensions.y && diff.y < seatDimensions.y
                     && !seat.IsOccupied() && seat.GetLayer() == myLayer) {
+
                     if (closestSeat == null) {
-                        // when this is the only seat so far
+                        // initializing candidate
                         closestSeat = seatObject;
                     }
                     else {
-                        // overlapping with multiple: choose the closer one
+                        // compare candidates
                         Vector2 oldDiff = JohnnyUITools.GetCanvasCoord(gameObject)
                             - JohnnyUITools.GetCanvasCoord(closestSeat);
                         closestSeat = (diff.magnitude < oldDiff.magnitude) ? seatObject : closestSeat;
@@ -111,13 +112,12 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
                 }
             }
 
-
             // register this candidate
             candidateSeat = closestSeat;
         }
     }
 
-    public string GetBlockInformation() {
-        throw new System.NotImplementedException();
+    public string GetInformation() {
+        return "this is an empty item with no information";
     }
 }
