@@ -691,6 +691,8 @@ MonoBehaviour:
   myGuard: {fileID: 0}
   mySlotInstance: {fileID: 4238331241327786918, guid: 355244f3b8a42e74fbc3a6c4fd3b69fd,
     type: 3}
+  mySlots:
+  - {fileID: 1189657493}
 --- !u!114 &1438783355
 MonoBehaviour:
   m_ObjectHideFlags: 0

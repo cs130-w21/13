@@ -15,6 +15,7 @@ public class ProtoCodingPanel : MonoBehaviour
     private HashSet<GameObject> unoccupiedSlotCondition = new HashSet<GameObject>();
 
     // need to make sure its order corresponds to positional order
+    [SerializeField]
     private List<GameObject> mySlots = new List<GameObject>(); 
 
     public void OccupiedProbe(GameObject probedObject) {
@@ -54,11 +55,11 @@ public class ProtoCodingPanel : MonoBehaviour
             // otherwise find the correct direction and insert the new slot
             if (probedIndex - 1 >= 0 &&
                mySlots[probedIndex - 1].GetComponent<ProtoPanelSlot>().RawProbe()) {
-                mySlots.Insert(probedIndex, FormatNewSlot());
+                FormatNewSlot(probedIndex);
                 break;
             }
             else {
-                mySlots.Insert(probedIndex + 1, FormatNewSlot());
+                FormatNewSlot(probedIndex + 1);
                 break;
             }
         }
@@ -68,11 +69,14 @@ public class ProtoCodingPanel : MonoBehaviour
     }
 
 
-    private GameObject FormatNewSlot() {
-        GameObject slot = Instantiate(mySlotInstance);
-        slot.transform.SetParent(transform);
-        slot.GetComponent<ProtoPanelSlot>().myPanel = this;
+    private GameObject FormatNewSlot(int index) {
+        GameObject newSlot = Instantiate(mySlotInstance);
+        newSlot.transform.SetParent(transform);
+        newSlot.GetComponent<ProtoPanelSlot>().myPanel = this;
 
-        return slot;
+        newSlot.transform.SetSiblingIndex(index);
+        mySlots.Insert(index, newSlot);
+
+        return newSlot;
     }
 }
