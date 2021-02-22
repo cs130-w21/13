@@ -8,7 +8,7 @@ public class ProtoPanelSlot : ProtoDroppable
     public ProtoCodingPanel myPanel;
 
     /// <summary>
-    /// the duration it exists while not being probed
+    /// frames the slot remains while not being probed
     /// </summary>
     [SerializeField]
     private float waitDuration = 1;
@@ -36,10 +36,14 @@ public class ProtoPanelSlot : ProtoDroppable
         return base.IsOccupied();
     }
 
+    public void ResetTimer() {
+        timer = 0;
+    }
+
     public void Update() {
         // if it's empty and not probed, report to panel
         if (!base.IsOccupied()) {
-            timer += Time.deltaTime;
+            timer += 1;
             if (timer >= waitDuration && !foolSwtich)
                 myPanel.DeprecateSlot(gameObject);
         }

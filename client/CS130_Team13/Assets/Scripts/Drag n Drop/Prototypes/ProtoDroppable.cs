@@ -10,7 +10,7 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     [SerializeField] private string myLayer;
 
     
-    public GameObject GetCurrentItem() {
+    public virtual GameObject GetCurrentItem() {
         return currentItem;
     }
 
@@ -25,7 +25,7 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     }
 
 
-    public void ItemCame(GameObject item) {
+    public virtual void ItemCame(GameObject item) {
         currentItem = item;
 
         // group under my hierarchy
@@ -42,7 +42,7 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     }
 
 
-    public void ItemLeft(GameObject item) {
+    public virtual void ItemLeft(GameObject item) {
         // release the item from this object's hierarchy
         item.transform.SetParent(JohnnyUITools.GetMyCanvas(gameObject).transform);
 
@@ -50,7 +50,7 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     }
 
 
-    public string GetLayer() {
+    public virtual string GetLayer() {
         return myLayer;
     }
 }
