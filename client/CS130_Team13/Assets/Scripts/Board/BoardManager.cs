@@ -90,7 +90,12 @@ public class BoardManager : MonoBehaviour
             backgroundTilemap.SetTileFlags(vec2, TileFlags.None);
             backgroundTilemap.SetColor(vec2, borderColor);
         }
-    }
+
+        // Set player positions at opposite corners
+        player1.transform.position = backgroundTilemap.LocalToWorld(new Vector3(0.5f,0.5f,0));
+        player2.transform.position = backgroundTilemap.LocalToWorld(new Vector3(boardWidth-0.5f,boardHeight-0.5f,0));
+
+    } // End CreateBoard
         
     public TileState GetTileState(int x, int y)
     {
