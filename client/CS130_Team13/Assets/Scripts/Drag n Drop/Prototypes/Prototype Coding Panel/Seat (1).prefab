@@ -89,5 +89,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myLayer: default
   myPanel: {fileID: 0}
-  waitDuration: 1
+  waitDuration: 0.2
   foolSwtich: 0

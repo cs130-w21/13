@@ -37,7 +37,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
     public void OnPointerUp(PointerEventData eventData) {
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
-            Debug.Log("seat found and updating");
+            // Debug.Log("seat found and updating");
 
             // lock onto new seat
             if (currentSeat) currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
@@ -65,16 +65,16 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
     // start ///////////////////////////////////////////////////////////////////////////
     private void Start() {
-        // some debug messages to check if the position translation worked
-        Debug.Log(Screen.width);
-        Debug.Log(Screen.height);
+        //// some debug messages to check if the position translation worked
+        //Debug.Log(Screen.width);
+        //Debug.Log(Screen.height);
 
-        // why the hell did I do this??? - johnny
-        Vector3[] v = new Vector3[4];
-        GetComponent<RectTransform>().GetWorldCorners(v);
-        foreach (Vector3 i in v) {
-            Debug.Log(i);
-        }
+        //// why the hell did I do this??? - johnny
+        //Vector3[] v = new Vector3[4];
+        //GetComponent<RectTransform>().GetWorldCorners(v);
+        //foreach (Vector3 i in v) {
+        //    Debug.Log(i);
+        //}
 
         myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
@@ -106,7 +106,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
                 Vector2 diff = JohnnyUITools.GetCanvasCoord(gameObject) - JohnnyUITools.GetCanvasCoord(seatObject);
 
                 // if overlapping, and not occupied, and within the correct layer
-                if (diff.x > -myDimensions.x && diff.x < seatDimensions.x
+                if (seatObject != currentSeat  && diff.x > -myDimensions.x && diff.x < seatDimensions.x
                     && diff.y > -myDimensions.y && diff.y < seatDimensions.y
                     && !seat.IsOccupied() && seat.GetLayer() == myLayer) {
 

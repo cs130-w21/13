@@ -54,7 +54,7 @@ public class ProtoCodingPanel : MonoBehaviour
             // in this prototype I assume there's at most only 2 slots probed at same time
             // otherwise find the correct direction and insert the new slot
             if (probedIndex - 1 >= 0 &&
-               mySlots[probedIndex - 1].GetComponent<ProtoPanelSlot>().RawProbe()) {
+               occupiedSlotCondition.Contains(mySlots[probedIndex - 1])) {
                 FormatNewSlot(probedIndex);
                 break;
             }
@@ -70,8 +70,8 @@ public class ProtoCodingPanel : MonoBehaviour
 
 
     private GameObject FormatNewSlot(int index) {
-        GameObject newSlot = Instantiate(mySlotInstance);
-        newSlot.transform.SetParent(transform);
+        GameObject newSlot = Instantiate(mySlotInstance, transform);
+        newSlot.transform.localScale = new Vector3(1, 1, 1);
         newSlot.GetComponent<ProtoPanelSlot>().myPanel = this;
 
         newSlot.transform.SetSiblingIndex(index);
