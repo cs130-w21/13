@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtoCodingPanel : MonoBehaviour {
+public class ProtoCodingPanel : MonoBehaviour, ICodeInfo {
     [SerializeField]
     private ProtoPanelGuard myGuard;
 
@@ -21,7 +21,23 @@ public class ProtoCodingPanel : MonoBehaviour {
     private List<GameObject> mySlots = new List<GameObject>();
 
 
-    // messages with slots //////////////////////////////////////////////////////////////////
+    // public interface ////////////////////////////////////////////////////////////////////
+    public string GetInformation() {
+        string newInformation = "";
+
+        foreach (GameObject slot in mySlots) {
+            if (slot.GetComponent<ProtoPanelSlot>().RawProbe()) {
+                if (slot.GetComponent<ICodeInfo>().GetInformation() != "") {
+                    newInformation += slot.GetComponent<ICodeInfo>().GetInformation() + " ";
+                }
+            }
+        }
+
+        return newInformation;
+    }
+
+
+    // messages with slots /////////////////////////////////////////////////////////////////
     public void OccupiedProbe(GameObject probedObject) {
         occupiedSlotCondition.Add(probedObject);
     }

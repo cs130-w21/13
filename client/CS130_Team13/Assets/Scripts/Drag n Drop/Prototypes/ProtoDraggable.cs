@@ -21,7 +21,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
 
     // UI event handlers ///////////////////////////////////////////////////////////////
-    public void OnPointerDown(PointerEventData eventData) {
+    public virtual void OnPointerDown(PointerEventData eventData) {
         // Debug.Log("hello");
 
         isDragged = true;
@@ -34,7 +34,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
         mouseLockPos = JohnnyUITools.GetMousePosInMyCanvas(gameObject);
     }
 
-    public void OnPointerUp(PointerEventData eventData) {
+    public virtual void OnPointerUp(PointerEventData eventData) {
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
             // Debug.Log("seat found and updating");
@@ -81,7 +81,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
 
     // update //////////////////////////////////////////////////////////////////////////
-    public void Update() {
+    private void Update() {
         if (!isDragged && currentSeat == null && transform.parent != DragDropManager.instance.GetDraggingContainer()) {
             gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
         }
@@ -126,9 +126,5 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
             // register this candidate
             candidateSeat = closestSeat;
         }
-    }
-
-    public string GetInformation() {
-        return "this is an empty item with no information";
     }
 }

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ProtoPanelSlot : ProtoDroppable
+public class ProtoPanelSlot : ProtoDroppable, ICodeInfo
 {
     public ProtoCodingPanel myPanel;
+
+    private string myInfo = "";
 
     /// <summary>
     /// frames the slot remains while not being probed
@@ -51,5 +53,21 @@ public class ProtoPanelSlot : ProtoDroppable
         else {
             timer = 0;
         }
+    }
+
+    public override void ItemCame(GameObject item) {
+        base.ItemCame(item);
+
+        myInfo = item.GetComponent<ICodeInfo>().GetInformation();
+    }
+
+    public override void ItemLeft(GameObject item) {
+        base.ItemCame(item);
+
+        myInfo = "";
+    }
+
+    public string GetInformation() {
+        return myInfo;
     }
 }

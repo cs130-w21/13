@@ -6,5 +6,4 @@ public interface IDraggable : IPointerDownHandler, IPointerUpHandler {
     /// if-statements and for-loops can be implemented with a healthy composite pattern
     /// </summary>
     /// <returns>string: the information extracted from this block</returns>
-    string GetInformation();
 }
