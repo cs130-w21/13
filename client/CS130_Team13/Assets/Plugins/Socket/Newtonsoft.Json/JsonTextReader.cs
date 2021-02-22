@@ -1125,6 +1125,7 @@ namespace Socket.Newtonsoft.Json {
       this.SetStateBasedOnCurrent();
       return false;
       label_16:
+        return false;
       throw JsonReaderException.Create((JsonReader) this,
         "After parsing a value an unexpected character was encountered: {0}.".FormatWith(
           (IFormatProvider) CultureInfo.InvariantCulture, (object) c));

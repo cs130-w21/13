@@ -26,6 +26,7 @@ client/CS130_Team13/[Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
 client/CS130_Team13/.vs/
+client/CS130_Team13/.vscode/
 
 # Gradle cache directory
 client/CS130_Team13/.gradle/
@@ -70,6 +71,10 @@ client/CS130_Team13/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 # Temporary auto-generated Android Assets
 client/CS130_Team13/[Aa]ssets/[Ss]treamingAssets/aa.meta
 client/CS130_Team13/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignore the first (and probably only) clone
+client/CS130_Team13/.uEcho/
+client/CS130_Team13_clone_0/
 
 
 ####### server file ignores ########
