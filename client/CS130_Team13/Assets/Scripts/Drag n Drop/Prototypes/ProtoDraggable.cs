@@ -22,7 +22,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
     // UI event handlers ///////////////////////////////////////////////////////////////
     public void OnPointerDown(PointerEventData eventData) {
-        Debug.Log("hello");
+        // Debug.Log("hello");
 
         isDragged = true;
 

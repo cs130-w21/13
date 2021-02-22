@@ -15,7 +15,7 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     }
 
 
-    public bool IsOccupied() {
+    public virtual bool IsOccupied() {
         return currentItem != null;
     }
 
