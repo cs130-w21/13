@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ProtoPlug : MonoBehaviour, IDraggable {
+public class ProtoDraggable : MonoBehaviour, IDraggable {
 
-    [SerializeField] private GameObject currentSeat = null;
-    
-    [SerializeField] private bool isDragged = false;
-
+    // API settings
     [SerializeField] private string myLayer;
 
+    // permenant states
+    [SerializeField] private GameObject currentSeat = null;
+
     // temporary states related to "drag"
+    [SerializeField] private bool isDragged = false;
     private Vector2 mouseLockPos = Vector2.zero;
     private Vector2 myLockPos = Vector2.zero;
 
@@ -19,13 +20,17 @@ public class ProtoPlug : MonoBehaviour, IDraggable {
     private GameObject candidateSeat = null;
 
 
-    // UI event handlers //////////////////////////////////////////////////////
+    // UI event handlers ///////////////////////////////////////////////////////////////
     public void OnPointerDown(PointerEventData eventData) {
         Debug.Log("hello");
 
         isDragged = true;
 
+        // put this object on top
+        gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
+
         // update diff
+        myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
         mouseLockPos = JohnnyUITools.GetMousePosInMyCanvas(gameObject);
     }
 
@@ -45,6 +50,9 @@ public class ProtoPlug : MonoBehaviour, IDraggable {
         else if (currentSeat) {
             // when there's no change in seat, resume to old position
             gameObject.GetComponent<RectTransform>().anchoredPosition = myLockPos;
+
+            // resume old parent transform
+            transform.SetParent(currentSeat.transform);
         }
 
         // reset position states
@@ -55,11 +63,13 @@ public class ProtoPlug : MonoBehaviour, IDraggable {
     }
 
 
-    // start //////////////////////////////////////////////////////////////////
+    // start ///////////////////////////////////////////////////////////////////////////
     private void Start() {
+        // some debug messages to check if the position translation worked
         Debug.Log(Screen.width);
         Debug.Log(Screen.height);
-        // Debug.Log(myContainer.GetComponent<RectTransform>().sizeDelta);
+
+        // why the hell did I do this??? - johnny
         Vector3[] v = new Vector3[4];
         GetComponent<RectTransform>().GetWorldCorners(v);
         foreach (Vector3 i in v) {
@@ -70,46 +80,55 @@ public class ProtoPlug : MonoBehaviour, IDraggable {
     }
 
 
-    // update /////////////////////////////////////////////////////////////////
+    // update //////////////////////////////////////////////////////////////////////////
     public void Update() {
+        if (!isDragged && currentSeat == null && transform.parent != DragDropManager.instance.GetDraggingContainer()) {
+            gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
+        }
+
         if (isDragged) {
             // set rect transform position
-            gameObject.GetComponent<RectTransform>().anchoredPosition = 
+            gameObject.GetComponent<RectTransform>().anchoredPosition =
                 JohnnyUITools.GetMousePosInMyCanvas(gameObject) - mouseLockPos + myLockPos;
 
-            // finding the right "seat" to fit in
+            // get a list of all seats / thank you Unity for the tag system
             GameObject[] seatObjects = GameObject.FindGameObjectsWithTag("Seat");
             GameObject closestSeat = null;
 
+            // like the var name, it's dimensions of this draggable object
             Vector2 myDimensions = gameObject.GetComponent<RectTransform>().sizeDelta;
 
-            // loop all seats for an overlap (or the closest overlap)
+            // loop all seats for the closest overlap
             foreach (GameObject seatObject in seatObjects) {
                 IDroppable seat = seatObject.GetComponent<IDroppable>();
                 Vector2 seatDimensions = seatObject.GetComponent<RectTransform>().sizeDelta;
 
                 Vector2 diff = JohnnyUITools.GetCanvasCoord(gameObject) - JohnnyUITools.GetCanvasCoord(seatObject);
 
-                // if overlapping, and not occupied, and under the same layer
-                if (diff.x > - myDimensions.x && diff.x < seatDimensions.x 
-                    && diff.y > - myDimensions.y && diff.y < seatDimensions.y
+                // if overlapping, and not occupied, and within the correct layer
+                if (diff.x > -myDimensions.x && diff.x < seatDimensions.x
+                    && diff.y > -myDimensions.y && diff.y < seatDimensions.y
                     && !seat.IsOccupied() && seat.GetLayer() == myLayer) {
+
                     if (closestSeat == null) {
-                        // when this is the only seat so far
+                        // initializing candidate
                         closestSeat = seatObject;
                     }
                     else {
-                        // overlapping with multiple: choose the closer one
-                        Vector2 oldDiff = JohnnyUITools.GetCanvasCoord(gameObject) 
+                        // compare candidates
+                        Vector2 oldDiff = JohnnyUITools.GetCanvasCoord(gameObject)
                             - JohnnyUITools.GetCanvasCoord(closestSeat);
                         closestSeat = (diff.magnitude < oldDiff.magnitude) ? seatObject : closestSeat;
                     }
                 }
             }
 
-
             // register this candidate
             candidateSeat = closestSeat;
         }
+    }
+
+    public string GetInformation() {
+        return "this is an empty item with no information";
     }
 }
