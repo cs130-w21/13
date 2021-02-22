@@ -184,4 +184,4 @@ server/.dynamodb/
 server/.tern-port
 
 # package lock file
-*/package-lock.json
+server/package-lock.json
