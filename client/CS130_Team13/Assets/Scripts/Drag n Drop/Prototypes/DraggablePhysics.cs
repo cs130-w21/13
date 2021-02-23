@@ -20,6 +20,20 @@ public class DraggablePhysics : MonoBehaviour, IDraggable {
     private GameObject candidateSeat = null;
 
 
+    /// <summary>
+    /// backdoor to force this item to be attached to an IDroppable, make sure you know what you are doing when calling this
+    /// </summary>
+    /// <param name="droppable">the game object containing IDroppable component</param>
+    public void ForceInto(GameObject droppable) {
+        Debug.Log("forced");
+        if (currentSeat)
+            currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
+
+        currentSeat = droppable;
+        droppable.GetComponent<IDroppable>().ItemCame(gameObject);
+    }
+
+
     // UI event handlers ///////////////////////////////////////////////////////////////
     public virtual void OnPointerDown(PointerEventData eventData) {
         isDragged = true;

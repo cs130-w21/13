@@ -23,5 +23,9 @@ public class PanelItem : DraggablePhysics, ICodeInfo
 
         if (DragDropManager.instance.currentlyDraggedItem == gameObject)
             DragDropManager.instance.currentlyDraggedItem = null;
+
+        if (transform.parent == DragDropManager.instance.GetDraggingContainer()) {
+            Destroy(gameObject);
+        }
     }
 }

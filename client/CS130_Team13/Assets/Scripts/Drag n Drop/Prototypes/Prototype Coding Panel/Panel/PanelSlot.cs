@@ -9,8 +9,8 @@ public class PanelSlot : DroppablePhysics, ICodeInfo
 
     private string myInfo = "";
 
-    [SerializeField]
-    private bool foolSwtich = false;
+    //[SerializeField]
+    //private bool foolSwtich = false;
 
     public override void ItemCame(GameObject item) {
         base.ItemCame(item);

@@ -20,7 +20,7 @@ public class DroppablePhysics : MonoBehaviour, IDroppable {
     }
 
 
-    private void Start() {
+    public virtual void Start() {
         myTransform = gameObject.GetComponent<RectTransform>();
     }
 
@@ -32,7 +32,7 @@ public class DroppablePhysics : MonoBehaviour, IDroppable {
         item.transform.SetParent(transform);
 
         // move to my center / if you read this be notified there are mutliple ways of handling "where to put it"
-        RectTransform itemTransform = item.gameObject.GetComponent<RectTransform>();
+        RectTransform itemTransform = item.GetComponent<RectTransform>();
 
         // don't use stretch anchor for this one
         itemTransform.anchoredPosition = new Vector2(

@@ -62,18 +62,19 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                     hoveringSlot = FormatNewSlot(0);
                 }
                 else {
-                    bool touched = false;
+                    bool matched = false;
                     
                     // position check
                     foreach (GameObject slot in mySlots) {
                         Vector2 slotBottom = JohnnyUITools.GetCanvasCoord(slot);
                         Vector2 slotTop = JohnnyUITools.GetCanvasCoord(slot) + slot.GetComponent<RectTransform>().sizeDelta;
+                        Vector2 itemBottom = JohnnyUITools.GetCanvasCoord(DragDropManager.instance.currentlyDraggedItem);
                         Vector2 itemCenter = JohnnyUITools.GetCenterCanvasCoord(DragDropManager.instance.currentlyDraggedItem);
 
                         // move or create hovering slot here
                         if (slotBottom.y <= itemCenter.y && slotTop.y >= itemCenter.y) {
-                            touched = true;
-
+                            matched = true;
+                            
                             if (slot == hoveringSlot) break;
 
                             // create new hover slot
@@ -101,7 +102,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                         }
                     }
 
-                    if (!touched) {
+                    if (!matched) {
                         // move hover slot to bottom
                         if (hoveringSlot) {
                             ReorderSlot(mySlots.Count - 1, hoveringSlot);
