@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtoPanelGuard : MonoBehaviour, IDroppable {
+public class PanelGuard : MonoBehaviour, IDroppable {
     [SerializeField]
     private string myLayer;
 
@@ -27,5 +27,10 @@ public class ProtoPanelGuard : MonoBehaviour, IDroppable {
 
     public void ItemLeft(GameObject item) {
         throw new System.NotImplementedException();
+    }
+
+    private void Update() {
+        gameObject.GetComponent<RectTransform>().anchoredPosition = myPanel.GetComponent<RectTransform>().anchoredPosition;
+        gameObject.GetComponent<RectTransform>().sizeDelta = myPanel.GetComponent<RectTransform>().sizeDelta;
     }
 }

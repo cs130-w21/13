@@ -38,8 +38,6 @@ public class DraggablePhysics : MonoBehaviour, IDraggable {
     public virtual void OnPointerUp(PointerEventData eventData) {
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
-            // Debug.Log("seat found and updating");
-
             // lock onto new seat
             if (currentSeat) currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
             candidateSeat.GetComponent<IDroppable>().ItemCame(gameObject);
@@ -47,16 +45,6 @@ public class DraggablePhysics : MonoBehaviour, IDraggable {
 
             // update lock position to new anchored position
             myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
-        }
-        //else if (currentSeat) {
-        //    // when there's no change in seat, resume to old position
-        //    gameObject.GetComponent<RectTransform>().anchoredPosition = myLockPos;
-
-        //    // resume old parent transform
-        //    transform.SetParent(currentSeat.transform);
-        //}
-        else {
-            // TODO: return to origination
         }
 
         // reset position states
@@ -69,17 +57,6 @@ public class DraggablePhysics : MonoBehaviour, IDraggable {
 
     // start ///////////////////////////////////////////////////////////////////////////
     private void Start() {
-        //// some debug messages to check if the position translation worked
-        //Debug.Log(Screen.width);
-        //Debug.Log(Screen.height);
-
-        //// why the hell did I do this??? - johnny
-        //Vector3[] v = new Vector3[4];
-        //GetComponent<RectTransform>().GetWorldCorners(v);
-        //foreach (Vector3 i in v) {
-        //    Debug.Log(i);
-        //}
-
         myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
 

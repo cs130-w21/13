@@ -84,10 +84,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 174922305299236426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d35eb959a023a541ae5d71104e2d1a1, type: 3}
+  m_Script: {fileID: 11500000, guid: b724642ad6333dd40a6aa94eee1e98ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myLayer: default
   myPanel: {fileID: 0}
-  waitDuration: 2
   foolSwtich: 0
