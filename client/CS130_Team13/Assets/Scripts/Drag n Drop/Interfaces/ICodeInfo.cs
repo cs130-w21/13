@@ -10,4 +10,6 @@ public interface ICodeInfo
     /// </summary>
     /// <returns>string: the information extracted from this block</returns>
     string GetInformation();
+
+    int GetCost();
 }

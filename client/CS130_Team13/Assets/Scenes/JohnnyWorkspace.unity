@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909d6ddcad6b38428596ed38123fa15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLayer: 
+  myLayer: default
   itemPrefab: {fileID: 1462272108748290699, guid: 5eaf137be3e89f54f81790db5f2ed2e3,
     type: 3}
 --- !u!114 &289344194
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909d6ddcad6b38428596ed38123fa15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLayer: 
+  myLayer: default
   itemPrefab: {fileID: 6940419369911841694, guid: fdda17b6a1d03bd40b0569a97ea3582b,
     type: 3}
 --- !u!114 &448350479
@@ -370,6 +370,7 @@ MonoBehaviour:
   mySlotInstance: {fileID: 174922305299236426, guid: 355244f3b8a42e74fbc3a6c4fd3b69fd,
     type: 3}
   mySlots: []
+  maxCost: 10
 --- !u!1 &1153391397
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909d6ddcad6b38428596ed38123fa15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLayer: 
+  myLayer: default
   itemPrefab: {fileID: 4448496373003061144, guid: e6a08ccb59dcb704c8421e7b7375a143,
     type: 3}
 --- !u!114 &1552032237

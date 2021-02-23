@@ -19,6 +19,10 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
     // there should only be one "hovering" empty slot instantiated in this
     private GameObject hoveringSlot = null;
 
+    // deciding the max amount of items
+    [SerializeField]
+    private int maxCost = 10;
+
     // public interface ////////////////////////////////////////////////////////////////////
     public string GetInformation() {
         string newInformation = "";
@@ -34,13 +38,17 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return newInformation;
     }
 
+    public int GetCost() {
+        int cost = 0;
 
-    public void RemoveSlot(GameObject deprecatedSlot) {
-        mySlots.Remove(deprecatedSlot);
-        Destroy(deprecatedSlot);
+        foreach (GameObject slot in mySlots) {
+            cost += slot.GetComponent<ICodeInfo>().GetCost();
+        }
+
+        return cost;
     }
 
-
+    
     // message with guard (handling empty) //////////////////////////////////////////////////
     public void ReportGuardProbe() {
         guardProbed = true;
@@ -55,6 +63,14 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
 
         // if there's an item hoverring above this panel
         if (guardProbed) {
+            // skip if panel is full already
+            if (GetCost() >= maxCost) {
+                // TODO: fill in the alarming behavior here
+                Debug.Log("panel full!");
+                guardProbed = false;
+                return;
+            }
+
             // if there's an item currently being dragged
             if (DragDropManager.instance.currentlyDraggedItem) {
                 // in case of empty
@@ -130,8 +146,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         mySlots.Remove(slot);
         mySlots.Insert(index, slot);
     }
-    
-    
+        
     private GameObject FormatNewSlot(int index) {
         GameObject newSlot = Instantiate(mySlotInstance, transform);
         newSlot.transform.localScale = new Vector3(1, 1, 1);
@@ -147,5 +162,10 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         mySlots.Insert(index, newSlot);
 
         return newSlot;
+    }
+
+    public void RemoveSlot(GameObject deprecatedSlot) {
+        mySlots.Remove(deprecatedSlot);
+        Destroy(deprecatedSlot);
     }
 }

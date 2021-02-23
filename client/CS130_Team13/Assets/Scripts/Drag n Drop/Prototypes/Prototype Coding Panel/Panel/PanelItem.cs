@@ -7,6 +7,9 @@ public class PanelItem : DraggablePhysics, ICodeInfo
 {
     [SerializeField]
     private string myInformation = "";
+
+    [SerializeField]
+    private int myCost = 1;
     
     public string GetInformation() {
         return myInformation;
@@ -27,5 +30,9 @@ public class PanelItem : DraggablePhysics, ICodeInfo
         if (transform.parent == DragDropManager.instance.GetDraggingContainer()) {
             Destroy(gameObject);
         }
+    }
+
+    public virtual int GetCost() {
+        return myCost;
     }
 }
