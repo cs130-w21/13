@@ -22,11 +22,12 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
     // UI event handlers ///////////////////////////////////////////////////////////////
     public virtual void OnPointerDown(PointerEventData eventData) {
-        // Debug.Log("hello");
-
         isDragged = true;
 
         // put this object on top
+        if (currentSeat)
+            currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
+        currentSeat = null;
         gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
 
         // update diff
@@ -47,12 +48,15 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
             // update lock position to new anchored position
             myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
         }
-        else if (currentSeat) {
-            // when there's no change in seat, resume to old position
-            gameObject.GetComponent<RectTransform>().anchoredPosition = myLockPos;
+        //else if (currentSeat) {
+        //    // when there's no change in seat, resume to old position
+        //    gameObject.GetComponent<RectTransform>().anchoredPosition = myLockPos;
 
-            // resume old parent transform
-            transform.SetParent(currentSeat.transform);
+        //    // resume old parent transform
+        //    transform.SetParent(currentSeat.transform);
+        //}
+        else {
+            // TODO: return to origination
         }
 
         // reset position states
