@@ -62,7 +62,7 @@ public class ProtoPanelSlot : ProtoDroppable, ICodeInfo
     }
 
     public override void ItemLeft(GameObject item) {
-        base.ItemCame(item);
+        base.ItemLeft(item);
 
         myInfo = "";
     }
