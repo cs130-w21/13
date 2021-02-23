@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtoCodingPanel : MonoBehaviour, ICodeInfo {
+public class CodingPanel : MonoBehaviour, ICodeInfo {
     [SerializeField]
     private ProtoPanelGuard myGuard;
 
@@ -125,6 +125,12 @@ public class ProtoCodingPanel : MonoBehaviour, ICodeInfo {
         GameObject newSlot = Instantiate(mySlotInstance, transform);
         newSlot.transform.localScale = new Vector3(1, 1, 1);
         newSlot.GetComponent<ProtoPanelSlot>().myPanel = this;
+
+        // make sure every slot 
+        if (DragDropManager.instance.currentlyDraggedItem != null) {
+            newSlot.GetComponent<RectTransform>().sizeDelta =
+                DragDropManager.instance.currentlyDraggedItem.GetComponent<RectTransform>().sizeDelta;
+        }
 
         newSlot.transform.SetSiblingIndex(index);
         mySlots.Insert(index, newSlot);

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ProtoPanelSlot : ProtoDroppable, ICodeInfo
 {
-    public ProtoCodingPanel myPanel;
+    public CodingPanel myPanel;
 
     private string myInfo = "";
 

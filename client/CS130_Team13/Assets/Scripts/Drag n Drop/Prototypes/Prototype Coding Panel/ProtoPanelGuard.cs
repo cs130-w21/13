@@ -6,7 +6,7 @@ public class ProtoPanelGuard : MonoBehaviour, IDroppable {
     [SerializeField]
     private string myLayer;
 
-    public ProtoCodingPanel myPanel;
+    public CodingPanel myPanel;
     
     public GameObject GetCurrentItem() {
         throw new System.NotImplementedException();
