@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ProtoDraggable : MonoBehaviour, IDraggable {
+public class DraggablePhysics : MonoBehaviour, IDraggable {
 
     // API settings
     [SerializeField] private string myLayer;

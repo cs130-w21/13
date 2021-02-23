@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtoDroppable : MonoBehaviour, IDroppable {
+public class DroppablePhysics : MonoBehaviour, IDroppable {
 
     private GameObject currentItem = null;
     private RectTransform myTransform;

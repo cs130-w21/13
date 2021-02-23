@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PanelItem : ProtoDraggable, ICodeInfo
+public class PanelItem : DraggablePhysics, ICodeInfo
 {
     [SerializeField]
     private string myInformation = "";
