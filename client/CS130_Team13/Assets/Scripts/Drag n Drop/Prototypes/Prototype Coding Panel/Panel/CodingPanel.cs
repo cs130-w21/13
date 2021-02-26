@@ -106,6 +106,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                 }
                 else {
                     bool matched = false;
+                    bool above = false;
                     
                     // position check
                     foreach (GameObject slot in mySlots) {
@@ -143,9 +144,20 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
 
                             break;
                         }
+                        else if (slotBottom.y < itemBottom.y) {
+                            above = true;
+                        }
                     }
 
-                    if (!matched) {
+                    if (!matched && above) {
+                        if (hoveringSlot) {
+                            ReorderSlot(0, hoveringSlot);
+                        }
+                        else {
+                            hoveringSlot = FormatNewSlot(0);
+                        }
+                    }
+                    else if (!matched) {                        
                         // move hover slot to bottom
                         if (hoveringSlot) {
                             ReorderSlot(mySlots.Count - 1, hoveringSlot);
