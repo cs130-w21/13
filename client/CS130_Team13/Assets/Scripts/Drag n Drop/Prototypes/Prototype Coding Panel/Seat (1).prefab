@@ -87,6 +87,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b724642ad6333dd40a6aa94eee1e98ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLayer: default
+  myLayer: panel_specific
   myPanel: {fileID: 0}
-  foolSwtich: 0

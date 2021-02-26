@@ -17,16 +17,16 @@ public class PanelGuard : MonoBehaviour, IDroppable {
     }
 
     public bool IsOccupied() {
-        myPanel.ReportGuardProbe();
-        return true;
+        return !myPanel.ReportGuardProbe();
     }
 
     public void ItemCame(GameObject item) {
-        throw new System.NotImplementedException();
+        // send item to panel
+        myPanel.PutItem(item);
     }
 
     public void ItemLeft(GameObject item) {
-        throw new System.NotImplementedException();
+        Debug.Log("item passed to panel");
     }
 
     private void Update() {

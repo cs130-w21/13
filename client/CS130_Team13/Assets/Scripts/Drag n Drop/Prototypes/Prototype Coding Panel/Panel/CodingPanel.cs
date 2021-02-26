@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// there needs to be a 
+/// </summary>
 public class CodingPanel : MonoBehaviour, ICodeInfo {
     [SerializeField]
     private PanelGuard myGuard;
@@ -22,6 +26,9 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
     // deciding the max amount of items
     [SerializeField]
     private int maxCost = 10;
+
+    // remember which items are in the panel
+    private HashSet<GameObject> myItems = new HashSet<GameObject>();
 
     // public interface ////////////////////////////////////////////////////////////////////
     public string GetInformation() {
@@ -48,10 +55,30 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return cost;
     }
 
-    
+    public void PutItem(GameObject newItem) {
+        // force item into hovering slot
+        if (hoveringSlot) {
+            // put item in slot
+            newItem.GetComponent<IDraggable>().ForceInto(hoveringSlot);
+            // update items
+            myItems.Add(newItem);
+        }
+        // TODO: handle the situation where no slot is hovering
+        else {
+            throw new System.Exception("it happened! the object is releaed while no slot is available! tell johnny!");
+        }
+    }
+
+
     // message with guard (handling empty) //////////////////////////////////////////////////
-    public void ReportGuardProbe() {
+    /// <summary>
+    /// register a guard being probed event, and tell the panel guard if panel can take the new object
+    /// </summary>
+    /// <returns>bool: panel has enough space (true = y)</returns>
+    public bool ReportGuardProbe() {
         guardProbed = true;
+        
+        return PanelHasEnoughSpace() /*&& !myItems.Contains(DragDropManager.instance.currentlyDraggedItem)*/;
     }
 
 
@@ -62,9 +89,9 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         }
 
         // if there's an item hoverring above this panel
-        if (guardProbed) {
+        if (guardProbed /*&& !myItems.Contains(DragDropManager.instance.currentlyDraggedItem)*/) {
             // skip if panel is full already
-            if (GetCost() >= maxCost) {
+            if (!PanelHasEnoughSpace()) {
                 // TODO: fill in the alarming behavior here
                 Debug.Log("panel full!");
                 guardProbed = false;
@@ -165,7 +192,16 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
     }
 
     public void RemoveSlot(GameObject deprecatedSlot) {
+        // update slots
         mySlots.Remove(deprecatedSlot);
+        // update items
+        myItems.Remove(deprecatedSlot.GetComponent<IDroppable>().GetCurrentItem());
         Destroy(deprecatedSlot);
+    }
+
+    private bool PanelHasEnoughSpace() {
+        // access the dragged item for 
+        int inpendingCost = DragDropManager.instance.currentlyDraggedItem.GetComponent<ICodeInfo>().GetCost();
+        return (GetCost() + inpendingCost <= maxCost);
     }
 }

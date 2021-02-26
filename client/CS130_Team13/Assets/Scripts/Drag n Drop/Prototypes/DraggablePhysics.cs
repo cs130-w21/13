@@ -53,9 +53,10 @@ public class DraggablePhysics : MonoBehaviour, IDraggable {
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
             // lock onto new seat
-            if (currentSeat) currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
-            candidateSeat.GetComponent<IDroppable>().ItemCame(gameObject);
+            if (currentSeat) 
+                currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
             currentSeat = candidateSeat;
+            candidateSeat.GetComponent<IDroppable>().ItemCame(gameObject);
 
             // update lock position to new anchored position
             myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
