@@ -30,8 +30,10 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
     // remember which items are in the panel
     private HashSet<GameObject> myItems = new HashSet<GameObject>();
 
+    private HashSet<GameObject> skipCheckItems = new HashSet<GameObject>();
+
     // public interface ////////////////////////////////////////////////////////////////////
-    public string GetInformation() {
+    public virtual string GetInformation() {
         string newInformation = "";
 
         foreach (GameObject slot in mySlots) {
@@ -45,7 +47,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return newInformation;
     }
 
-    public int GetCost() {
+    public virtual int GetCost() {
         int cost = 0;
 
         foreach (GameObject slot in mySlots) {
@@ -55,7 +57,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return cost;
     }
 
-    public void PutItem(GameObject newItem) {
+    public virtual void PutItem(GameObject newItem) {
         // force item into hovering slot
         if (hoveringSlot) {
             // put item in slot
@@ -69,13 +71,17 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         }
     }
 
+    public virtual void RegisterSkip(GameObject newItem) {
+        skipCheckItems.Add(newItem);
+    }
+
 
     // message with guard (handling empty) //////////////////////////////////////////////////
     /// <summary>
     /// register a guard being probed event, and tell the panel guard if panel can take the new object
     /// </summary>
     /// <returns>bool: panel has enough space (true = y)</returns>
-    public bool ReportGuardProbe() {
+    public virtual bool ReportGuardProbe() {
         guardProbed = true;
         
         return PanelHasEnoughSpace() /*&& !myItems.Contains(DragDropManager.instance.currentlyDraggedItem)*/;
@@ -83,7 +89,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
 
 
     // system messages //////////////////////////////////////////////////////////////////////
-    public void LateUpdate() {
+    public virtual void LateUpdate() {
         if (hoveringSlot && hoveringSlot.GetComponent<IDroppable>().IsOccupied()) {
             hoveringSlot = null;
         }
@@ -110,6 +116,8 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                     
                     // position check
                     foreach (GameObject slot in mySlots) {
+                        GameObject slotItem = slot.GetComponent<IDroppable>().GetCurrentItem();
+
                         Vector2 slotBottom = JohnnyUITools.GetCanvasCoord(slot);
                         Vector2 slotTop = JohnnyUITools.GetCanvasCoord(slot) + slot.GetComponent<RectTransform>().sizeDelta;
                         Vector2 itemBottom = JohnnyUITools.GetCanvasCoord(DragDropManager.instance.currentlyDraggedItem);
@@ -120,6 +128,14 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                             matched = true;
                             
                             if (slot == hoveringSlot) break;
+                            else if (skipCheckItems.Contains(slotItem)) {
+                                // clear hovering slot
+                                if (hoveringSlot) {
+                                    RemoveSlot(hoveringSlot);
+                                    hoveringSlot = null;    
+                                }
+                                break;
+                            }
 
                             // create new hover slot
                             if (!hoveringSlot) {
@@ -150,7 +166,13 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                     }
 
                     if (!matched && above) {
-                        if (hoveringSlot) {
+                        if (skipCheckItems.Contains(mySlots[0].GetComponent<IDroppable>().GetCurrentItem())) {
+                            if (hoveringSlot) {
+                                    RemoveSlot(hoveringSlot);
+                                    hoveringSlot = null;    
+                            }
+                        }
+                        else if (hoveringSlot) {
                             ReorderSlot(0, hoveringSlot);
                         }
                         else {
@@ -203,11 +225,17 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return newSlot;
     }
 
-    public void RemoveSlot(GameObject deprecatedSlot) {
+    public virtual void RemoveSlot(GameObject deprecatedSlot) {
+        GameObject depItem = deprecatedSlot.GetComponent<IDroppable>().GetCurrentItem();
+        
         // update slots
         mySlots.Remove(deprecatedSlot);
         // update items
-        myItems.Remove(deprecatedSlot.GetComponent<IDroppable>().GetCurrentItem());
+        myItems.Remove(depItem);
+        // update skip item
+        if (skipCheckItems.Contains(depItem)) {
+            skipCheckItems.Remove(depItem);
+        }
         Destroy(deprecatedSlot);
     }
 

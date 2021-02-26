@@ -6,26 +6,27 @@ public class PanelGuard : MonoBehaviour, IDroppable {
     [SerializeField]
     private string myLayer;
 
-    public CodingPanel myPanel;
+    [SerializeField]
+    private CodingPanel myPanel;
     
-    public GameObject GetCurrentItem() {
+    public virtual GameObject GetCurrentItem() {
         throw new System.NotImplementedException();
     }
 
-    public string GetLayer() {
+    public virtual string GetLayer() {
         return myLayer;
     }
 
-    public bool IsOccupied() {
+    public virtual bool IsOccupied() {
         return !myPanel.ReportGuardProbe();
     }
 
-    public void ItemCame(GameObject item) {
+    public virtual void ItemCame(GameObject item) {
         // send item to panel
         myPanel.PutItem(item);
     }
 
-    public void ItemLeft(GameObject item) {
+    public virtual void ItemLeft(GameObject item) {
         Debug.Log("item passed to panel");
     }
 

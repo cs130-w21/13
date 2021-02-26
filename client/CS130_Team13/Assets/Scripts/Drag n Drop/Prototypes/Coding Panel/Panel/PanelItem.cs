@@ -11,7 +11,7 @@ public class PanelItem : DraggablePhysics, ICodeInfo
     [SerializeField]
     private int myCost = 1;
     
-    public string GetInformation() {
+    public virtual string GetInformation() {
         return myInformation;
     }
 
