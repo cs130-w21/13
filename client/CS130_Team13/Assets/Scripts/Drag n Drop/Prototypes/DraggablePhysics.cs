@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ProtoDraggable : MonoBehaviour, IDraggable {
+public class DraggablePhysics : MonoBehaviour, IDraggable {
 
     // API settings
     [SerializeField] private string myLayer;
@@ -20,13 +20,28 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
     private GameObject candidateSeat = null;
 
 
-    // UI event handlers ///////////////////////////////////////////////////////////////
-    public void OnPointerDown(PointerEventData eventData) {
-        Debug.Log("hello");
+    /// <summary>
+    /// backdoor to force this item to be attached to an IDroppable, make sure you know what you are doing when calling this
+    /// </summary>
+    /// <param name="droppable">the game object containing IDroppable component</param>
+    public void ForceInto(GameObject droppable) {
+        Debug.Log("forced");
+        if (currentSeat)
+            currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
 
+        currentSeat = droppable;
+        droppable.GetComponent<IDroppable>().ItemCame(gameObject);
+    }
+
+
+    // UI event handlers ///////////////////////////////////////////////////////////////
+    public virtual void OnPointerDown(PointerEventData eventData) {
         isDragged = true;
 
         // put this object on top
+        if (currentSeat)
+            currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
+        currentSeat = null;
         gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
 
         // update diff
@@ -34,11 +49,9 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
         mouseLockPos = JohnnyUITools.GetMousePosInMyCanvas(gameObject);
     }
 
-    public void OnPointerUp(PointerEventData eventData) {
+    public virtual void OnPointerUp(PointerEventData eventData) {
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
-            Debug.Log("seat found and updating");
-
             // lock onto new seat
             if (currentSeat) currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
             candidateSeat.GetComponent<IDroppable>().ItemCame(gameObject);
@@ -46,13 +59,6 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
             // update lock position to new anchored position
             myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
-        }
-        else if (currentSeat) {
-            // when there's no change in seat, resume to old position
-            gameObject.GetComponent<RectTransform>().anchoredPosition = myLockPos;
-
-            // resume old parent transform
-            transform.SetParent(currentSeat.transform);
         }
 
         // reset position states
@@ -65,23 +71,12 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
 
     // start ///////////////////////////////////////////////////////////////////////////
     private void Start() {
-        // some debug messages to check if the position translation worked
-        Debug.Log(Screen.width);
-        Debug.Log(Screen.height);
-
-        // why the hell did I do this??? - johnny
-        Vector3[] v = new Vector3[4];
-        GetComponent<RectTransform>().GetWorldCorners(v);
-        foreach (Vector3 i in v) {
-            Debug.Log(i);
-        }
-
         myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
 
 
     // update //////////////////////////////////////////////////////////////////////////
-    public void Update() {
+    private void Update() {
         if (!isDragged && currentSeat == null && transform.parent != DragDropManager.instance.GetDraggingContainer()) {
             gameObject.transform.SetParent(DragDropManager.instance.GetDraggingContainer());
         }
@@ -106,7 +101,7 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
                 Vector2 diff = JohnnyUITools.GetCanvasCoord(gameObject) - JohnnyUITools.GetCanvasCoord(seatObject);
 
                 // if overlapping, and not occupied, and within the correct layer
-                if (diff.x > -myDimensions.x && diff.x < seatDimensions.x
+                if (seatObject != currentSeat  && diff.x > -myDimensions.x && diff.x < seatDimensions.x
                     && diff.y > -myDimensions.y && diff.y < seatDimensions.y
                     && !seat.IsOccupied() && seat.GetLayer() == myLayer) {
 
@@ -126,9 +121,5 @@ public class ProtoDraggable : MonoBehaviour, IDraggable {
             // register this candidate
             candidateSeat = closestSeat;
         }
-    }
-
-    public string GetInformation() {
-        return "this is an empty item with no information";
     }
 }

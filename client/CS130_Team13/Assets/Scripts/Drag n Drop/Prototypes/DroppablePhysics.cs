@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtoDroppable : MonoBehaviour, IDroppable {
+public class DroppablePhysics : MonoBehaviour, IDroppable {
 
     private GameObject currentItem = null;
     private RectTransform myTransform;
@@ -10,29 +10,29 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     [SerializeField] private string myLayer;
 
     
-    public GameObject GetCurrentItem() {
+    public virtual GameObject GetCurrentItem() {
         return currentItem;
     }
 
 
-    public bool IsOccupied() {
+    public virtual bool IsOccupied() {
         return currentItem != null;
     }
 
 
-    private void Start() {
+    public virtual void Start() {
         myTransform = gameObject.GetComponent<RectTransform>();
     }
 
 
-    public void ItemCame(GameObject item) {
+    public virtual void ItemCame(GameObject item) {
         currentItem = item;
 
         // group under my hierarchy
         item.transform.SetParent(transform);
 
         // move to my center / if you read this be notified there are mutliple ways of handling "where to put it"
-        RectTransform itemTransform = item.gameObject.GetComponent<RectTransform>();
+        RectTransform itemTransform = item.GetComponent<RectTransform>();
 
         // don't use stretch anchor for this one
         itemTransform.anchoredPosition = new Vector2(
@@ -42,7 +42,7 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     }
 
 
-    public void ItemLeft(GameObject item) {
+    public virtual void ItemLeft(GameObject item) {
         // release the item from this object's hierarchy
         item.transform.SetParent(JohnnyUITools.GetMyCanvas(gameObject).transform);
 
@@ -50,7 +50,7 @@ public class ProtoDroppable : MonoBehaviour, IDroppable {
     }
 
 
-    public string GetLayer() {
+    public virtual string GetLayer() {
         return myLayer;
     }
 }
