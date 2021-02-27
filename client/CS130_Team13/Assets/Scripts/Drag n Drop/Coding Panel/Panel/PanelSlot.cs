@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// attach to object to make it slot that works with CodingPanel;
+/// it implements ICodeInfo overrides DroppablePhysics and adds to it:
+/// 1) update its own info and cost on item leaving and coming;
+/// </summary>
 public class PanelSlot : DroppablePhysics, ICodeInfo
 {
     public CodingPanel myPanel;

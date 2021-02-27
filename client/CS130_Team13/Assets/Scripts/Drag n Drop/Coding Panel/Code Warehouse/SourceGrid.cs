@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// attach to game object and 
+/// assign a IDraggable instance to its itemPrefab field to make it a generator of the assigned prefab;
+/// </summary>
 public class SourceGrid : DroppablePhysics {
     private GameObject myItem = null;
 

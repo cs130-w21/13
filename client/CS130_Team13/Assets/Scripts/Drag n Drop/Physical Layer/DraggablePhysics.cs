@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// attach this to a UI element to allow user to drag it around and find touching droppable objects to snap into;
+/// it will call IDroppable.ItemCame(gameObject) when snapping into something, 
+/// and IDroppable.ItemLeft(gameObject) when dragged away.
+/// </summary>
 public class DraggablePhysics : MonoBehaviour, IDraggable {
 
     // API settings

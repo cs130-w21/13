@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// attach this to a UI element to make it a droppable, additionally tag the object "Seat" to let draggable item to find it;
+/// overriding the functions, or implement a new IDroppable class from scratch if you want other dropping behaviors.
+/// </summary>
 public class DroppablePhysics : MonoBehaviour, IDroppable {
 
     private GameObject currentItem = null;
