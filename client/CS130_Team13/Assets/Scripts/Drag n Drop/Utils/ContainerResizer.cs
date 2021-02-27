@@ -9,15 +9,13 @@ using UnityEngine;
 public class ContainerResizer : MonoBehaviour
 {
     private void FixedUpdate() {
-        RectTransform[] children = transform.GetComponentsInChildren<RectTransform>();
-
         float height = 0;
 
-        foreach (RectTransform rt in children) {
-            height += rt.sizeDelta.y * rt.localScale.y;
+        foreach (Transform child in transform) {
+            height += child.GetComponent<RectTransform>().sizeDelta.y;
         }
 
         // update self
-        gameObject.GetComponent<RectTransform>().sizeDelta.Set(gameObject.GetComponent<RectTransform>().sizeDelta.x, height);
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(gameObject.GetComponent<RectTransform>().sizeDelta.x, height);
     }
 }
