@@ -30,6 +30,7 @@ public class DroppablePhysics : MonoBehaviour, IDroppable {
 
         // group under my hierarchy
         item.transform.SetParent(transform);
+        item.transform.localScale = new Vector3(1, 1, 1);
 
         // move to my center / if you read this be notified there are mutliple ways of handling "where to put it"
         RectTransform itemTransform = item.GetComponent<RectTransform>();
