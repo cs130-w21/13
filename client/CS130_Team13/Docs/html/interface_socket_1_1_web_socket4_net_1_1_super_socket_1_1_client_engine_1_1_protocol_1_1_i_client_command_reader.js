@@ -1,0 +1,5 @@
+var interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_client_command_reader =
+[
+    [ "GetCommandInfo", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_client_command_reader.html#ae43051a1086fe2fb28be406a1c82b3cc", null ],
+    [ "NextCommandReader", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_client_command_reader.html#aaab5297d78f8d224160d9f29b8da5b2e", null ]
+];

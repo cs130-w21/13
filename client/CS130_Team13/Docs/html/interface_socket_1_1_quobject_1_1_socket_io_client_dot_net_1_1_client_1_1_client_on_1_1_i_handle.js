@@ -1,0 +1,4 @@
+var interface_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_client_on_1_1_i_handle =
+[
+    [ "Destroy", "interface_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_client_on_1_1_i_handle.html#a9662b449b7cadace99ac77688f87215f", null ]
+];

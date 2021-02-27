@@ -1,0 +1,26 @@
+var class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader =
+[
+    [ "JsonValidatingReader", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#ae9184592f8518d102e6d284d8adf2b28", null ],
+    [ "Close", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#ab914aa0fca500f0c6e5441b4ed89183f", null ],
+    [ "Read", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a648796d24a67693e6424af34c2c8c5be", null ],
+    [ "ReadAsBoolean", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#ae425501698aa5b93a9003bbfdbc04515", null ],
+    [ "ReadAsBytes", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a5994060103ac746f73923192ce0250d6", null ],
+    [ "ReadAsDateTime", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#aa69d62747fa77addf1a7b56e221f9d81", null ],
+    [ "ReadAsDecimal", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a4da09b9be62ff9dd4b969d59d5c67fda", null ],
+    [ "ReadAsDouble", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a6ae2d84f641748cd0d3bb7ea98957bb7", null ],
+    [ "ReadAsInt32", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a423a9388588350dd5f210d9dbf4c1ff2", null ],
+    [ "ReadAsString", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a2e252e087a849bff73467f872c7b05e1", null ],
+    [ "CurrentMemberSchemas", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a177d1e4a8498b26fbe5be76849dad4ff", null ],
+    [ "CurrentSchemas", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#aaa2d16895889f0b870d888c2eb572eb9", null ],
+    [ "Depth", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a95621e7222e17cf9cf1e688c68f72191", null ],
+    [ "LineNumber", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a14148a70d25ff8c9426059bb844c9f7b", null ],
+    [ "LinePosition", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a4d50b48e600170e49dbe222d51321a37", null ],
+    [ "Path", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a93fff72dc0a8c7d41e9f79b26631663d", null ],
+    [ "QuoteChar", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a1d2f2461aaeae1fff3ba8c306c43f722", null ],
+    [ "Reader", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#ac9786db847cc9cfedb37bc1a95e71c99", null ],
+    [ "Schema", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#aa282cd9200eefd6da2bca426851bf117", null ],
+    [ "TokenType", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#afae4c94dc5fad55d383f628bdc0e91d2", null ],
+    [ "Value", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a45125862cb4ff1d7780cadac972a9cec", null ],
+    [ "ValueType", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a56e57fbaaad7c7285856697b7cacbf0b", null ],
+    [ "ValidationEventHandler", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_validating_reader.html#a9f1f17d26cca0153d70b45a434be21a7", null ]
+];

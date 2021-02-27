@@ -1,0 +1,4 @@
+var interface_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager_1_1_i_open_callback =
+[
+    [ "Call", "interface_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager_1_1_i_open_callback.html#add150c4857f21f03829b894407578e4f", null ]
+];
