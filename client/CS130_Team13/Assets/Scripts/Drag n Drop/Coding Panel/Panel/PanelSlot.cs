@@ -13,6 +13,8 @@ public class PanelSlot : DroppablePhysics, ICodeInfo
     //[SerializeField]
     //private bool foolSwtich = false;
 
+    private Vector2 itemDimension;
+
     public override void ItemCame(GameObject item) {
         base.ItemCame(item);
 
@@ -34,5 +36,14 @@ public class PanelSlot : DroppablePhysics, ICodeInfo
 
     public int GetCost() {
         return myCost;
+    }
+
+    private void Update() {
+        // check the size of item and keep self the same size of it
+        if (GetCurrentItem() != null && !GetCurrentItem().GetComponent<RectTransform>().sizeDelta.Equals(itemDimension)) {
+            itemDimension = GetCurrentItem().GetComponent<RectTransform>().sizeDelta;
+            // TODO: this might not be deep copy of the vector 2 object
+            gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(itemDimension.x, itemDimension.y);
+        }
     }
 }

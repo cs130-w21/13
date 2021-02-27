@@ -8,9 +8,6 @@ using UnityEngine;
 /// </summary>
 public class CodingPanel : MonoBehaviour, ICodeInfo {
     [SerializeField]
-    private PanelGuard myGuard;
-
-    [SerializeField]
     private GameObject mySlotInstance;
 
     // guard message
@@ -30,7 +27,10 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
     // remember which items are in the panel
     private HashSet<GameObject> myItems = new HashSet<GameObject>();
 
-    private HashSet<GameObject> skipCheckItems = new HashSet<GameObject>();
+    // remember probed subpanels
+    private GameObject lastSubPanel = null;
+
+    //private HashSet<GameObject> skipCheckItems = new HashSet<GameObject>();
 
     // public interface ////////////////////////////////////////////////////////////////////
     public virtual string GetInformation() {
@@ -65,15 +65,21 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
             // update items
             myItems.Add(newItem);
         }
-        // TODO: handle the situation where no slot is hovering
         else {
-            throw new System.Exception("it happened! the object is releaed while no slot is available! tell johnny!");
+            // decide if item is hovered upon a container
+            if (lastSubPanel) {
+                lastSubPanel.GetComponent<ISubPanel>().ItemCame(newItem);
+            }
+            else {
+                // TODO: handle the situation where no slot is hovering
+                throw new System.Exception("it happened! the object is releaed while no slot is available! tell johnny!");
+            }
         }
     }
 
-    public virtual void RegisterSkip(GameObject newItem) {
-        skipCheckItems.Add(newItem);
-    }
+    //public virtual void RegisterSkip(GameObject newItem) {
+    //    skipCheckItems.Add(newItem);
+    //}
 
 
     // message with guard (handling empty) //////////////////////////////////////////////////
@@ -128,12 +134,19 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                             matched = true;
                             
                             if (slot == hoveringSlot) break;
-                            else if (skipCheckItems.Contains(slotItem)) {
+                            else if (slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>() != null) {
                                 // clear hovering slot
                                 if (hoveringSlot) {
                                     RemoveSlot(hoveringSlot);
                                     hoveringSlot = null;    
                                 }
+
+                                // forward the call
+                                ISubPanel subPanel = slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>();
+                                subPanel.IsOccupied();
+                                // update subpanel reference
+                                lastSubPanel = slot.GetComponent<IDroppable>().GetCurrentItem();
+
                                 break;
                             }
 
@@ -166,13 +179,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                     }
 
                     if (!matched && above) {
-                        if (skipCheckItems.Contains(mySlots[0].GetComponent<IDroppable>().GetCurrentItem())) {
-                            if (hoveringSlot) {
-                                    RemoveSlot(hoveringSlot);
-                                    hoveringSlot = null;    
-                            }
-                        }
-                        else if (hoveringSlot) {
+                        if (hoveringSlot) {
                             ReorderSlot(0, hoveringSlot);
                         }
                         else {
@@ -232,10 +239,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         mySlots.Remove(deprecatedSlot);
         // update items
         myItems.Remove(depItem);
-        // update skip item
-        if (skipCheckItems.Contains(depItem)) {
-            skipCheckItems.Remove(depItem);
-        }
+        
         Destroy(deprecatedSlot);
     }
 

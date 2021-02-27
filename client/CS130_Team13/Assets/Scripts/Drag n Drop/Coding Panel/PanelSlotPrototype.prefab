@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 5431415600809387103}
   - component: {fileID: 2328895086333551339}
   - component: {fileID: 4441941404983019803}
+  - component: {fileID: 1548536327429127445}
+  - component: {fileID: 4411750446614438975}
   m_Layer: 5
-  m_Name: Seat (1)
+  m_Name: PanelSlotPrototype
   m_TagString: Seat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -199.91, y: 209}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400.0012, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5431415600809387103
@@ -89,3 +91,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myLayer: panel_specific
   myPanel: {fileID: 0}
+--- !u!114 &1548536327429127445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174922305299236426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+--- !u!114 &4411750446614438975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174922305299236426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1134b7a115a3c3e4f90a931367b203a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
