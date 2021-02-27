@@ -37,6 +37,17 @@ public class JohnnyUITools
         return result;
     }
 
+    /// <summary>
+    /// find the position of UI element's center with respect to its canvas
+    /// </summary>
+    /// <param name="gameObject">game object in question</param>
+    /// <returns>Vector2: the center position under canvas</returns>
+    public static Vector2 GetCenterCanvasCoord(GameObject gameObject) {
+        Vector2 center = GetCanvasCoord(gameObject);
+        center += gameObject.GetComponent<RectTransform>().sizeDelta / 2;
+
+        return center;
+    }
 
     /// <summary>
     /// return the canvas the input game object is currently under
