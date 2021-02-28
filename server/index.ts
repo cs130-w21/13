@@ -50,7 +50,6 @@ var user2: UserProps;
 
 /**
  * Ready to listen for others (imagine that it is a function for one connection)
- * TODO: switch to socket.id use
  */
 io.on('connection', (socket) => {
   console.log('a user connected');
