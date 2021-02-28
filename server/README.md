@@ -1,4 +1,4 @@
-[Server config site](https://cs130-hacman.herokuapp.com/) and [server link](https://cs130-hacman.herokuapp.com/)
+[Server config site](https://dashboard.heroku.com/apps/cs130-hacman) and [server link](https://cs130-hacman.herokuapp.com/)
 
 # How to start up this server
 `cd server` ==> make sure that path ends with `13\server`, or `13/server` on UNIX systems
