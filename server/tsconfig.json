@@ -6,7 +6,6 @@
     "outDir": "./build",
     "esModuleInterop": true,
     "strict": true,
-    "noImplicitAny": false,
-    "types": ["node"]
+    "noImplicitAny": false
   }
 }
