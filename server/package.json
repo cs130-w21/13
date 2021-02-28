@@ -6,7 +6,7 @@
   "scripts": {
     "build-ts": "tsc",
     "postinstall": "npm run build-ts",
-    "start": "npm run serve",
+    "start": "ts-node index.ts",
     "serve": "node index.ts",
     "watch-node": "nodemon index.ts",
     "watch-ts": "tsc -w"
