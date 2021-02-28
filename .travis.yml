@@ -8,7 +8,7 @@ script:
   - cd server
   - echo "Build starting :^)"
   - echo "Installing first"
-  - npm install --only=prod
+  - npm install
   - echo "Time to build :0"
   - npm run build-ts
   - echo "Test time!"
