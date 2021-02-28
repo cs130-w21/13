@@ -2,6 +2,8 @@ language: node_js
 node_js:
  - "8"
 cache: npm
+before_script:
+  npm install -g typescript
 script:
   - cd server
   - echo "Build starting :^)"
