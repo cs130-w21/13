@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.ts",
-    "build": "tsc --project ./"
+    "build-ts": "tsc",
+    "postinstall": "npm run build-ts",
+    "start": "npm run serve",
+    "serve": "node index.ts",
+    "watch-node": "nodemon index.ts",
+    "watch-ts": "tsc -w"
   },
   "keywords": [],
   "author": "",
