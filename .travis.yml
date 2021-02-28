@@ -10,9 +10,9 @@ script:
   - echo "Installing first"
   - npm install
   - echo "Time to build :0"
-  - npm run build-ts
+  - npm run postinstall
   - echo "Test time!"
-  - npm run test
+  - npm test
 deploy:
   provider: heroku
   api_key:
