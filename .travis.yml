@@ -8,7 +8,7 @@ script:
   - echo "Installing first"
   - npm install --only=prod
   - echo "Time to build :0"
-  - npm start
+  - npm run build-ts
   - echo "Test time!"
   - npm run test
 deploy:
