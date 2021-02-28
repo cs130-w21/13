@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['url_1738',['Url',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_url.html',1,'Socket::Quobject::SocketIoClientDotNet::Client']]],
-  ['utf8_1739',['UTF8',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_u_t_f8.html',1,'Socket::Quobject::EngineIoClientDotNet::Modules']]],
-  ['utf8exception_1740',['UTF8Exception',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_u_t_f8_exception.html',1,'Socket::Quobject::EngineIoClientDotNet::Modules']]]
+  ['tcpclientsession_1859',['TcpClientSession',['../class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_tcp_client_session.html',1,'Socket::WebSocket4Net::SuperSocket::ClientEngine']]],
+  ['text_1860',['Text',['../class_socket_1_1_web_socket4_net_1_1_command_1_1_text.html',1,'Socket::WebSocket4Net::Command']]],
+  ['transport_1861',['Transport',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transport.html',1,'Socket::Quobject::EngineIoClientDotNet::Client']]]
 ];

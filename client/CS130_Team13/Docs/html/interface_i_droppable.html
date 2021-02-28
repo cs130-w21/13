@@ -94,13 +94,17 @@ Inheritance diagram for IDroppable:</div>
  <div class="center">
   <img src="interface_i_droppable.png" usemap="#IDroppable_map" alt=""/>
   <map id="IDroppable_map" name="IDroppable_map">
-<area href="class_proto_seat.html" alt="ProtoSeat" shape="rect" coords="0,56,74,80"/>
+<area href="class_droppable_physics.html" alt="DroppablePhysics" shape="rect" coords="62,56,177,80"/>
+<area href="class_panel_guard.html" alt="PanelGuard" shape="rect" coords="187,56,302,80"/>
+<area href="class_panel_slot.html" alt="PanelSlot" shape="rect" coords="0,112,115,136"/>
+<area href="class_source_grid.html" alt="SourceGrid" shape="rect" coords="125,112,240,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aef26621bc5a257569f16efc7859a716c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_droppable.html#aef26621bc5a257569f16efc7859a716c">ItemLeft</a> (GameObject item)</td></tr>
+<tr class="memdesc:aef26621bc5a257569f16efc7859a716c"><td class="mdescLeft">&#160;</td><td class="mdescRight">the ultimate response to item leaving.  <a href="interface_i_droppable.html#aef26621bc5a257569f16efc7859a716c">More...</a><br /></td></tr>
 <tr class="separator:aef26621bc5a257569f16efc7859a716c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab89a208f64f9d9c2f2a3bf4584726122"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_droppable.html#ab89a208f64f9d9c2f2a3bf4584726122">ItemCame</a> (GameObject item)</td></tr>
 <tr class="separator:ab89a208f64f9d9c2f2a3bf4584726122"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,7 +131,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_proto_seat.html#a181c2186cfa9588f1a6e8f2d581e9632">ProtoSeat</a>.</p>
+<p>Implemented in <a class="el" href="class_panel_guard.html#a459d0925d7b80681db5a22b8daf1302e">PanelGuard</a>, and <a class="el" href="class_droppable_physics.html#ae7fddd684424b50d02228fcf2cb35797">DroppablePhysics</a>.</p>
 
 </div>
 </div>
@@ -146,7 +150,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_proto_seat.html#a298dc92e9688de3abfee98d7bbb9081f">ProtoSeat</a>.</p>
+<p>Implemented in <a class="el" href="class_panel_guard.html#a7e62266b540c8e0cfab2cae0972a2e31">PanelGuard</a>, and <a class="el" href="class_droppable_physics.html#a4f02dbb90c6732e3eb5668bd1148c7ef">DroppablePhysics</a>.</p>
 
 </div>
 </div>
@@ -165,7 +169,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_proto_seat.html#a8857070cdee02a70485fc078931ac2e0">ProtoSeat</a>.</p>
+<p>Implemented in <a class="el" href="class_panel_guard.html#ad36f117d4fb22a42c27fb030fb98a678">PanelGuard</a>, and <a class="el" href="class_droppable_physics.html#a524735677b4b4bbb09c47591093e13f4">DroppablePhysics</a>.</p>
 
 </div>
 </div>
@@ -185,7 +189,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_proto_seat.html#abdcfcf408e296964c4a216daed528876">ProtoSeat</a>.</p>
+<p>Implemented in <a class="el" href="class_panel_slot.html#a27cbfad14dbfb7e93ff503fada5f287a">PanelSlot</a>, <a class="el" href="class_panel_guard.html#adae6de8632a2e9c1ab956a226dc9ea1a">PanelGuard</a>, <a class="el" href="class_source_grid.html#ad2d68b2719f304300a9f933a4459d36c">SourceGrid</a>, and <a class="el" href="class_droppable_physics.html#add031935497129fd189c13e4fdbe18f0">DroppablePhysics</a>.</p>
 
 </div>
 </div>
@@ -205,12 +209,21 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_proto_seat.html#afe21c3f206af2a376539534b1cb9b89e">ProtoSeat</a>.</p>
+<p>the ultimate response to item leaving. </p>
+<p>item might do their own thing while being dragged.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>the item that left this droppable object</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="class_panel_slot.html#a3a26eda119bedc27f11ed0f067cb1de7">PanelSlot</a>, <a class="el" href="class_panel_guard.html#ab740e8518d8eb1c7bb6be649f67e3b3c">PanelGuard</a>, <a class="el" href="class_source_grid.html#a8e4f1e79bba8f7b7e1d38414050d7c3f">SourceGrid</a>, and <a class="el" href="class_droppable_physics.html#aaf58a859089cdef52726f3b794396852">DroppablePhysics</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
-<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/Drag n Drop/<a class="el" href="_i_droppable_8cs.html">IDroppable.cs</a></li>
+<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/Drag n Drop/Interfaces/<a class="el" href="_i_droppable_8cs.html">IDroppable.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -218,7 +231,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="interface_i_droppable.html">IDroppable</a></li>
-    <li class="footer">Generated on Fri Feb 26 2021 16:56:56 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Feb 26 2021 17:34:40 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

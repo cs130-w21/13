@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['handleimpl_1569',['HandleImpl',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_client_on_1_1_handle_impl.html',1,'Socket::Quobject::SocketIoClientDotNet::Client::ClientOn']]],
-  ['handshake_1570',['Handshake',['../class_socket_1_1_web_socket4_net_1_1_command_1_1_handshake.html',1,'Socket::WebSocket4Net::Command']]],
-  ['handshakedata_1571',['HandshakeData',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_handshake_data.html',1,'Socket::Quobject::EngineIoClientDotNet::Client']]],
-  ['hasbinarydata_1572',['HasBinaryData',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_modules_1_1_has_binary_data.html',1,'Socket::Quobject::SocketIoClientDotNet::Modules']]]
+  ['gamemanager_1683',['GameManager',['../class_game_manager.html',1,'']]],
+  ['global_1684',['Global',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_global.html',1,'Socket::Quobject::EngineIoClientDotNet::Modules']]]
 ];

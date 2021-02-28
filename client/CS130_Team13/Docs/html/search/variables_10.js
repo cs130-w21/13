@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['undefined_2797',['Undefined',['../class_socket_1_1_newtonsoft_1_1_json_1_1_json_convert.html#a34c8ac2dd954a3a9e2c848be020caa31',1,'Socket::Newtonsoft::Json::JsonConvert']]],
-  ['unityprojectid_2798',['UnityProjectID',['../class_doxygen_window.html#a0c52f34973444c41e90151536dbd6e82',1,'DoxygenWindow']]],
-  ['upgrade_2799',['Upgrade',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_socket_1_1_options.html#a603fd82105c019b5ef0413e56cd714d7',1,'Socket::Quobject::EngineIoClientDotNet::Client::Socket::Options']]],
-  ['upgrade_2800',['UPGRADE',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_parser_1_1_packet.html#abde3f7f43971a5568ede38b3e5f7d126',1,'Socket::Quobject::EngineIoClientDotNet::Parser::Packet']]],
-  ['upgrades_2801',['Upgrades',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_handshake_data.html#a4ad4cb5eb2944516740c9df720ea6a5a',1,'Socket::Quobject::EngineIoClientDotNet::Client::HandshakeData']]],
-  ['uri_2802',['Uri',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c.html#ac5c7556266a1c70d55a85254aeaaa72a',1,'Socket::Quobject::EngineIoClientDotNet::Client::Transports::PollingXHR::XHRRequest::RequestOptions']]],
-  ['useragentkey_2803',['UserAgentKey',['../class_socket_1_1_web_socket4_net_1_1_default_1_1_web_socket.html#a927532b6c81f702fc4a461a2d915ec47',1,'Socket::WebSocket4Net::Default::WebSocket']]]
+  ['scriptsdirectory_2987',['ScriptsDirectory',['../class_doxygen_config.html#aea53b2e7fc0f47a7f658ce25e65c4a09',1,'DoxygenConfig']]],
+  ['secure_2988',['Secure',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transport.html#a9bf9056f297e4f689be1be8003e39a7f',1,'Socket.Quobject.EngineIoClientDotNet.Client.Transport.Secure()'],['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transport_1_1_options.html#a94cfd0d1cb12f182f6c250cdbf44ffc1',1,'Socket.Quobject.EngineIoClientDotNet.Client.Transport.Options.Secure()']]],
+  ['selectedtheme_2989',['SelectedTheme',['../class_doxygen_window.html#aff9bfc8c7ed3f017a61e67025ea7c99a',1,'DoxygenWindow']]],
+  ['sid_2990',['Sid',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_handshake_data.html#a3effa90b868d9fd9ea04f4de699c3aa3',1,'Socket::Quobject::EngineIoClientDotNet::Client::HandshakeData']]],
+  ['socket_2991',['Socket',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transport.html#aafca76f0836a24f21c9a28e5a2836927',1,'Socket::Quobject::EngineIoClientDotNet::Client::Transport']]],
+  ['synopsis_2992',['Synopsis',['../class_doxygen_config.html#a2b1926144ba2768c36de32a8d3445567',1,'DoxygenConfig']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['id_2734',['Id',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_socket.html#aa4330ce5818af76d699715b9a572cf41',1,'Socket.Quobject.EngineIoClientDotNet.Client.Socket.Id()'],['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_packet.html#a9ce6d151499662e69d6f64988bc34f09',1,'Socket.Quobject.SocketIoClientDotNet.Parser.Packet.Id()']]],
-  ['ignoreservercertificatevalidation_2735',['IgnoreServerCertificateValidation',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transport_1_1_options.html#ad88553edfa667a81848f7d66b89cbbb6',1,'Socket::Quobject::EngineIoClientDotNet::Client::Transport::Options']]],
-  ['instance_2736',['Instance',['../class_doxygen_window.html#a45d09c9a64d2873367470303789e3bf9',1,'DoxygenWindow']]]
+  ['handshake_2925',['Handshake',['../class_socket_1_1_web_socket4_net_1_1_default_1_1_op_code.html#a8deb5685af0368b52e7ed12cf64826e1',1,'Socket::WebSocket4Net::Default::OpCode']]],
+  ['host_2926',['Host',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_socket_1_1_options.html#a613b4a3f5a1f4291b52c935ac91bebab',1,'Socket::Quobject::EngineIoClientDotNet::Client::Socket::Options']]],
+  ['hostname_2927',['Hostname',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transport.html#a6bd3c977dcdd39841e02741a1c12b44f',1,'Socket.Quobject.EngineIoClientDotNet.Client.Transport.Hostname()'],['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transport_1_1_options.html#a0eeabdf8c7305dc303184d76e39f21d0',1,'Socket.Quobject.EngineIoClientDotNet.Client.Transport.Options.Hostname()']]]
 ];

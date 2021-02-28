@@ -1,5 +1,9 @@
 var hierarchy =
 [
+    [ "ParrelSync.NonCore.AskFeedbackDialog", "class_parrel_sync_1_1_non_core_1_1_ask_feedback_dialog.html", null ],
+    [ "UnityEditor.AssetModificationProcessor", null, [
+      [ "ParrelSync.ParrelSyncAssetModificationProcessor", "class_parrel_sync_1_1_parrel_sync_asset_modification_processor.html", null ]
+    ] ],
     [ "Attribute", null, [
       [ "Socket.Newtonsoft.Json.JsonConstructorAttribute", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_constructor_attribute.html", null ],
       [ "Socket.Newtonsoft.Json.JsonContainerAttribute", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_container_attribute.html", [
@@ -16,10 +20,12 @@ var hierarchy =
     ] ],
     [ "Socket.Quobject.SocketIoClientDotNet.Parser.Binary", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_binary.html", null ],
     [ "Socket.Quobject.SocketIoClientDotNet.Parser.Parser.BinaryReconstructor", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_parser_1_1_binary_reconstructor.html", null ],
+    [ "ParrelSync.BoolPreference", "class_parrel_sync_1_1_bool_preference.html", null ],
     [ "Socket.Newtonsoft.Json.Bson.BsonObjectId", "class_socket_1_1_newtonsoft_1_1_json_1_1_bson_1_1_bson_object_id.html", null ],
     [ "Socket.Quobject.Collections.Immutable.ImmutableList< T >.Builder", "class_socket_1_1_quobject_1_1_collections_1_1_immutable_1_1_immutable_list_1_1_builder.html", null ],
     [ "Socket.Quobject.EngineIoClientDotNet.Parser.ByteBuffer", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_parser_1_1_byte_buffer.html", null ],
     [ "Socket.Quobject.SocketIoClientDotNet.Client.ClientOn", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_client_on.html", null ],
+    [ "ParrelSync.ClonesManager", "class_parrel_sync_1_1_clones_manager.html", null ],
     [ "Collection", null, [
       [ "Socket.Newtonsoft.Json.JsonConverterCollection", "class_socket_1_1_newtonsoft_1_1_json_1_1_json_converter_collection.html", null ]
     ] ],
@@ -36,8 +42,11 @@ var hierarchy =
     [ "DoxyRunner", "class_doxy_runner.html", null ],
     [ "DoxyThreadSafeOutput", "class_doxy_thread_safe_output.html", null ],
     [ "Socket.Quobject.EngineIoClientDotNet.Thread.EasyTimer", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_thread_1_1_easy_timer.html", null ],
+    [ "ParrelSync.EditorQuit", "class_parrel_sync_1_1_editor_quit.html", null ],
     [ "EditorWindow", null, [
-      [ "DoxygenWindow", "class_doxygen_window.html", null ]
+      [ "DoxygenWindow", "class_doxygen_window.html", null ],
+      [ "ParrelSync.ClonesManagerWindow", "class_parrel_sync_1_1_clones_manager_window.html", null ],
+      [ "ParrelSync.Preferences", "class_parrel_sync_1_1_preferences.html", null ]
     ] ],
     [ "Socket.Quobject.EngineIoClientDotNet.ComponentEmitter.Emitter", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_component_emitter_1_1_emitter.html", [
       [ "Socket.Quobject.EngineIoClientDotNet.Client.Socket", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_socket.html", [
@@ -84,6 +93,7 @@ var hierarchy =
     [ "Socket.Newtonsoft.Json.Schema.Extensions", "class_socket_1_1_newtonsoft_1_1_json_1_1_schema_1_1_extensions.html", null ],
     [ "Socket.WebSocket4Net.Default.Extensions", "class_socket_1_1_web_socket4_net_1_1_default_1_1_extensions.html", null ],
     [ "Socket.WebSocket4Net.SuperSocket.ClientEngine.Extensions", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_extensions.html", null ],
+    [ "ParrelSync.ExternalLinks", "class_parrel_sync_1_1_external_links.html", null ],
     [ "Socket.Quobject.EngineIoClientDotNet.Modules.Global", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_global.html", null ],
     [ "Socket.Quobject.EngineIoClientDotNet.Client.HandshakeData", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_handshake_data.html", null ],
     [ "Socket.Quobject.SocketIoClientDotNet.Modules.HasBinaryData", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_modules_1_1_has_binary_data.html", null ],
@@ -125,7 +135,8 @@ var hierarchy =
     [ "Socket.WebSocket4Net.SuperSocket.ClientEngine.IClientSession", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_i_client_session.html", [
       [ "Socket.WebSocket4Net.SuperSocket.ClientEngine.ClientSession", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_client_session.html", null ]
     ] ],
-    [ "ICloneable", null, [
+    [ "System.ICloneable", null, [
+      [ "ParrelSync.Project", "class_parrel_sync_1_1_project.html", null ],
       [ "Socket.Newtonsoft.Json.Linq.JToken", "class_socket_1_1_newtonsoft_1_1_json_1_1_linq_1_1_j_token.html", [
         [ "Socket.Newtonsoft.Json.Linq.JContainer", "class_socket_1_1_newtonsoft_1_1_json_1_1_linq_1_1_j_container.html", null ],
         [ "Socket.Newtonsoft.Json.Linq.JValue", "class_socket_1_1_newtonsoft_1_1_json_1_1_linq_1_1_j_value.html", [
@@ -136,6 +147,11 @@ var hierarchy =
     [ "Socket.WebSocket4Net.Protocol.ICloseStatusCode", "interface_socket_1_1_web_socket4_net_1_1_protocol_1_1_i_close_status_code.html", [
       [ "Socket.WebSocket4Net.Protocol.CloseStatusCodeHybi10", "class_socket_1_1_web_socket4_net_1_1_protocol_1_1_close_status_code_hybi10.html", null ],
       [ "Socket.WebSocket4Net.Protocol.CloseStatusCodeRfc6455", "class_socket_1_1_web_socket4_net_1_1_protocol_1_1_close_status_code_rfc6455.html", null ]
+    ] ],
+    [ "ICodeInfo", "interface_i_code_info.html", [
+      [ "CodingPanel", "class_coding_panel.html", null ],
+      [ "PanelItem", "class_panel_item.html", null ],
+      [ "PanelSlot", "class_panel_slot.html", null ]
     ] ],
     [ "ICollection", null, [
       [ "Socket.Newtonsoft.Json.Linq.JArray", "class_socket_1_1_newtonsoft_1_1_json_1_1_linq_1_1_j_array.html", null ],
@@ -224,7 +240,11 @@ var hierarchy =
       [ "Socket.WebSocket4Net.Default.WebSocket", "class_socket_1_1_web_socket4_net_1_1_default_1_1_web_socket.html", null ]
     ] ],
     [ "IDroppable", "interface_i_droppable.html", [
-      [ "ProtoSeat", "class_proto_seat.html", null ]
+      [ "DroppablePhysics", "class_droppable_physics.html", [
+        [ "PanelSlot", "class_panel_slot.html", null ],
+        [ "SourceGrid", "class_source_grid.html", null ]
+      ] ],
+      [ "PanelGuard", "class_panel_guard.html", null ]
     ] ],
     [ "Socket.Quobject.EngineIoClientDotNet.Parser.IEncodeCallback", "interface_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_parser_1_1_i_encode_callback.html", [
       [ "Socket.Quobject.EngineIoClientDotNet.Client.Transports.Polling.SendEncodeCallback", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_1_1_send_encode_callback.html", null ],
@@ -340,7 +360,9 @@ var hierarchy =
     ] ],
     [ "IPointerDownHandler", null, [
       [ "IDraggable", "interface_i_draggable.html", [
-        [ "ProtoPlug", "class_proto_plug.html", null ]
+        [ "DraggablePhysics", "class_draggable_physics.html", [
+          [ "PanelItem", "class_panel_item.html", null ]
+        ] ]
       ] ]
     ] ],
     [ "IPointerUpHandler", null, [
@@ -428,11 +450,16 @@ var hierarchy =
     [ "Socket.Quobject.EngineIoClientDotNet.Modules.LogManager", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_log_manager.html", null ],
     [ "MonoBehaviour", null, [
       [ "BoardManager", "class_board_manager.html", null ],
+      [ "CodingPanel", "class_coding_panel.html", null ],
+      [ "DragDropManager", "class_drag_drop_manager.html", null ],
+      [ "DraggablePhysics", "class_draggable_physics.html", null ],
+      [ "DroppablePhysics", "class_droppable_physics.html", null ],
       [ "GameManager", "class_game_manager.html", null ],
+      [ "ItemWarenhaus", "class_item_warenhaus.html", null ],
       [ "NewBehaviourScript", "class_new_behaviour_script.html", null ],
       [ "Obselete.ProtoContainer", "class_obselete_1_1_proto_container.html", null ],
-      [ "ProtoPlug", "class_proto_plug.html", null ],
-      [ "ProtoSeat", "class_proto_seat.html", null ],
+      [ "PanelGuard", "class_panel_guard.html", null ],
+      [ "ParrelSync.FileUtilities", "class_parrel_sync_1_1_file_utilities.html", null ],
       [ "RemoteController", "class_remote_controller.html", null ],
       [ "RobotMovement", "class_robot_movement.html", null ],
       [ "RobotTestController", "class_robot_test_controller.html", null ]
@@ -450,6 +477,7 @@ var hierarchy =
         ] ]
       ] ]
     ] ],
+    [ "ParrelSync.NonCore.OtherMenuItem", "class_parrel_sync_1_1_non_core_1_1_other_menu_item.html", null ],
     [ "Socket.Quobject.EngineIoClientDotNet.Parser.Packet", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_parser_1_1_packet.html", null ],
     [ "Socket.Quobject.SocketIoClientDotNet.Parser.Packet< T >", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_packet.html", null ],
     [ "Socket.Quobject.EngineIoClientDotNet.Modules.ParseQS", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_parse_q_s.html", null ],
@@ -466,7 +494,9 @@ var hierarchy =
       [ "Socket.Newtonsoft.Json.Serialization.DefaultSerializationBinder", "class_socket_1_1_newtonsoft_1_1_json_1_1_serialization_1_1_default_serialization_binder.html", null ]
     ] ],
     [ "Socket.Quobject.EngineIoClientDotNet.Modules.ServerCertificate", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_server_certificate.html", null ],
+    [ "ParrelSync.Update.UpdateChecker", "class_parrel_sync_1_1_update_1_1_update_checker.html", null ],
     [ "Socket.Quobject.SocketIoClientDotNet.Client.Url", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_url.html", null ],
+    [ "UserInfo", "class_user_info.html", null ],
     [ "Socket.Quobject.EngineIoClientDotNet.Modules.UTF8", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_u_t_f8.html", null ],
     [ "Socket.WebSocket4Net.Default.WebSocketContext", "class_socket_1_1_web_socket4_net_1_1_default_1_1_web_socket_context.html", null ],
     [ "Socket.WebSocket4Net.Protocol.WebSocketDataFrame", "class_socket_1_1_web_socket4_net_1_1_protocol_1_1_web_socket_data_frame.html", null ]

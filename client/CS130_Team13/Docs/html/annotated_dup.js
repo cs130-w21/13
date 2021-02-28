@@ -4,6 +4,24 @@ var annotated_dup =
       [ "IContainer", "interface_obselete_1_1_i_container.html", "interface_obselete_1_1_i_container" ],
       [ "ProtoContainer", "class_obselete_1_1_proto_container.html", "class_obselete_1_1_proto_container" ]
     ] ],
+    [ "ParrelSync", "namespace_parrel_sync.html", [
+      [ "NonCore", "namespace_parrel_sync_1_1_non_core.html", [
+        [ "AskFeedbackDialog", "class_parrel_sync_1_1_non_core_1_1_ask_feedback_dialog.html", null ],
+        [ "OtherMenuItem", "class_parrel_sync_1_1_non_core_1_1_other_menu_item.html", null ]
+      ] ],
+      [ "Update", "namespace_parrel_sync_1_1_update.html", [
+        [ "UpdateChecker", "class_parrel_sync_1_1_update_1_1_update_checker.html", null ]
+      ] ],
+      [ "EditorQuit", "class_parrel_sync_1_1_editor_quit.html", "class_parrel_sync_1_1_editor_quit" ],
+      [ "ParrelSyncAssetModificationProcessor", "class_parrel_sync_1_1_parrel_sync_asset_modification_processor.html", "class_parrel_sync_1_1_parrel_sync_asset_modification_processor" ],
+      [ "ClonesManager", "class_parrel_sync_1_1_clones_manager.html", "class_parrel_sync_1_1_clones_manager" ],
+      [ "ClonesManagerWindow", "class_parrel_sync_1_1_clones_manager_window.html", "class_parrel_sync_1_1_clones_manager_window" ],
+      [ "ExternalLinks", "class_parrel_sync_1_1_external_links.html", "class_parrel_sync_1_1_external_links" ],
+      [ "FileUtilities", "class_parrel_sync_1_1_file_utilities.html", "class_parrel_sync_1_1_file_utilities" ],
+      [ "BoolPreference", "class_parrel_sync_1_1_bool_preference.html", "class_parrel_sync_1_1_bool_preference" ],
+      [ "Preferences", "class_parrel_sync_1_1_preferences.html", "class_parrel_sync_1_1_preferences" ],
+      [ "Project", "class_parrel_sync_1_1_project.html", "class_parrel_sync_1_1_project" ]
+    ] ],
     [ "Socket", "namespace_socket.html", [
       [ "Newtonsoft", "namespace_socket_1_1_newtonsoft.html", [
         [ "Json", "namespace_socket_1_1_newtonsoft_1_1_json.html", [
@@ -264,18 +282,27 @@ var annotated_dup =
       ] ]
     ] ],
     [ "BoardManager", "class_board_manager.html", "class_board_manager" ],
+    [ "CodingPanel", "class_coding_panel.html", "class_coding_panel" ],
     [ "DoxygenConfig", "class_doxygen_config.html", "class_doxygen_config" ],
     [ "DoxygenWindow", "class_doxygen_window.html", "class_doxygen_window" ],
     [ "DoxyRunner", "class_doxy_runner.html", "class_doxy_runner" ],
     [ "DoxyThreadSafeOutput", "class_doxy_thread_safe_output.html", "class_doxy_thread_safe_output" ],
+    [ "DragDropManager", "class_drag_drop_manager.html", "class_drag_drop_manager" ],
+    [ "DraggablePhysics", "class_draggable_physics.html", "class_draggable_physics" ],
+    [ "DroppablePhysics", "class_droppable_physics.html", "class_droppable_physics" ],
     [ "GameManager", "class_game_manager.html", "class_game_manager" ],
-    [ "IDraggable", "interface_i_draggable.html", null ],
+    [ "ICodeInfo", "interface_i_code_info.html", "interface_i_code_info" ],
+    [ "IDraggable", "interface_i_draggable.html", "interface_i_draggable" ],
     [ "IDroppable", "interface_i_droppable.html", "interface_i_droppable" ],
+    [ "ItemWarenhaus", "class_item_warenhaus.html", null ],
     [ "JohnnyUITools", "class_johnny_u_i_tools.html", "class_johnny_u_i_tools" ],
     [ "NewBehaviourScript", "class_new_behaviour_script.html", null ],
-    [ "ProtoPlug", "class_proto_plug.html", "class_proto_plug" ],
-    [ "ProtoSeat", "class_proto_seat.html", "class_proto_seat" ],
+    [ "PanelGuard", "class_panel_guard.html", "class_panel_guard" ],
+    [ "PanelItem", "class_panel_item.html", "class_panel_item" ],
+    [ "PanelSlot", "class_panel_slot.html", "class_panel_slot" ],
     [ "RemoteController", "class_remote_controller.html", null ],
     [ "RobotMovement", "class_robot_movement.html", "class_robot_movement" ],
-    [ "RobotTestController", "class_robot_test_controller.html", "class_robot_test_controller" ]
+    [ "RobotTestController", "class_robot_test_controller.html", "class_robot_test_controller" ],
+    [ "SourceGrid", "class_source_grid.html", "class_source_grid" ],
+    [ "UserInfo", "class_user_info.html", "class_user_info" ]
 ];

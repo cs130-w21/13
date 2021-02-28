@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['gamemanager_1567',['GameManager',['../class_game_manager.html',1,'']]],
-  ['global_1568',['Global',['../class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_modules_1_1_global.html',1,'Socket::Quobject::EngineIoClientDotNet::Modules']]]
+  ['fileutilities_1682',['FileUtilities',['../class_parrel_sync_1_1_file_utilities.html',1,'ParrelSync']]]
 ];
