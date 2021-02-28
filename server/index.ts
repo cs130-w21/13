@@ -1,15 +1,36 @@
+/**
+ * This is the main file for the hacman server. Currently, the server is designed
+ * mostly to facilitate communication between the clients (ie. not to enforce
+ * game state or to manage client actions, etc.), so see the Unity side of the
+ * project for the actual game logic.
+ */
+
+/******************************************************************************/
+
+// Imports
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
+/******************************************************************************/
+
+/** global monotonic counter */
 var user_id = 0;
-// if client hits GET endpoint "localhost:3000/user_id",
-// then let user have a unique id
+
+/**
+ * if client hits GET endpoint "localhost:3000/user_id",
+ * then let user have a unique id
+ */
 app.get('/user_id', (req, res) => {
   user_id++;
   res.end(user_id.toString());
 });
 
+/******************************************************************************/
+
+/**
+ * Manages the metadata for each client during a game.
+ */
 class UserProps {
   name!: string;
   id!: number;
@@ -24,8 +45,14 @@ class UserProps {
 
 var user1: UserProps;
 var user2: UserProps;
-// TODO: switch to socket.id use
-io.on('connection', (socket) => { // ready to listen for others (imagine that it is a function for one connection)
+
+/******************************************************************************/
+
+/**
+ * Ready to listen for others (imagine that it is a function for one connection)
+ * TODO: switch to socket.id use
+ */
+io.on('connection', (socket) => {
   console.log('a user connected');
 
   socket.on('hello', (msg) => { // listening for event `hello`
@@ -61,6 +88,11 @@ io.on('connection', (socket) => { // ready to listen for others (imagine that it
   });
 });
 
+/******************************************************************************/
+
+/**
+ * Listen on port 3000
+ */
 http.listen(3000, () => {
   console.log('Connected at 3000');
 });
