@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "postinstall": "npm run build-ts",
+    "postinstall": "tsc",
     "start": "node build/index.js",
     "serve": "node index.ts",
     "watch-node": "nodemon index.ts",
