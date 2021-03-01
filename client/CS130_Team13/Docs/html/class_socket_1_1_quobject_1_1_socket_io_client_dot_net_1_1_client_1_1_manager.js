@@ -1,0 +1,35 @@
+var class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager =
+[
+    [ "IOpenCallback", "interface_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager_1_1_i_open_callback.html", "interface_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager_1_1_i_open_callback" ],
+    [ "OpenCallbackImp", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager_1_1_open_callback_imp.html", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager_1_1_open_callback_imp" ],
+    [ "ReadyStateEnum", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a212530b94d9d1f2993157c46286808d3", [
+      [ "OPENING", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a212530b94d9d1f2993157c46286808d3a71a74f5026f5642a42a229e04cf1efdc", null ],
+      [ "OPEN", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a212530b94d9d1f2993157c46286808d3aa38bd5138bf35514df41a1795ebbf5c3", null ],
+      [ "CLOSED", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a212530b94d9d1f2993157c46286808d3a110ccf2f5d2ff4eda1fd1a494293467d", null ]
+    ] ],
+    [ "Manager", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a826ae67cac2cd07725090393f749bf27", null ],
+    [ "Manager", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a55a759194a9d02e47d7147730b37d63c", null ],
+    [ "Manager", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ad950a2f18494ff8b494a3778bd5e9c26", null ],
+    [ "Manager", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a20bb1cf22cf6675fcb41ecbe556022ec", null ],
+    [ "Close", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a819db1411b1af569eb8567f0f5e429db", null ],
+    [ "Open", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a9a1f4963c10a9eae550506dd981cacf4", null ],
+    [ "Reconnection", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a7b2dfe15d081b0aedf8d432bdd86a676", null ],
+    [ "ReconnectionAttempts", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ad519e853bdb76e3b2cdd1e9da10ed876", null ],
+    [ "ReconnectionDelay", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ad7b5359a3de0b9ffcee3786dadc174fd", null ],
+    [ "ReconnectionDelayMax", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a50adf71dee6862afb85b1a33ef1f2d41", null ],
+    [ "Socket", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a7e57ae931d5dd07f4d30d60cb86f2773", null ],
+    [ "Timeout", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ad83706476c69f97ac4366e4da3ccef0b", null ],
+    [ "EngineSocket", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ac8f3d9103e486f7e58ca60c197a9027e", null ],
+    [ "EVENT_CLOSE", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a960dc5a6e39f5069e674efbe4c34bb39", null ],
+    [ "EVENT_CONNECT_ERROR", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a6c8644221606100ef6932d4c17ed8c2c", null ],
+    [ "EVENT_CONNECT_TIMEOUT", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#af02d9d20cea877c22993344cb18f7b6e", null ],
+    [ "EVENT_ERROR", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ae715a2dd82e138603f6cc86c537f9b2d", null ],
+    [ "EVENT_OPEN", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a81684968a4801f1d9a170f5bcaa2f9d9", null ],
+    [ "EVENT_PACKET", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ae3e2cac0df853aa4909cfe362d39393a", null ],
+    [ "EVENT_RECONNECT", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a6662fb75a8ba588e737307b306621967", null ],
+    [ "EVENT_RECONNECT_ATTEMPT", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a8d59008ce2c86ec9c18be0cfac1a1065", null ],
+    [ "EVENT_RECONNECT_ERROR", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a79c6afea80d2cc558740c42ea97fb628", null ],
+    [ "EVENT_RECONNECT_FAILED", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#ae820fb89885d7e31c7e0f828ff638c20", null ],
+    [ "EVENT_RECONNECTING", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#a6e7d50703ecca093c8e495a2b3e0b485", null ],
+    [ "ReadyState", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_client_1_1_manager.html#aa235f8b455941090f7c4bedc90a54505", null ]
+];

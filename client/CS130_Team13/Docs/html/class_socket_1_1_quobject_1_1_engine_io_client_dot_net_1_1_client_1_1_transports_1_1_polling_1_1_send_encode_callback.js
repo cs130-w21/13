@@ -1,0 +1,5 @@
+var class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_1_1_send_encode_callback =
+[
+    [ "SendEncodeCallback", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_1_1_send_encode_callback.html#a402f8ed445023dcb4477388684cde8c7", null ],
+    [ "Call", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_1_1_send_encode_callback.html#a593f32101ce8f4873ce8b3826efb4307", null ]
+];
