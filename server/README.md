@@ -12,9 +12,9 @@
 2. Run `npm install`
 3. Run `npm start` everytime you want to reset the game (will be changed in future)
     - In VSCode, you can [have a terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) as part of the screen so that you don't have to have a thousand tabs
-4. Checkout index.ts for the socket code
+4. Checkout index.ts, server.ts for the socket code
     - (may possibly add other files in future)
-5. Modify index.ts
+5. Modify server.ts
     - (or add new ts files and import them in the index.ts file!)
 
 ## Client Prep
