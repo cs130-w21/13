@@ -1,22 +1,21 @@
 language: node_js
 node_js:
- - "14"
+- '14'
 cache: npm
-before_script:
-  npm install -g typescript
+before_script: npm install -g typescript
 script:
-  - cd server
-  - echo "Build starting :^)"
-  - echo "Installing first"
-  - npm install
-  - echo "Time to build :0"
-  - npm run postinstall
-  - echo "Test time!"
-  - npm test
+- cd server
+- echo "Build starting :^)"
+- echo "Installing first"
+- npm install
+- echo "Time to build :0"
+- npm run postinstall
+- echo "Test time!"
+- npm test
 deploy:
   provider: heroku
   api_key:
-    secure: fCTdZr90s84Awhx+qwh+MHMWlHgB1Q85nrvNbFqg+NmeisCHdf8VBDvEQqUCOQUVpqnQwTO0MKtJRmZ0zz56UYd1lhwUDWOUbOW+NL61jKrFyVOeResQzTcPKr0PbbtDljLyTuaaO3i3Bws5X5GEmaI3/bZR1gBJ92FAw+q8+oebRWsxpvdYD8savYiuOoW0jc956C/21xCtZNbQz+rt6xNUkUMlAFiD64/5wS4+HUKdHLGzXS10BAWx2AJg2vWWAHDe+PqDHQ+QVwAbt5TRe8VM82+l0b9CtjvC4CTQ34NSRAFd7Ipiy630+0Qdcp4vfsB7ZlAhMx8s+xDu1oaui7sKifriNbszCa6dlmmRsh6Uh3FBC/iHWPjZt4mKs4EWpX4R4VRe1q+mWfAsOjKDgqu2Og+8OXw5R6y6ytsNMOp6IbYS4pXJbI+YBaDzL7xp16OMCVLLaeKuuAzdRDMgAYVyAJsX2ij4jzH3TH6HRQ4mdRvCTLEdnOsq5OGdWWsoX1JvzOoNkXuIh0kXPOAxO8dyTMsH72+z5NoZGutCnJvGxrMPLH/o7joy9+jjNGaJ1fpjX3wn5nHWpnHWXftmDHWJeKwJMwpWs/1J8KsPkI7tVmQp57GTOilGGwtFUOTuq7vGK2194ViYloY4t1Z1fxly2VtpZqM3rKojuCVWrTA=
+    secure: ag9VsakTlIlu5cd1xEPLiDIL81+8qOY0+fkRf/Dqd/q3W2oODG9Qk+N0fkaWRmtPOJzsnXpMRuWq/S23yl4ZTyrEvNCq2hzne7yexcarzCV8O0d8PxiiOph78GKkv+YIxj59AikWgz/ipCnaN2iwo8zuhY5f5eObjsouNLliKc4Qtnk1N/Q4dCIuSxn7nHBpv5ba5tTQkiidmC/xFwbuzxs9sxu3eSvXUOXcpunj08S04UV6/9cl8lp3EDX55tY+SIxy3mfOTdTRLvrzgpEMcGYj+vz72CpjX0suX4XcwvqL51Lz3MDvUO6v4gb8PnLo6UJ42DbJQ42m9KHVZCSkSYUpJkCGvb1bz5Ien7N63+YT0MvBGbPy+FDs7paXCHWtqbIIxERk5s2fjC2X+l5MxITDP/qDjdhd9hScNAKnAypqYqnbZjY8WkJaSTIgyA8kMV4e6zOl1gV+q25fPxjElgeTYYh1dq98rKC0BXe7KTok1Ma/zL/roK58bi78vQExTGlVTW4LLxHFohOwQyOGPM9s2Nn6OOLbPFce22/Hj1P3YZNNlbE0apPYR1hg4nokCHuL/eTzvfKtm7t8EqbCdw7unbdYTrAI+Bdahg/8YpbvkRdRJfY2UbCbxtfdvgSZ85NsVxBuJ0bzuEIfF1cnYj+XMTVaNCLahQOa+rHDApM=
   app: cs130-hacman
-  on: 
+  on:
     repo: cs130-w21/13
