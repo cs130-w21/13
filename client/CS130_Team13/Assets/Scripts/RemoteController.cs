@@ -26,13 +26,22 @@ public class RemoteController : MonoBehaviour {
     private UserInfo userInfo;
     private UserInfo opponentInfo;
 
+    private string username;
+    private readonly const string SERVER_URL = "http://localhost:3000";
+
+    // public RemoteController(string username) {
+    //     // TODO
+    // }
+
     void Start() {
-        StartCoroutine(InitializeGame());
+        // TODO: Remove the hardcoded values from this function.
+        user = new UserInfo("pickles", id);
+        StartCoroutine(InitializeGame(SERVER_URL, user));
     }
 
-    IEnumerator InitializeGame() {
+    IEnumerator InitializeGame(string serverUrl, UserInfo user) {
         int id;
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://localhost:3000/user_id")) {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(serverUrl + "/user_id")) {
             // TODO: ERROR CHECK
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -40,12 +49,12 @@ public class RemoteController : MonoBehaviour {
             Debug.Log(webRequest.downloadHandler.text);
         }
         // set User Info
-        userInfo = new UserInfo("pickles", id);
-        setupSocket();
+        this.userInfo = user;
+        setupSocket(serverUrl);
     }
 
-    private void setupSocket() {
-        socket = IO.Socket("http://localhost:3000");
+    private void setupSocket(string serverUrl) {
+        socket = IO.Socket(serverUrl);
 
         // this happens on connect
         socket.On(QSocket.EVENT_CONNECT, () => {
@@ -82,16 +91,6 @@ public class RemoteController : MonoBehaviour {
     // --------------------------------------------------------------------------------
 
     /// <summary>
-    /// Connect to the server and tell it to match the player with an opponent.
-    ///
-    /// This should be called by C# functions within Unity, and it should call
-    /// Socket.IO-related functions within RemoteController.
-    /// </summary>
-    public void SearchForGame() {
-        // TODO
-    }
-
-    /// <summary>
     /// Start a new game.
     ///
     /// This should be called by the Socket.IO-related functions within RemoteController,
@@ -120,6 +119,16 @@ public class RemoteController : MonoBehaviour {
     /// </summary>
     /// <param name="commands">the opponent's commands, received from the server</param>
     public void ReceiveOpponentCommands(string commands) {
+        // TODO
+    }
+
+    /// <summary>
+    /// Connect to the server and tell it that the game has ended.
+    ///
+    /// This should be called by C# functions within Unity, and it should call
+    /// Socket.IO-related functions within RemoteController.
+    /// </summary>
+    public void EndCurrentGame() {
         // TODO
     }
 
