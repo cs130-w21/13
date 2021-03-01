@@ -26,22 +26,20 @@ public class RemoteController : MonoBehaviour {
     private UserInfo userInfo;
     private UserInfo opponentInfo;
 
-    private string username;
-    private readonly const string SERVER_URL = "http://localhost:3000";
+    private string username = "pickles";
+    private const string SERVER_URL = "http://localhost:3000";
 
     // public RemoteController(string username) {
-    //     // TODO
+    //     // TODO: Change the hardcoded values above.
     // }
 
     void Start() {
-        // TODO: Remove the hardcoded values from this function.
-        user = new UserInfo("pickles", id);
-        StartCoroutine(InitializeGame(SERVER_URL, user));
+        StartCoroutine(InitializeGame());
     }
 
-    IEnumerator InitializeGame(string serverUrl, UserInfo user) {
+    IEnumerator InitializeGame() {
         int id;
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(serverUrl + "/user_id")) {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(SERVER_URL + "/user_id")) {
             // TODO: ERROR CHECK
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -49,12 +47,12 @@ public class RemoteController : MonoBehaviour {
             Debug.Log(webRequest.downloadHandler.text);
         }
         // set User Info
-        this.userInfo = user;
-        setupSocket(serverUrl);
+        this.userInfo = new UserInfo(username, id);;
+        setupSocket();
     }
 
-    private void setupSocket(string serverUrl) {
-        socket = IO.Socket(serverUrl);
+    private void setupSocket() {
+        socket = IO.Socket(SERVER_URL);
 
         // this happens on connect
         socket.On(QSocket.EVENT_CONNECT, () => {
