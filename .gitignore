@@ -117,6 +117,9 @@ server/.lock-wscript
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 server/build/Release
 
+# Server build to javascript files
+server/build
+
 # Dependency directories
 server/node_modules/
 server/jspm_packages/
