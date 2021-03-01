@@ -8,7 +8,8 @@
     "start": "node build/index.js",
     "serve": "node index.ts",
     "watch-node": "nodemon index.ts",
-    "watch-ts": "tsc -w"
+    "watch-ts": "tsc -w",
+    "test": "ts-mocha tests/*.test.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +22,12 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
+    "@types/mocha": "^8.2.1",
     "@types/node": "^14.14.22",
+    "chai": "^4.3.0",
+    "mocha": "^8.3.0",
     "nodemon": "^2.0.7",
+    "ts-mocha": "^8.0.0",
     "typedoc": "^0.20.28"
   }
 }
