@@ -1,0 +1,5 @@
+var class_socket_1_1_newtonsoft_1_1_json_1_1_serialization_1_1_camel_case_property_names_contract_resolver =
+[
+    [ "CamelCasePropertyNamesContractResolver", "class_socket_1_1_newtonsoft_1_1_json_1_1_serialization_1_1_camel_case_property_names_contract_resolver.html#a96ad2b6c7d6824a1852ca4f043eeb97d", null ],
+    [ "ResolveContract", "class_socket_1_1_newtonsoft_1_1_json_1_1_serialization_1_1_camel_case_property_names_contract_resolver.html#a2fb028ceb0eff148efa9eaa9b094056f", null ]
+];
