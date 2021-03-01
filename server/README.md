@@ -1,7 +1,9 @@
+[Server config site](https://dashboard.heroku.com/apps/cs130-hacman) and [server link](https://cs130-hacman.herokuapp.com/)
+
 # How to start up this server
 `cd server` ==> make sure that path ends with `13\server`, or `13/server` on UNIX systems
 `npm install`
-`npm start`
+`npm run watch-node`
 
 # Multiplayer Development Instructions
 1. In Unity, use [ParallelSync](https://github.com/VeriorPies/ParrelSync/tree/1.4.1) to run two different clients with Debug at once
@@ -10,7 +12,7 @@
 
 ## Server prep
 2. Run `npm install`
-3. Run `npm start` everytime you want to reset the game (will be changed in future)
+3. Run `npm run watch-node` everytime you want to reset the game (will be changed in future)
     - In VSCode, you can [have a terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) as part of the screen so that you don't have to have a thousand tabs
 4. Checkout index.ts for the socket code
     - (may possibly add other files in future)

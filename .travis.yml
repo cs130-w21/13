@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+ - "8"
+cache: npm
+before_script:
+  npm install -g typescript
+script:
+  - cd server
+  - echo "Build starting :^)"
+  - echo "Installing first"
+  - npm install
+  - echo "Time to build :0"
+  - npm run postinstall
+  - echo "Test time!"
+  - npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: fCTdZr90s84Awhx+qwh+MHMWlHgB1Q85nrvNbFqg+NmeisCHdf8VBDvEQqUCOQUVpqnQwTO0MKtJRmZ0zz56UYd1lhwUDWOUbOW+NL61jKrFyVOeResQzTcPKr0PbbtDljLyTuaaO3i3Bws5X5GEmaI3/bZR1gBJ92FAw+q8+oebRWsxpvdYD8savYiuOoW0jc956C/21xCtZNbQz+rt6xNUkUMlAFiD64/5wS4+HUKdHLGzXS10BAWx2AJg2vWWAHDe+PqDHQ+QVwAbt5TRe8VM82+l0b9CtjvC4CTQ34NSRAFd7Ipiy630+0Qdcp4vfsB7ZlAhMx8s+xDu1oaui7sKifriNbszCa6dlmmRsh6Uh3FBC/iHWPjZt4mKs4EWpX4R4VRe1q+mWfAsOjKDgqu2Og+8OXw5R6y6ytsNMOp6IbYS4pXJbI+YBaDzL7xp16OMCVLLaeKuuAzdRDMgAYVyAJsX2ij4jzH3TH6HRQ4mdRvCTLEdnOsq5OGdWWsoX1JvzOoNkXuIh0kXPOAxO8dyTMsH72+z5NoZGutCnJvGxrMPLH/o7joy9+jjNGaJ1fpjX3wn5nHWpnHWXftmDHWJeKwJMwpWs/1J8KsPkI7tVmQp57GTOilGGwtFUOTuq7vGK2194ViYloY4t1Z1fxly2VtpZqM3rKojuCVWrTA=
+  app: cs130-hacman
+  on: 
+    repo: cs130-w21/13

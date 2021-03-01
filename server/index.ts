@@ -50,7 +50,6 @@ var user2: UserProps;
 
 /**
  * Ready to listen for others (imagine that it is a function for one connection)
- * TODO: switch to socket.id use
  */
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -93,6 +92,7 @@ io.on('connection', (socket) => {
 /**
  * Listen on port 3000
  */
-http.listen(3000, () => {
-  console.log('Connected at 3000');
+const port = process.env.PORT || 3000;
+http.listen(port, () => {
+  console.log('Connected at ' + port);
 });
