@@ -1,0 +1,4 @@
+var namespace_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_modules =
+[
+    [ "HasBinaryData", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_modules_1_1_has_binary_data.html", "class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_modules_1_1_has_binary_data" ]
+];

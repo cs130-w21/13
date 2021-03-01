@@ -1,0 +1,6 @@
+var class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_h_r_1_1_x_h_r_request =
+[
+    [ "RequestOptions", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c.html", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c" ],
+    [ "XHRRequest", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_h_r_1_1_x_h_r_request.html#a0c3fce1e9ac728d4306dfe2a81b0741b", null ],
+    [ "Create", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_h_r_1_1_x_h_r_request.html#aa8f653c1fed84a75f5ce394e5a545db6", null ]
+];

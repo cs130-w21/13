@@ -1,0 +1,4 @@
+var class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_binary_command_info =
+[
+    [ "BinaryCommandInfo", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_binary_command_info.html#a6ab11d2b7c0a6023e6bc248366a503f7", null ]
+];

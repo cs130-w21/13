@@ -1,0 +1,11 @@
+var namespace_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol =
+[
+    [ "ArraySegmentList", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_array_segment_list.html", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_array_segment_list" ],
+    [ "BinaryCommandInfo", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_binary_command_info.html", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_binary_command_info" ],
+    [ "CommandInfo", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_command_info.html", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_command_info" ],
+    [ "IClientCommandReader", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_client_command_reader.html", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_client_command_reader" ],
+    [ "ICommand", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_command.html", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_command" ],
+    [ "ICommandInfo", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_command_info.html", "interface_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_i_command_info" ],
+    [ "StringCommandInfo", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_string_command_info.html", "class_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol_1_1_string_command_info" ],
+    [ "CommandDelegate< TClientSession, TCommandInfo >", "namespace_socket_1_1_web_socket4_net_1_1_super_socket_1_1_client_engine_1_1_protocol.html#a925127a06741a138e51b2ae751aef588", null ]
+];

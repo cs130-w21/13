@@ -1,0 +1,8 @@
+var class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c =
+[
+    [ "CookieHeaderValue", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c.html#ad18e359e8e648ecd3b8e62dce368f390", null ],
+    [ "Data", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c.html#a8662202bb669faf5d31dfcdb84c6426b", null ],
+    [ "ExtraHeaders", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c.html#a66a3618c9b164c40aac50722113950e2", null ],
+    [ "Method", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c.html#a2ffc209f18465f994b9f8a492ee6f8db", null ],
+    [ "Uri", "class_socket_1_1_quobject_1_1_engine_io_client_dot_net_1_1_client_1_1_transports_1_1_polling_x_hd93cd888112ba7a4e050d4981ec0384c.html#ac5c7556266a1c70d55a85254aeaaa72a", null ]
+];
