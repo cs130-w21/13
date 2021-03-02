@@ -7,14 +7,22 @@ public class ForLoopBlock : PanelItem, ISubPanel
 {
     [SerializeField]
     private GameObject myPanel = null;
-    
+
+    /// <summary>
+    /// simulate a guard probe event if dragged item is not for loop
+    /// </summary>
     public void IsOccupied() {
-        // simulate a guard probe event
-        myPanel.GetComponent<CodingPanel>().ReportGuardProbe();
+        if (DragDropManager.instance.currentlyDraggedItem.GetComponent<ForLoopBlock>())
+            return;
+        else
+            myPanel.GetComponent<CodingPanel>().ReportGuardProbe();
     }
 
     public void ItemCame(GameObject newItem) {
-        myPanel.GetComponent<CodingPanel>().PutItem(newItem);
+        if (DragDropManager.instance.currentlyDraggedItem.GetComponent<ForLoopBlock>())
+            return;
+        else
+            myPanel.GetComponent<CodingPanel>().PutItem(newItem);
     }
 
     public override string GetInformation() {
