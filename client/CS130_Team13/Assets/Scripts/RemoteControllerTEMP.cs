@@ -3,10 +3,11 @@ using Socket.Quobject.SocketIoClientDotNet.Client;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using System;
 
 /////// USE THIS FOR CLIENT COMMUNICATION FOR NOW :)
-public class RemoteControllerTEMP {
-    public RemoteControllerTEMP (string name){}
+public class RemoteController {
+    public RemoteController (string name){}
     public void SendPlayerCommands_ToServer(string commands) {}
     public void EndCurrentGame_ToServer() {}
 
@@ -35,7 +36,7 @@ public class UserInfo {
     }
 }
 
-public class RemoteController : MonoBehaviour {
+public class RemoteControllerTEMP : MonoBehaviour {
     private QSocket socket;
     private UserInfo userInfo;
     private UserInfo opponentInfo;
@@ -54,10 +55,14 @@ public class RemoteController : MonoBehaviour {
     IEnumerator InitializeGame() {
         int id;
         using (UnityWebRequest webRequest = UnityWebRequest.Get(SERVER_URL + "/user_id")) {
-            // TODO: ERROR CHECK
             // Request and wait for the desired page.
+            id = 0;
             yield return webRequest.SendWebRequest();
-            id = System.Convert.ToInt32(webRequest.downloadHandler.text);
+            string result = webRequest.downloadHandler.text;
+            if (result.Length <= 0) {
+                throw new Exception(webRequest.error);
+            }
+            id = System.Convert.ToInt32(result);
             Debug.Log(webRequest.downloadHandler.text);
         }
         // set User Info
@@ -81,7 +86,6 @@ public class RemoteController : MonoBehaviour {
         });
 
         socket.On("gameplay", (data) => {
-            // TODO switch to socket.id use
             Debug.Log(data);
             opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
             Debug.Log(opponentInfo.ToString());
