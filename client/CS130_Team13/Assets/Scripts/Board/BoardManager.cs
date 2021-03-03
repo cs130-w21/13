@@ -16,10 +16,10 @@ public enum TileState
 //     Running // Player is running the board state
 // }
 
-    /// <summary> 
-    /// The Board Manager handles the state of everything on the board, and communicates with the player objects.
-    /// This facilitates the ordering of all of the motion of a turn, and controls some of the game logic.
-    /// </summary>
+/// <summary> 
+/// The Board Manager handles the state of everything on the board, and communicates with the player objects.
+/// This facilitates the ordering of all of the motion of a turn, and controls some of the game logic.
+/// </summary>
 public class BoardManager : MonoBehaviour
 {
     /// References for tilemaps that handle the objects on the screen
@@ -27,8 +27,10 @@ public class BoardManager : MonoBehaviour
     public Tilemap objectTilemap;
 
     /// References for tiles to fill the tilemap
-    public Tile bgTile; 
-    public Color borderColor = new Color(0.5f,0.5f,0.5f,1.0f);
+    public TileBase bgTile;
+    public TileBase placedRock;
+    public List<TileBase> rockTiles;
+    public Color borderColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 
     /// Reference for camera so it can properly be scaled to fit the board
     public Camera cam;
@@ -37,11 +39,9 @@ public class BoardManager : MonoBehaviour
     public Robot player1;
     public Robot player2;
 
-    /// Size of the grid. Can be modified in editor, but should remain constant over the course of a game
-    [SerializeField]
-    private int boardWidth = 5;
-    [SerializeField]
-    private int boardHeight = 5;
+    /// Size of the grid.
+    private int boardWidth = Constants.Board.BOARD_WIDTH;
+    private int boardHeight = Constants.Board.BOARD_HEIGHT;
 
 
     /// <summary> 
@@ -51,14 +51,8 @@ public class BoardManager : MonoBehaviour
     public void CreateBoard(int seed)
     {
         // Set the random seed based on the input
-        Random.InitState(seed); 
+        Random.InitState(seed);
 
-        // This chunk is maybe not necessary? Move the camera to the center instead
-        // // Offset the grids so that they are centered on the camera
-        // Vector3 tileAnchorOffset = new Vector3(-boardWidth/2, -boardHeight/2, 0.0f);
-        // backgroundTilemap.tileAnchor = tileAnchorOffset;
-        // objectTilemap.tileAnchor = tileAnchorOffset;
-        
         // Move the camera to the center and scale camera to fit the whole board
         cam.transform.position = new Vector3(boardWidth / 2, boardHeight / 2, cam.transform.position.z);
         cam.orthographicSize = boardHeight / 2 + 3;
@@ -68,63 +62,106 @@ public class BoardManager : MonoBehaviour
         {
             for (int x = 0; x < boardWidth; x++)
             {
-                backgroundTilemap.SetTile(new Vector3Int(x,y,0), bgTile);
+                backgroundTilemap.SetTile(new Vector3Int(x, y, 0), bgTile);
+                //Random.Range
             }
         }
 
         // Fill border with tiles
         // This portion is purely aesthetic and can be removed if the screen looks too cluttered
         // Also this is messy code, could probably improve it by making a List<Vector3Int> of all the coords first
-        for (int x = -1; x < boardWidth+1; x++)
+        for (int x = -1; x < boardWidth + 1; x++)
         {
-            Vector3Int vec1 = new Vector3Int(x,-1,0);
+            Vector3Int vec1 = new Vector3Int(x, -1, 0);
             backgroundTilemap.SetTile(vec1, bgTile);
             backgroundTilemap.SetTileFlags(vec1, TileFlags.None);
             backgroundTilemap.SetColor(vec1, borderColor);
-            Vector3Int vec2 = new Vector3Int(x,boardHeight,0);
+            Vector3Int vec2 = new Vector3Int(x, boardHeight, 0);
             backgroundTilemap.SetTile(vec2, bgTile);
             backgroundTilemap.SetTileFlags(vec2, TileFlags.None);
             backgroundTilemap.SetColor(vec2, borderColor);
         }
         for (int y = 0; y < boardHeight; y++)
         {
-            Vector3Int vec1 = new Vector3Int(-1,y,0);
+            Vector3Int vec1 = new Vector3Int(-1, y, 0);
             backgroundTilemap.SetTile(vec1, bgTile);
             backgroundTilemap.SetTileFlags(vec1, TileFlags.None);
             backgroundTilemap.SetColor(vec1, borderColor);
-            Vector3Int vec2 = new Vector3Int(boardWidth,y,0);
+            Vector3Int vec2 = new Vector3Int(boardWidth, y, 0);
             backgroundTilemap.SetTile(vec2, bgTile);
             backgroundTilemap.SetTileFlags(vec2, TileFlags.None);
             backgroundTilemap.SetColor(vec2, borderColor);
         }
 
         // Set player positions at opposite corners
-        player1.transform.position = backgroundTilemap.LocalToWorld(new Vector3(0.5f,0.5f,0));
-        player2.transform.position = backgroundTilemap.LocalToWorld(new Vector3(boardWidth-0.5f,boardHeight-0.5f,0));
+        player1.transform.position = backgroundTilemap.LocalToWorld(new Vector3(0.5f, 0.5f, 0));
+        player2.transform.position = backgroundTilemap.LocalToWorld(new Vector3(boardWidth - 0.5f, boardHeight - 0.5f, 0));
         // Pass this BoardManager to the players so they can access its functions
         player1.Init(this);
         player2.Init(this);
 
+        // Fill the board with points
+
+
+        // Fill the baord with powerups
+
+
+        // Fill the board with rocks
+        for (int y = 0; y < boardHeight; y++)
+        {
+            for (int x = 0; x < boardWidth; x++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+                if (GetTileState(pos) == TileState.Empty)
+                {
+                    int rockType = Random.Range(0, rockTiles.Count);
+                    objectTilemap.SetTile(pos, rockTiles[rockType]);
+                }
+            }
+        }
     } // End CreateBoard
-        
+
     /// Takes in a World space Vector3 and gets the state of the tile at that position.
     public TileState GetTileState(Vector3 tilePos)
     {
-        Vector3Int tilepos = objectTilemap.WorldToCell(tilePos);
-        int x = tilepos.x;
-        int y = tilepos.y;
+        Vector3Int intTilePos = objectTilemap.WorldToCell(tilePos);
+        int x = intTilePos.x;
+        int y = intTilePos.y;
         // Cells off the board are null
         if (x < 0 || x > boardWidth - 1 || y < 0 || y > boardHeight - 1)
         {
             return TileState.Null;
         }
         // Check if the cell is occupied
-        if (objectTilemap.HasTile(tilepos))
+        if (objectTilemap.HasTile(intTilePos)
+            || objectTilemap.WorldToCell(player1.transform.position) == intTilePos
+            || objectTilemap.WorldToCell(player2.transform.position) == intTilePos
+            )
         {
             return TileState.Occupied;
         }
         // If not null or occupied, it is empty.
         return TileState.Empty;
+    }
+
+    /// Removes a tile for a robot
+    public void MineTile(Vector3 tilePos)
+    {
+        Vector3Int intTilePos = objectTilemap.WorldToCell(tilePos);
+        if (rockTiles.Contains(objectTilemap.GetTile(intTilePos)) || objectTilemap.GetTile(intTilePos) == placedRock)
+        {
+            objectTilemap.SetTile(intTilePos, null);
+        }
+    }
+
+    /// Places a tile for a robot
+    public void PlaceTile(Vector3 tilePos)
+    {
+        Vector3Int intTilePos = objectTilemap.WorldToCell(tilePos);
+        if (GetTileState(intTilePos) == TileState.Empty)
+        {
+            objectTilemap.SetTile(intTilePos, placedRock);
+        }
     }
 
     /// Takes in two command strings and runs them on the board.
@@ -138,17 +175,17 @@ public class BoardManager : MonoBehaviour
     private IEnumerator RunTurnHelper(string p1Moves, string p2Moves)
     {
         // TODO: Shift camera position to fit UI
-        
+
         // Players give input, run the commands
         int len = Mathf.Max(p1Moves.Length, p2Moves.Length);
         for (int i = 0; i < len; i++)
         {
             if (i < p1Moves.Length)
                 yield return StartCoroutine(RunCommand(player1, p1Moves[i]));
-                yield return new WaitForSeconds(Constants.Game.ACTION_PAUSE_BETWEEN);
+            yield return new WaitForSeconds(Constants.Game.ACTION_PAUSE_BETWEEN);
             if (i < p2Moves.Length)
                 yield return StartCoroutine(RunCommand(player2, p2Moves[i]));
-                yield return new WaitForSeconds(Constants.Game.ACTION_PAUSE_BETWEEN);
+            yield return new WaitForSeconds(Constants.Game.ACTION_PAUSE_BETWEEN);
         }
 
         // Both robots have finished running, so do some cleanup
@@ -158,7 +195,7 @@ public class BoardManager : MonoBehaviour
     /// RunCommand takes in a robot and a command char and tells the robot to do the corresponding command.
     private IEnumerator RunCommand(Robot robot, char cmd)
     {
-        switch(cmd)
+        switch (cmd)
         {
             case 'L': // Rotate left
                 yield return StartCoroutine(robot.Rotate90(Direction.Left));
@@ -173,12 +210,12 @@ public class BoardManager : MonoBehaviour
                 yield return StartCoroutine(robot.Move(Direction.Down));
                 break;
             case 'M': // Mine
-
+                yield return StartCoroutine(robot.Mine());
                 break;
             case 'P': // Place
-
+                yield return StartCoroutine(robot.Place());
                 break;
-            default: 
+            default:
                 break;
         }
     }
