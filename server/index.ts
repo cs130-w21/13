@@ -12,6 +12,6 @@ const { http, io } = require("./server.ts");
 const port = process.env.PORT || 3000;
 http.listen(port, () => {
   console.log('Connected at ' + port);
-});
+}); 
 
 export {}  // suppress TS import checker
