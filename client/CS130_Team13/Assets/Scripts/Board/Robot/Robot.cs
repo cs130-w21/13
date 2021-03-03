@@ -146,6 +146,7 @@ public class Robot : MonoBehaviour
         }
     }
 
+    /// Mines the tile in front of the robot
     public IEnumerator Mine()
     {
         // Play an animation that moves the robot forward and back
@@ -162,6 +163,34 @@ public class Robot : MonoBehaviour
 
         // Try to mine the block in front
         boardManager.MineTile(start + facingDir);
+
+        // Move backward
+        for (; t < 1; t += Time.deltaTime / Constants.Game.ACTION_SPEED)
+        {
+            float dist = Mathf.Sin(t * 3.14f); // Moves forward and back a short dist
+            transform.position = Vector3.Lerp(start, start + facingDir * 0.2f, dist);
+            yield return null;
+        }
+        transform.position = start;
+    }
+
+    /// Places a rock in front of the robot
+    public IEnumerator Place()
+    {
+        // Play an animation that moves the robot forward and back
+        Vector3 start = transform.position;
+        Vector3 facingDir = transform.up;
+        float t = 0f;
+        // Move forward
+        for (; t < 0.5; t += Time.deltaTime / Constants.Game.ACTION_SPEED)
+        {
+            float dist = Mathf.Sin(t * 3.14f); // Moves forward and back a short dist
+            transform.position = Vector3.Lerp(start, start + facingDir * 0.2f, dist);
+            yield return null;
+        }
+
+        // Try to mine the block in front
+        boardManager.PlaceTile(start + facingDir);
 
         // Move backward
         for (; t < 1; t += Time.deltaTime / Constants.Game.ACTION_SPEED)

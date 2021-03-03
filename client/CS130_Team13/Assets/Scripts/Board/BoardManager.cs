@@ -28,6 +28,7 @@ public class BoardManager : MonoBehaviour
 
     /// References for tiles to fill the tilemap
     public TileBase bgTile;
+    public TileBase placedRock;
     public List<TileBase> rockTiles;
     public Color borderColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 
@@ -148,12 +149,23 @@ public class BoardManager : MonoBehaviour
         return TileState.Empty;
     }
 
+    /// Removes a tile for a robot
     public void MineTile(Vector3 tilePos)
     {
         Vector3Int intTilePos = objectTilemap.WorldToCell(tilePos);
-        if (rockTiles.Contains(objectTilemap.GetTile(intTilePos)))
+        if (rockTiles.Contains(objectTilemap.GetTile(intTilePos)) || objectTilemap.GetTile(intTilePos) == placedRock)
         {
-
+            objectTilemap.SetTile(intTilePos, null);
+        }
+    }
+    
+    /// Places a tile for a robot
+    public void PlaceTile(Vector3 tilePos)
+    {
+        Vector3Int intTilePos = objectTilemap.WorldToCell(tilePos);
+        if (GetTileState(intTilePos) == TileState.Empty)
+        {
+            objectTilemap.SetTile(intTilePos, placedRock);
         }
     }
 
@@ -203,10 +215,10 @@ public class BoardManager : MonoBehaviour
                 yield return StartCoroutine(robot.Move(Direction.Down));
                 break;
             case 'M': // Mine
-
+                yield return StartCoroutine(robot.Mine());
                 break;
             case 'P': // Place
-
+                yield return StartCoroutine(robot.Place());
                 break;
             default:
                 break;

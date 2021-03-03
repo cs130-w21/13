@@ -686,6 +686,7 @@ MonoBehaviour:
   backgroundTilemap: {fileID: 760157}
   objectTilemap: {fileID: 928840555}
   bgTile: {fileID: 11400000, guid: 434adaae7cf3f824f9bc24412b5a18f3, type: 2}
+  placedRock: {fileID: 11400000, guid: 417df5923e7a9364388b65fe76e1944e, type: 2}
   rockTiles:
   - {fileID: 11400000, guid: 54595cd730f59d146ae244ebf4428452, type: 2}
   - {fileID: 11400000, guid: da0abf20e9a8c5e4e96542d045e31894, type: 2}
