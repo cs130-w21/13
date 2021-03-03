@@ -56,7 +56,6 @@ public class RemoteControllerTEMP : MonoBehaviour {
         int id;
         using (UnityWebRequest webRequest = UnityWebRequest.Get(SERVER_URL + "/user_id")) {
             // Request and wait for the desired page.
-            id = 0;
             yield return webRequest.SendWebRequest();
             string result = webRequest.downloadHandler.text;
             if (result.Length <= 0) {
