@@ -119,11 +119,6 @@ public class BoardManager : MonoBehaviour
                 }
             }
         }
-
-
-
-
-
     } // End CreateBoard
 
     /// Takes in a World space Vector3 and gets the state of the tile at that position.
@@ -158,7 +153,7 @@ public class BoardManager : MonoBehaviour
             objectTilemap.SetTile(intTilePos, null);
         }
     }
-    
+
     /// Places a tile for a robot
     public void PlaceTile(Vector3 tilePos)
     {
