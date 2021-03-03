@@ -33,4 +33,10 @@ public static class Constants
         public const float ACTION_SPEED = 0.3f;
         public const float ACTION_PAUSE_BETWEEN = 0.2f;
     }
+
+    public static class Board
+    {
+        public const int BOARD_WIDTH = 20;
+        public const int BOARD_HEIGHT = 16;
+    }
 }

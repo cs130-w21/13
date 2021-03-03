@@ -27,7 +27,8 @@ public class BoardManager : MonoBehaviour
     public Tilemap objectTilemap;
 
     /// References for tiles to fill the tilemap
-    public Tile bgTile;
+    public TileBase bgTile;
+    public List<TileBase> rockTiles;
     public Color borderColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 
     /// Reference for camera so it can properly be scaled to fit the board
@@ -37,11 +38,9 @@ public class BoardManager : MonoBehaviour
     public Robot player1;
     public Robot player2;
 
-    /// Size of the grid. Can be modified in editor, but should remain constant over the course of a game
-    [SerializeField]
-    private int boardWidth = 5;
-    [SerializeField]
-    private int boardHeight = 5;
+    /// Size of the grid.
+    private int boardWidth = Constants.Board.BOARD_WIDTH;
+    private int boardHeight = Constants.Board.BOARD_HEIGHT;
 
 
     /// <summary> 
@@ -53,12 +52,6 @@ public class BoardManager : MonoBehaviour
         // Set the random seed based on the input
         Random.InitState(seed);
 
-        // This chunk is maybe not necessary? Move the camera to the center instead
-        // // Offset the grids so that they are centered on the camera
-        // Vector3 tileAnchorOffset = new Vector3(-boardWidth/2, -boardHeight/2, 0.0f);
-        // backgroundTilemap.tileAnchor = tileAnchorOffset;
-        // objectTilemap.tileAnchor = tileAnchorOffset;
-
         // Move the camera to the center and scale camera to fit the whole board
         cam.transform.position = new Vector3(boardWidth / 2, boardHeight / 2, cam.transform.position.z);
         cam.orthographicSize = boardHeight / 2 + 3;
@@ -69,6 +62,7 @@ public class BoardManager : MonoBehaviour
             for (int x = 0; x < boardWidth; x++)
             {
                 backgroundTilemap.SetTile(new Vector3Int(x, y, 0), bgTile);
+                //Random.Range
             }
         }
 
@@ -105,6 +99,30 @@ public class BoardManager : MonoBehaviour
         player1.Init(this);
         player2.Init(this);
 
+        // Fill the board with points
+
+
+        // Fill the baord with powerups
+
+
+        // Fill the board with rocks
+        for (int y = 0; y < boardHeight; y++)
+        {
+            for (int x = 0; x < boardWidth; x++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+                if (GetTileState(pos) == TileState.Empty)
+                {
+                    int rockType = Random.Range(0, rockTiles.Count);
+                    objectTilemap.SetTile(pos, rockTiles[rockType]);
+                }
+            }
+        }
+
+
+
+
+
     } // End CreateBoard
 
     /// Takes in a World space Vector3 and gets the state of the tile at that position.
@@ -128,6 +146,15 @@ public class BoardManager : MonoBehaviour
         }
         // If not null or occupied, it is empty.
         return TileState.Empty;
+    }
+
+    public void MineTile(Vector3 tilePos)
+    {
+        Vector3Int intTilePos = objectTilemap.WorldToCell(tilePos);
+        if (rockTiles.Contains(objectTilemap.GetTile(intTilePos)))
+        {
+
+        }
     }
 
     /// Takes in two command strings and runs them on the board.
