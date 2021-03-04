@@ -37,7 +37,7 @@ describe("server-socket-test", () => {
   /**
    * Tests whether two clients can connect to the server.
    */
-  /** 
+  
   it("hello-test-two-clients", (done) => {
     clientSocket1.emit('hello', '{"name":"client1","id":1,"playerOrder":0}');
     clientSocket1.on('initiate', (msg) => {
@@ -51,12 +51,13 @@ describe("server-socket-test", () => {
       });
     });
   });
-  */
+  
 
   /**
    * Test if messages are sent
    */
 
+  /** 
   it("test-command-sharing", (done) => {
     clientSocket1.emit('hello', '{"name":"client1","id":1,"playerOrder":0}');
     clientSocket1.on('initiate', (msg) => {
@@ -81,6 +82,7 @@ describe("server-socket-test", () => {
       });
     });
   });
+  */
 });
   /******************************************************************************/
 
