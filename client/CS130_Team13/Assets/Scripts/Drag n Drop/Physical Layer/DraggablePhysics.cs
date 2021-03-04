@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// attach this to a UI element to allow user to drag it around and find touching droppable objects to snap into;
+/// it will call IDroppable.ItemCame(gameObject) when snapping into something, 
+/// and IDroppable.ItemLeft(gameObject) when dragged away.
+/// </summary>
 public class DraggablePhysics : MonoBehaviour, IDraggable {
 
     // API settings
@@ -53,9 +58,10 @@ public class DraggablePhysics : MonoBehaviour, IDraggable {
         // update seat information
         if (candidateSeat && candidateSeat != currentSeat) {
             // lock onto new seat
-            if (currentSeat) currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
-            candidateSeat.GetComponent<IDroppable>().ItemCame(gameObject);
+            if (currentSeat) 
+                currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
             currentSeat = candidateSeat;
+            candidateSeat.GetComponent<IDroppable>().ItemCame(gameObject);
 
             // update lock position to new anchored position
             myLockPos = gameObject.GetComponent<RectTransform>().anchoredPosition;

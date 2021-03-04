@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// attach this to a UI element to make it a droppable, additionally tag the object "Seat" to let draggable item to find it;
+/// overriding the functions, or implement a new IDroppable class from scratch if you want other dropping behaviors.
+/// </summary>
 public class DroppablePhysics : MonoBehaviour, IDroppable {
 
     private GameObject currentItem = null;
@@ -30,6 +34,7 @@ public class DroppablePhysics : MonoBehaviour, IDroppable {
 
         // group under my hierarchy
         item.transform.SetParent(transform);
+        item.transform.localScale = new Vector3(1, 1, 1);
 
         // move to my center / if you read this be notified there are mutliple ways of handling "where to put it"
         RectTransform itemTransform = item.GetComponent<RectTransform>();

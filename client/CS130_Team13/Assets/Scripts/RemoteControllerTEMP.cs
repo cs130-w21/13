@@ -3,6 +3,21 @@ using Socket.Quobject.SocketIoClientDotNet.Client;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using System;
+
+/////// USE THIS FOR CLIENT COMMUNICATION FOR NOW :)
+public class RemoteController {
+    public RemoteController (string name){}
+    public void SendPlayerCommands_ToServer(string commands) {}
+    public void EndCurrentGame_ToServer() {}
+
+    ////// TODO CLIENT PEEPS: FILL IN WHAT SHOULD HAPPEN IF Game Found, Received Commands, and Game Ended.
+    private void GameFound_FromServer() {}
+    private void ReceiveOpponentCommands_FromServer(string commands) {}
+    private void GameEnded_FromServer() {}
+}
+
+//////// CLIENT PEEPS LOOK NO FURTHER :0
 
 // serializable means it can be converted to JSON info easily 
 // https://docs.unity3d.com/Manual/JSONSerialization.html
@@ -21,7 +36,7 @@ public class UserInfo {
     }
 }
 
-public class RemoteController : MonoBehaviour {
+public class RemoteControllerTEMP : MonoBehaviour {
     private QSocket socket;
     private UserInfo userInfo;
     private UserInfo opponentInfo;
@@ -40,10 +55,13 @@ public class RemoteController : MonoBehaviour {
     IEnumerator InitializeGame() {
         int id;
         using (UnityWebRequest webRequest = UnityWebRequest.Get(SERVER_URL + "/user_id")) {
-            // TODO: ERROR CHECK
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
-            id = System.Convert.ToInt32(webRequest.downloadHandler.text);
+            string result = webRequest.downloadHandler.text;
+            if (result.Length <= 0) {
+                throw new Exception(webRequest.error);
+            }
+            id = System.Convert.ToInt32(result);
             Debug.Log(webRequest.downloadHandler.text);
         }
         // set User Info
@@ -67,7 +85,6 @@ public class RemoteController : MonoBehaviour {
         });
 
         socket.On("gameplay", (data) => {
-            // TODO switch to socket.id use
             Debug.Log(data);
             opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
             Debug.Log(opponentInfo.ToString());
@@ -94,7 +111,7 @@ public class RemoteController : MonoBehaviour {
     /// This should be called by the Socket.IO-related functions within RemoteController,
     /// and it should call C# functions within Unity.
     /// </summary>
-    public void GameFound() {
+    private void GameFound_FromServer() {
         // TODO
     }
 
@@ -105,7 +122,7 @@ public class RemoteController : MonoBehaviour {
     /// Socket.IO-related functions within RemoteController.
     /// </summary>
     /// <param name="commands">the player's commands, to be sent to the server</param>
-    public void SendPlayerCommands(string commands) {
+    public void SendPlayerCommands_ToServer(string commands) {
         // TODO
     }
 
@@ -116,7 +133,7 @@ public class RemoteController : MonoBehaviour {
     /// and it should call C# functions within Unity.
     /// </summary>
     /// <param name="commands">the opponent's commands, received from the server</param>
-    public void ReceiveOpponentCommands(string commands) {
+    private void ReceiveOpponentCommands_FromServer(string commands) {
         // TODO
     }
 
@@ -126,7 +143,7 @@ public class RemoteController : MonoBehaviour {
     /// This should be called by C# functions within Unity, and it should call
     /// Socket.IO-related functions within RemoteController.
     /// </summary>
-    public void EndCurrentGame() {
+    public void EndCurrentGame_ToServer() {
         // TODO
     }
 
@@ -136,7 +153,7 @@ public class RemoteController : MonoBehaviour {
     /// This should be called by the Socket.IO-related functions within RemoteController,
     /// and it should call C# functions within Unity.
     /// </summary>
-    public void GameEnded() {
+    private void GameEnded_FromServer() {
         // TODO
     }
 }

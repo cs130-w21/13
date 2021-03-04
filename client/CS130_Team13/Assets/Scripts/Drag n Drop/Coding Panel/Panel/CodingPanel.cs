@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CodingPanel : MonoBehaviour, ICodeInfo {
-    [SerializeField]
-    private PanelGuard myGuard;
 
+/// <summary>
+/// there needs to be a 
+/// </summary>
+public class CodingPanel : MonoBehaviour, ICodeInfo {
     [SerializeField]
     private GameObject mySlotInstance;
 
@@ -23,8 +24,16 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
     [SerializeField]
     private int maxCost = 10;
 
+    // remember which items are in the panel
+    private HashSet<GameObject> myItems = new HashSet<GameObject>();
+
+    // remember probed subpanels
+    private GameObject lastSubPanel = null;
+
+    //private HashSet<GameObject> skipCheckItems = new HashSet<GameObject>();
+
     // public interface ////////////////////////////////////////////////////////////////////
-    public string GetInformation() {
+    public virtual string GetInformation() {
         string newInformation = "";
 
         foreach (GameObject slot in mySlots) {
@@ -38,7 +47,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return newInformation;
     }
 
-    public int GetCost() {
+    public virtual int GetCost() {
         int cost = 0;
 
         foreach (GameObject slot in mySlots) {
@@ -48,23 +57,53 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return cost;
     }
 
-    
+    public virtual void PutItem(GameObject newItem) {
+        // force item into hovering slot
+        if (hoveringSlot) {
+            // put item in slot
+            newItem.GetComponent<IDraggable>().ForceInto(hoveringSlot);
+            // update items
+            myItems.Add(newItem);
+        }
+        else {
+            // decide if item is hovered upon a container
+            if (lastSubPanel) {
+                lastSubPanel.GetComponent<ISubPanel>().ItemCame(newItem);
+            }
+            else {
+                // TODO: handle the situation where no slot is hovering
+                throw new System.Exception("it happened! the object is releaed while no slot is available! tell johnny!");
+            }
+        }
+    }
+
+    //public virtual void RegisterSkip(GameObject newItem) {
+    //    skipCheckItems.Add(newItem);
+    //}
+
+
     // message with guard (handling empty) //////////////////////////////////////////////////
-    public void ReportGuardProbe() {
+    /// <summary>
+    /// register a guard being probed event, and tell the panel guard if panel can take the new object
+    /// </summary>
+    /// <returns>bool: panel has enough space (true = y)</returns>
+    public virtual bool ReportGuardProbe() {
         guardProbed = true;
+        
+        return PanelHasEnoughSpace() /*&& !myItems.Contains(DragDropManager.instance.currentlyDraggedItem)*/;
     }
 
 
     // system messages //////////////////////////////////////////////////////////////////////
-    public void LateUpdate() {
+    public virtual void LateUpdate() {
         if (hoveringSlot && hoveringSlot.GetComponent<IDroppable>().IsOccupied()) {
             hoveringSlot = null;
         }
 
         // if there's an item hoverring above this panel
-        if (guardProbed) {
+        if (guardProbed /*&& !myItems.Contains(DragDropManager.instance.currentlyDraggedItem)*/) {
             // skip if panel is full already
-            if (GetCost() >= maxCost) {
+            if (!PanelHasEnoughSpace()) {
                 // TODO: fill in the alarming behavior here
                 Debug.Log("panel full!");
                 guardProbed = false;
@@ -79,9 +118,12 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                 }
                 else {
                     bool matched = false;
+                    bool above = false;
                     
                     // position check
                     foreach (GameObject slot in mySlots) {
+                        GameObject slotItem = slot.GetComponent<IDroppable>().GetCurrentItem();
+
                         Vector2 slotBottom = JohnnyUITools.GetCanvasCoord(slot);
                         Vector2 slotTop = JohnnyUITools.GetCanvasCoord(slot) + slot.GetComponent<RectTransform>().sizeDelta;
                         Vector2 itemBottom = JohnnyUITools.GetCanvasCoord(DragDropManager.instance.currentlyDraggedItem);
@@ -92,6 +134,21 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                             matched = true;
                             
                             if (slot == hoveringSlot) break;
+                            else if (slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>() != null) {
+                                // clear hovering slot
+                                if (hoveringSlot) {
+                                    RemoveSlot(hoveringSlot);
+                                    hoveringSlot = null;    
+                                }
+
+                                // forward the call
+                                ISubPanel subPanel = slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>();
+                                subPanel.IsOccupied();
+                                // update subpanel reference
+                                lastSubPanel = slot.GetComponent<IDroppable>().GetCurrentItem();
+
+                                break;
+                            }
 
                             // create new hover slot
                             if (!hoveringSlot) {
@@ -116,9 +173,20 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
 
                             break;
                         }
+                        else if (slotBottom.y < itemBottom.y) {
+                            above = true;
+                        }
                     }
 
-                    if (!matched) {
+                    if (!matched && above) {
+                        if (hoveringSlot) {
+                            ReorderSlot(0, hoveringSlot);
+                        }
+                        else {
+                            hoveringSlot = FormatNewSlot(0);
+                        }
+                    }
+                    else if (!matched) {                        
                         // move hover slot to bottom
                         if (hoveringSlot) {
                             ReorderSlot(mySlots.Count - 1, hoveringSlot);
@@ -164,8 +232,20 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return newSlot;
     }
 
-    public void RemoveSlot(GameObject deprecatedSlot) {
+    public virtual void RemoveSlot(GameObject deprecatedSlot) {
+        GameObject depItem = deprecatedSlot.GetComponent<IDroppable>().GetCurrentItem();
+        
+        // update slots
         mySlots.Remove(deprecatedSlot);
+        // update items
+        myItems.Remove(depItem);
+        
         Destroy(deprecatedSlot);
+    }
+
+    private bool PanelHasEnoughSpace() {
+        // access the dragged item for 
+        int inpendingCost = DragDropManager.instance.currentlyDraggedItem.GetComponent<ICodeInfo>().GetCost();
+        return (GetCost() + inpendingCost <= maxCost);
     }
 }
