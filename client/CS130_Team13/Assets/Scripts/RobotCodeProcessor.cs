@@ -62,40 +62,15 @@ public class codeprocessor
     }
 
     /// <summary>
-    /// get the result of the code translation
-    /// </summary>
-    /// <returns> returns a string which hold the result of the translation </returns>
-    public string getResult()
-    {
-        codeProcessor();
-        return result;
-    }
-
-    /// <summary>
     /// set the code to the new code string and empty the previouse results
     /// </summary>
     /// <param name="pCode"></param> Code from the panel which might have a loop in it
-    public void setCode(string pCode)
+    /// <returns> String result of the code translation <returns>
+    public string getResult(string pCode)
     {
         code = pCode;
         result = "";
+        codeProcessor();
+        return result;
     }
 }
-
-
-//A little tihng to test the code above
-// also to use the codeProcessor you make the object, give it the code string, and ask for the result.
-/*
-public class test
-{
-    public static void Main()
-    {
-        codeprocessor code1 = new codeprocessor();
-
-        code1.setCode("RLLRLFFBBl3{RLLFB}F");
-        string result = code1.getResult();
-
-        Console.Out.WriteLine(result);
-
-    }
-}*/
