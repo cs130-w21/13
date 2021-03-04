@@ -37,19 +37,51 @@ describe("server-socket-test", () => {
   /**
    * Tests whether two clients can connect to the server.
    */
+  /** 
   it("hello-test-two-clients", (done) => {
-    clientSocket1.emit('hello', '{"name":"client1","id":1}');
+    clientSocket1.emit('hello', '{"name":"client1","id":1,"playerOrder":0}');
     clientSocket1.on('initiate', (msg) => {
-      assert.equal(msg, 'you are user 1!');
-      clientSocket2.emit('hello', '{"name":"client2","id":2}');
+      console.log("" + msg);
+      assert.equal(msg, '1');
+      clientSocket2.emit('hello', '{"name":"client2","id":2,"playerOrder":0}');
       clientSocket2.on('initiate', (msg) => {
-        assert.equal(msg, 'you are user 2!');
+        console.log("" + msg);
+        assert.equal(msg, '2');
         done();
       });
     });
   });
+  */
+
+  /**
+   * Test if messages are sent
+   */
+
+  it("test-command-sharing", (done) => {
+    clientSocket1.emit('hello', '{"name":"client1","id":1,"playerOrder":0}');
+    clientSocket1.on('initiate', (msg) => {
+      console.log("" + msg);
+      assert.equal(msg, '1');
+      clientSocket2.emit('hello', '{"name":"client2","id":2,"playerOrder":0}');
+      clientSocket2.on('initiate', (msg) => {
+        console.log("" + msg);
+        assert.equal(msg, '2');
+        clientSocket1.emit('submittingTurn', '{"commandString":"FBFB","playerId":1}');
+        clientSocket2.emit('submittingTurn', '{"commandString":"LRLR","playerId":2}');
+        console.log("sent both turns");
+        clientSocket1.on('receiveTurn', (data) => {
+          console.log("P1 receiving " + data);
+          assert.equal(data, "LRLR");
+          clientSocket2.on('receiveTurn', (data) => {
+            console.log("P2 receiving " + data);
+            assert.equal(data, "FBFB");
+            done();
+          });
+        });
+      });
+    });
+  });
 });
+  /******************************************************************************/
 
-/******************************************************************************/
-
-export {}  // suppress TS import checker
+  export { }  // suppress TS import checker
