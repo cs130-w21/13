@@ -192,7 +192,7 @@ public class Robot : MonoBehaviour
             }
 
             // Try to mine the block in front
-            boardManager.MineTile(start + facingDir);
+            boardManager.MineTile(start + facingDir, this);
 
             // Move backward
             for (; t < 1; t += Time.deltaTime / Constants.Game.ACTION_SPEED)

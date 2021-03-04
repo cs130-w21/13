@@ -18,9 +18,9 @@ public static class Constants
         public const int MEDIUM = 10;
         public const int LARGE = 20;
         // Weights for randomization
-        public const int WEIGHT_SMALL = 2;
-        public const int WEIGHT_MEDIUM = 3;
-        public const int WEIGHT_LARGE = 5;
+        //public const int WEIGHT_SMALL = 2;
+        //public const int WEIGHT_MEDIUM = 3;
+        //public const int WEIGHT_LARGE = 5;
     }
 
     public static class Robot
