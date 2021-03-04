@@ -22,6 +22,10 @@ public enum TileState
 /// </summary>
 public class BoardManager : MonoBehaviour
 {
+    //#############################################
+    // Class Variables
+    // ############################################
+
     /// References for tilemaps that handle the objects on the screen
     public Tilemap backgroundTilemap;
     public Tilemap objectTilemap;
@@ -44,6 +48,10 @@ public class BoardManager : MonoBehaviour
     private int boardHeight = Constants.Board.BOARD_HEIGHT;
 
 
+    //#############################################
+    // Class Functions
+    // ############################################
+
     /// <summary> 
     /// Creates a board based on the board width and height
     /// The board is centered on the screen, and the bottom square left is (0,0)
@@ -63,7 +71,6 @@ public class BoardManager : MonoBehaviour
             for (int x = 0; x < boardWidth; x++)
             {
                 backgroundTilemap.SetTile(new Vector3Int(x, y, 0), bgTile);
-                //Random.Range
             }
         }
 
@@ -103,7 +110,9 @@ public class BoardManager : MonoBehaviour
         // Fill the board with points
 
 
-        // Fill the baord with powerups
+
+
+        // Fill the board with powerups
 
 
         // Fill the board with rocks
@@ -164,11 +173,19 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    public void CheckForPowerup(Robot robot)
+    {
+        Vector3Int intTilePos = objectTilemap.WorldToCell(robot.transform.position);
+        
+    }
+
     /// Takes in two command strings and runs them on the board.
     /// Alternates between P1 and P2, but runs both to completion if one is shorter than the other.
     public void RunTurn(string p1Moves, string p2Moves)
     {
         StartCoroutine(RunTurnHelper(p1Moves, p2Moves));
+        player1.Recharge();
+        player2.Recharge();
     }
 
     // Helper function to make RunTurn a coroutine.
@@ -187,9 +204,13 @@ public class BoardManager : MonoBehaviour
                 yield return StartCoroutine(RunCommand(player2, p2Moves[i]));
             yield return new WaitForSeconds(Constants.Game.ACTION_PAUSE_BETWEEN);
         }
+        // Pause before continuing to the next turn
+        yield return new WaitForSeconds(Constants.Game.END_TURN_PAUSE);
 
         // Both robots have finished running, so do some cleanup
         // TODO: Reset the camera position back to programming state
+
+
     }
 
     /// RunCommand takes in a robot and a command char and tells the robot to do the corresponding command.

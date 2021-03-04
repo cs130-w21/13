@@ -4,7 +4,7 @@
 /// Class that gets the string of codes from the panel and turns in into the
 /// string whiuch can be understood by the robot
 /// </summary>
-public class codeprocessor
+public class CodeProcessor
 {
     ///To hold the code  string from the panel
     private string code = "";
@@ -18,7 +18,7 @@ public class codeprocessor
     /// funciton to go through the funciton and transalte the string from the panel
     /// to a string that the robot can understand
     /// </summary>
-    private void codeProcessor()
+    private void ProcessCode()
     {
         int loopCounter = 0;        //loop counter
         int loopSP = -1;            //loop starting position
@@ -66,11 +66,11 @@ public class codeprocessor
     /// </summary>
     /// <param name="pCode"></param> Code from the panel which might have a loop in it
     /// <returns> String result of the code translation <returns>
-    public string getResult(string pCode)
+    public string GetResult(string pCode)
     {
         code = pCode;
         result = "";
-        codeProcessor();
+        ProcessCode();
         return result;
     }
 }
