@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Temporary setup for demoing
-        int seed = (int)Random.Range(0,100);
-        boardManager.CreateBoard(seed);
-        boardManager.RunTurn("RRRRLLLL", "BBFFRFFBBBLF");
+        int seed = (int)Random.Range(0, 100);
+        boardManager.CreateBoard(0);
+        boardManager.RunTurn("MPMFRMFMFMFLMFMFMPBPBPB", "LLMFRMFMFMFLMFMFMPBPBPB");
     }
 }
