@@ -2,20 +2,24 @@
  * This is the test file corresponding to ../server.ts.
  */
 
-const { http, io } = require("../server.ts");
+import { SocketTurnInfo } from "../UserInfoClasses";
+
+const { http, io } = require("../server");
 const Client = require("socket.io-client");
 const assert = require("chai").assert;
+const { promisify } = require('util')
+const sleep = promisify(setTimeout)
+
+const url = 'http://localhost:3000';
 
 /******************************************************************************/
-
-describe("server-socket-test", () => {
+describe("test-client-pairing-socket-events", () => {
   let clientSocket1, clientSocket2;
-  let url = 'http://localhost:3000';
 
   /**
    * Initialize server, client sockets
    */
-  before((done) => {
+  beforeEach((done) => {
     http.listen(3000, () => {
       clientSocket1 = new Client(url);
       clientSocket1.on("connect", () => {
@@ -28,7 +32,7 @@ describe("server-socket-test", () => {
   /**
    * Teardown sockets
    */
-  after(() => {
+  afterEach(() => {
     io.close();
     clientSocket1.close();
     clientSocket2.close();
@@ -37,53 +41,121 @@ describe("server-socket-test", () => {
   /**
    * Tests whether two clients can connect to the server.
    */
-  
   it("hello-test-two-clients", (done) => {
-    clientSocket1.emit('hello', '{"name":"client1","id":1,"playerOrder":0}');
-    clientSocket1.on('initiate', (msg) => {
-      console.log("" + msg);
+    clientSocket1.emit('hello', '{"name":"client1","id":1,"playerNumber":0}');
+    clientSocket1.on('pairing', (msg) => {
       assert.equal(msg, '1');
-      clientSocket2.emit('hello', '{"name":"client2","id":2,"playerOrder":0}');
-      clientSocket2.on('initiate', (msg) => {
-        console.log("" + msg);
+      clientSocket2.emit('hello', '{"name":"client2","id":2,"playerNumber":0}');
+      clientSocket2.on('pairing', (msg) => {
         assert.equal(msg, '2');
         done();
       });
     });
   });
-  
 
   /**
-   * Test if messages are sent
+   * Tests whether two clients can be paired
    */
+  it("hello-test-pair-two-clients", async () => {
+    clientSocket1.emit('hello', '{"name":"client1","id":1,"playerNumber":0}');
+    clientSocket1.on('pairing', (msg) => { });
+    clientSocket2.emit('hello', '{"name":"client2","id":2,"playerNumber":0}');
+    clientSocket2.on('pairing', (msg) => { });
+    await clientSocket1.on('gameplay', (msg) => {
+      assert.equal(msg.name, "client2");
+      assert.equal(msg.playerNumber, 2);
+      assert.equal(msg.commands, undefined);
+    });
+    await clientSocket2.on('gameplay', (msg) => {
+      assert.equal(msg.name, "client1");
+      assert.equal(msg.playerNumber, 1);
+      assert.equal(msg.commands, undefined);
+    });
+  });
+});
 
-  /** 
-  it("test-command-sharing", (done) => {
-    clientSocket1.emit('hello', '{"name":"client1","id":1,"playerOrder":0}');
-    clientSocket1.on('initiate', (msg) => {
-      console.log("" + msg);
-      assert.equal(msg, '1');
-      clientSocket2.emit('hello', '{"name":"client2","id":2,"playerOrder":0}');
-      clientSocket2.on('initiate', (msg) => {
-        console.log("" + msg);
-        assert.equal(msg, '2');
-        clientSocket1.emit('submittingTurn', '{"commandString":"FBFB","playerId":1}');
-        clientSocket2.emit('submittingTurn', '{"commandString":"LRLR","playerId":2}');
-        console.log("sent both turns");
-        clientSocket1.on('receiveTurn', (data) => {
-          console.log("P1 receiving " + data);
-          assert.equal(data, "LRLR");
-          clientSocket2.on('receiveTurn', (data) => {
-            console.log("P2 receiving " + data);
-            assert.equal(data, "FBFB");
-            done();
-          });
+/******************************************************************************/
+describe("test-gameplay-socket-events", () => {
+  let clientSocket1, clientSocket2;
+
+  /**
+   * Initialize server, client sockets
+   */
+  beforeEach((done) => {
+    http.listen(3000, () => {
+      clientSocket1 = new Client(url);
+      clientSocket1.on("connect", () => {
+        clientSocket2 = new Client(url);
+        clientSocket2.on("connect", () => {
+          clientSocket1.emit('hello', '{"name":"client1","id":1}');
+          clientSocket2.emit('hello', '{"name":"client2","id":2}');
+          done();
         });
       });
     });
   });
-  */
-});
-  /******************************************************************************/
 
-  export { }  // suppress TS import checker
+  /**
+   * Teardown sockets
+   */
+  afterEach(() => {
+    io.close();
+    clientSocket1.close();
+    clientSocket2.close();
+  });
+
+  /**
+   * Tests whether server sends moves after both clients send their moves
+   */
+  it("gameplay-test-send-info", async () => {
+    const player1Turn = new SocketTurnInfo(1, "LELELEAP");
+    const player2Turn = new SocketTurnInfo(2, "DUE VLA");
+    clientSocket1.emit('submittingTurn', JSON.stringify(player1Turn));
+    clientSocket2.emit('submittingTurn', JSON.stringify(player2Turn));
+    await clientSocket1.on('receiveTurn', (msg) => {
+      assert.equal(msg, player1Turn.toString());
+    });
+    await clientSocket2.on('receiveTurn', (msg) => {
+      assert.equal(msg, player2Turn.toString());
+    });
+  });
+
+  /**
+ * Tests whether server sends new moves after both clients send their moves
+ */
+  it("gameplay-test-send-multiple-info", async() => {
+    clientSocket1.emit('submittingTurn', '{"id":1,"commands":"LELELEAP"}');
+    clientSocket2.emit('submittingTurn', '{"id":2,"commands":"DUE VLA"}');
+    await clientSocket1.on('receiveTurn', () => {});
+    await clientSocket2.on('receiveTurn', () => {});
+    clientSocket1.emit('submittingTurn', '{"id":1,"commands":"OS"}');
+    clientSocket2.emit('submittingTurn', '{"id":2,"commands":"MEOW"}');
+    await clientSocket1.on('receiveTurn', (msg) => {
+      assert.equal(msg, '{"id":2,"commands":"MEOW"}');
+    });
+    await clientSocket2.on('receiveTurn', (msg) => {
+      assert.equal(msg, '{"id":1,"commands":"OS"}');
+    });
+  });
+
+  /**
+  * Test end game
+  */
+  it("gameplay-game-end", async () => {
+    clientSocket1.emit('submittingTurn', '{"id":1,"commands":"LELELEAP"}');
+    clientSocket2.emit('submittingTurn', '{"id":2,"commands":"DUE VLA"}');
+    clientSocket1.emit('submittingTurn', '{"id":1,"commands":"OS"}');
+    clientSocket2.emit('submittingTurn', '{"id":2,"commands":"MEOW"}');
+    clientSocket1.emit('endGameRequest', '');
+    clientSocket2.emit('endGameRequest', '');
+    await clientSocket1.on('endGameConfirmation', (msg) => {
+      assert.equal(msg, '');
+    });
+    await clientSocket2.on('endGameConfirmation', (msg) => {
+      assert.equal(msg, '');
+    });
+  });
+});
+
+/******************************************************************************/
+export { }  // suppress TS import checker
