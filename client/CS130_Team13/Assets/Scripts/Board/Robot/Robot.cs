@@ -111,7 +111,7 @@ public class Robot : MonoBehaviour
     public IEnumerator Move(Direction dir)
     {
         // Check battery cost
-        int moveCost = moveBoostTurns > 0 ? Constants.Costs.BOOSTED_MOVE : Constants.Costs.MOVE; 
+        int moveCost = moveBoostTurns > 0 ? Constants.Costs.BOOSTED_MOVE : Constants.Costs.MOVE;
         if (batteryCharge < moveCost)
         {
             OutOfBattery();
@@ -138,7 +138,8 @@ public class Robot : MonoBehaviour
             }
             float timer = 0;
             // Move forward, lerped over a duration
-            if (boardManager.GetTileState(dest) == TileState.Empty)
+            TileState moveTileState = boardManager.GetTileState(dest);
+            if (moveTileState == TileState.Empty || moveTileState == TileState.Powerup)
             {
                 while (timer <= Constants.Game.ACTION_SPEED)
                 {
@@ -171,7 +172,7 @@ public class Robot : MonoBehaviour
     /// Mines the tile in front of the robot
     public IEnumerator Mine()
     {
-        int mineCost = moveBoostTurns > 0 ? Constants.Costs.BOOSTED_MINE : Constants.Costs.MINE; 
+        int mineCost = moveBoostTurns > 0 ? Constants.Costs.BOOSTED_MINE : Constants.Costs.MINE;
         if (batteryCharge < mineCost)
         {
             OutOfBattery();

@@ -7,7 +7,8 @@ public enum TileState
 {
     Null, // Not a valid space
     Empty, // Nothing in a valid space
-    Occupied // Something in a valid space
+    Occupied, // Something in a valid space
+    Powerup // Space contains a powerup
 }
 // public enum BoardState
 // {
@@ -39,10 +40,10 @@ public class BoardManager : MonoBehaviour
 
     /// Filled with 3 tiles in editor: small, medium, large, in that order
     public List<TileBase> gemTiles;
-    private Dictionary<TileBase, int> gemPoints;
 
-    // 
-    public List<TileBase> powerupTiles;
+    /// Reference for the powerup tile icon. Types of powerups are randomized.
+    public TileBase powerupTile;
+    private Dictionary<Vector3Int, int> powerupLocations;
     public Color borderColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 
     /// Reference for camera so it can properly be scaled to fit the board
@@ -76,6 +77,7 @@ public class BoardManager : MonoBehaviour
         // Set the random seed based on the input
         gameManager = gm;
         Random.InitState(seed);
+        powerupLocations = new Dictionary<Vector3Int, int>();
 
         // Move the camera to the center and scale camera to fit the whole board
         cam.transform.position = new Vector3(boardWidth / 2, boardHeight / 2, cam.transform.position.z);
@@ -140,16 +142,19 @@ public class BoardManager : MonoBehaviour
         ////////////////////////////////
 
         // Fill the board with points
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < Constants.Game.GEM_COUNT; i++)
         {
             PlaceRandomCollectable(gemTiles[0], unoccupiedTiles);
             PlaceRandomCollectable(gemTiles[1], unoccupiedTiles);
             PlaceRandomCollectable(gemTiles[2], unoccupiedTiles);
         }
 
-
         // Fill the board with powerups
-
+        for (int i = 0; i < Constants.Game.POWERUP_COUNT; i++)
+        {
+            Vector3Int pos = PlaceRandomCollectable(powerupTile, unoccupiedTiles);
+            powerupLocations.Add(pos, Random.Range(0, 3));
+        }
 
         // Fill the board with rocks
         for (int y = 0; y < boardHeight; y++)
@@ -176,6 +181,11 @@ public class BoardManager : MonoBehaviour
         if (x < 0 || x > boardWidth - 1 || y < 0 || y > boardHeight - 1)
         {
             return TileState.Null;
+        }
+        // Check for powerup
+        if (objectTilemap.GetTile(intTilePos) == powerupTile)
+        {
+            return TileState.Powerup;
         }
         // Check if the cell is occupied
         if (objectTilemap.HasTile(intTilePos)
@@ -235,8 +245,23 @@ public class BoardManager : MonoBehaviour
         Vector3Int intTilePos = objectTilemap.WorldToCell(robot.transform.position);
         TileBase robotTile = objectTilemap.GetTile(intTilePos);
         // Check for a gem and give a player points
-        if (gemTiles.Contains(robotTile))
+        if (robotTile == powerupTile)
         {
+            int powerupType = powerupLocations[intTilePos];
+            switch (powerupType)
+            {
+                case 0:
+                    robot.PowerupBatteryBoost();
+                    break;
+                case 1:
+                    robot.PowerupMineBoost();
+                    break;
+                case 2:
+                    robot.PowerupMoveCostReduction();
+                    break;
+                default:
+                    break;
+            }
 
             objectTilemap.SetTile(intTilePos, null);
             return;
@@ -309,9 +334,11 @@ public class BoardManager : MonoBehaviour
                 break;
             case 'F': // Move forward
                 yield return StartCoroutine(robot.Move(Direction.Up));
+                CheckForCollectable(robot);
                 break;
             case 'B': // Move back
                 yield return StartCoroutine(robot.Move(Direction.Down));
+                CheckForCollectable(robot);
                 break;
             case 'M': // Mine
                 yield return StartCoroutine(robot.Mine());
@@ -325,13 +352,13 @@ public class BoardManager : MonoBehaviour
     }
 
     /// Takes a tile and a list of unoccupied spaces, then places the tile in a random one of those spaces
-    private bool PlaceRandomCollectable(TileBase tile, List<Vector3Int> spaces)
+    private Vector3Int PlaceRandomCollectable(TileBase tile, List<Vector3Int> spaces)
     {
         if (spaces.Count <= 0)
-            return false;
+            return new Vector3Int(-1, -1, 0);
         Vector3Int pos = spaces[Random.Range(0, spaces.Count)];
         objectTilemap.SetTile(pos, tile);
         spaces.Remove(pos);
-        return true;
+        return pos;
     }
 }
