@@ -7,7 +7,8 @@ public enum TileState
 {
     Null, // Not a valid space
     Empty, // Nothing in a valid space
-    Occupied // Something in a valid space
+    Occupied, // Something in a valid space
+    Powerup // Space contains a powerup
 }
 // public enum BoardState
 // {
@@ -22,6 +23,10 @@ public enum TileState
 /// </summary>
 public class BoardManager : MonoBehaviour
 {
+    //#############################################
+    // Class Variables
+    // ############################################
+
     /// References for tilemaps that handle the objects on the screen
     public Tilemap backgroundTilemap;
     public Tilemap objectTilemap;
@@ -29,7 +34,16 @@ public class BoardManager : MonoBehaviour
     /// References for tiles to fill the tilemap
     public TileBase bgTile;
     public TileBase placedRock;
+
+    /// Can contain any number of tiles that will randomly fill the board
     public List<TileBase> rockTiles;
+
+    /// Filled with 3 tiles in editor: small, medium, large, in that order
+    public List<TileBase> gemTiles;
+
+    /// Reference for the powerup tile icon. Types of powerups are randomized.
+    public TileBase powerupTile;
+    private Dictionary<Vector3Int, int> powerupLocations;
     public Color borderColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 
     /// Reference for camera so it can properly be scaled to fit the board
@@ -40,30 +54,46 @@ public class BoardManager : MonoBehaviour
     public Robot player2;
 
     /// Size of the grid.
-    private int boardWidth = Constants.Board.BOARD_WIDTH;
-    private int boardHeight = Constants.Board.BOARD_HEIGHT;
+    private const int boardWidth = Constants.Board.BOARD_WIDTH;
+    private const int boardHeight = Constants.Board.BOARD_HEIGHT;
 
+    private GameManager gameManager;
+
+
+    //#############################################
+    // Class Functions
+    // ############################################
 
     /// <summary> 
     /// Creates a board based on the board width and height
     /// The board is centered on the screen, and the bottom square left is (0,0)
     /// </summary>
-    public void CreateBoard(int seed)
+    public void CreateBoard(GameManager gm, int seed)
     {
+        ////////////////////////////////
+        // Camera + background setup
+        ////////////////////////////////
+
         // Set the random seed based on the input
+        gameManager = gm;
         Random.InitState(seed);
+        powerupLocations = new Dictionary<Vector3Int, int>();
 
         // Move the camera to the center and scale camera to fit the whole board
         cam.transform.position = new Vector3(boardWidth / 2, boardHeight / 2, cam.transform.position.z);
         cam.orthographicSize = boardHeight / 2 + 3;
+
+        List<Vector3Int> unoccupiedTiles = new List<Vector3Int>();
 
         // Generate the background board from the basic tiles
         for (int y = 0; y < boardHeight; y++)
         {
             for (int x = 0; x < boardWidth; x++)
             {
-                backgroundTilemap.SetTile(new Vector3Int(x, y, 0), bgTile);
-                //Random.Range
+                Vector3Int tilepos = new Vector3Int(x, y, 0);
+                backgroundTilemap.SetTile(tilepos, bgTile);
+                // Push each tile onto unoccupiedSpaces
+                unoccupiedTiles.Add(tilepos);
             }
         }
 
@@ -93,18 +123,39 @@ public class BoardManager : MonoBehaviour
             backgroundTilemap.SetColor(vec2, borderColor);
         }
 
+        ////////////////////////////////
+        // Player setup
+        ////////////////////////////////
+
         // Set player positions at opposite corners
         player1.transform.position = backgroundTilemap.LocalToWorld(new Vector3(0.5f, 0.5f, 0));
         player2.transform.position = backgroundTilemap.LocalToWorld(new Vector3(boardWidth - 0.5f, boardHeight - 0.5f, 0));
+        player2.transform.rotation = Quaternion.Euler(0,0,180);
+        unoccupiedTiles.Remove(new Vector3Int(0, 0, 0));
+        unoccupiedTiles.Remove(new Vector3Int(boardHeight - 1, boardWidth - 1, 0));
+
         // Pass this BoardManager to the players so they can access its functions
         player1.Init(this);
         player2.Init(this);
 
+        ////////////////////////////////
+        // Board setup
+        ////////////////////////////////
+
         // Fill the board with points
+        for (int i = 0; i < Constants.Game.GEM_COUNT; i++)
+        {
+            PlaceRandomCollectable(gemTiles[0], unoccupiedTiles);
+            PlaceRandomCollectable(gemTiles[1], unoccupiedTiles);
+            PlaceRandomCollectable(gemTiles[2], unoccupiedTiles);
+        }
 
-
-        // Fill the baord with powerups
-
+        // Fill the board with powerups
+        for (int i = 0; i < Constants.Game.POWERUP_COUNT; i++)
+        {
+            Vector3Int pos = PlaceRandomCollectable(powerupTile, unoccupiedTiles);
+            powerupLocations.Add(pos, Random.Range(0, 3));
+        }
 
         // Fill the board with rocks
         for (int y = 0; y < boardHeight; y++)
@@ -132,6 +183,11 @@ public class BoardManager : MonoBehaviour
         {
             return TileState.Null;
         }
+        // Check for powerup
+        if (objectTilemap.GetTile(intTilePos) == powerupTile)
+        {
+            return TileState.Powerup;
+        }
         // Check if the cell is occupied
         if (objectTilemap.HasTile(intTilePos)
             || objectTilemap.WorldToCell(player1.transform.position) == intTilePos
@@ -144,11 +200,31 @@ public class BoardManager : MonoBehaviour
         return TileState.Empty;
     }
 
-    /// Removes a tile for a robot
-    public void MineTile(Vector3 tilePos)
+    /// Removes a tile for a robot. Adds points if the tile is a gem.
+    public void MineTile(Vector3 tilePos, Robot robot)
     {
         Vector3Int intTilePos = objectTilemap.WorldToCell(tilePos);
-        if (rockTiles.Contains(objectTilemap.GetTile(intTilePos)) || objectTilemap.GetTile(intTilePos) == placedRock)
+        TileBase tile = objectTilemap.GetTile(intTilePos);
+
+        if (gemTiles.Contains(tile))
+        {
+            // Figure out point value to assign
+            int points = 0;
+            if (tile == gemTiles[0])
+                points = Constants.Points.SMALL;
+            else if (tile == gemTiles[1])
+                points = Constants.Points.MEDIUM;
+            else if (tile == gemTiles[2])
+                points = Constants.Points.LARGE;
+            // Assign point value to player
+            if (robot == player1)
+                gameManager.UpdateScore(1, points);
+            else if (robot == player2)
+                gameManager.UpdateScore(2, points);
+
+            objectTilemap.SetTile(intTilePos, null);
+        }
+        else if (rockTiles.Contains(tile) || gemTiles.Contains(tile) || tile == placedRock)
         {
             objectTilemap.SetTile(intTilePos, null);
         }
@@ -164,11 +240,42 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    /// Checks if the robot is on a tile that gives points
+    public void CheckForCollectable(Robot robot)
+    {
+        Vector3Int intTilePos = objectTilemap.WorldToCell(robot.transform.position);
+        TileBase robotTile = objectTilemap.GetTile(intTilePos);
+        // Check for a gem and give a player points
+        if (robotTile == powerupTile)
+        {
+            int powerupType = powerupLocations[intTilePos];
+            switch (powerupType)
+            {
+                case 0:
+                    robot.PowerupBatteryBoost();
+                    break;
+                case 1:
+                    robot.PowerupMineBoost();
+                    break;
+                case 2:
+                    robot.PowerupMoveCostReduction();
+                    break;
+                default:
+                    break;
+            }
+
+            objectTilemap.SetTile(intTilePos, null);
+            return;
+        } //else if () 
+    }
+
     /// Takes in two command strings and runs them on the board.
     /// Alternates between P1 and P2, but runs both to completion if one is shorter than the other.
     public void RunTurn(string p1Moves, string p2Moves)
     {
         StartCoroutine(RunTurnHelper(p1Moves, p2Moves));
+        player1.Recharge();
+        player2.Recharge();
     }
 
     // Helper function to make RunTurn a coroutine.
@@ -176,20 +283,43 @@ public class BoardManager : MonoBehaviour
     {
         // TODO: Shift camera position to fit UI
 
+        bool gameOver = false;
         // Players give input, run the commands
         int len = Mathf.Max(p1Moves.Length, p2Moves.Length);
         for (int i = 0; i < len; i++)
         {
+            // Run P1's move
             if (i < p1Moves.Length)
                 yield return StartCoroutine(RunCommand(player1, p1Moves[i]));
             yield return new WaitForSeconds(Constants.Game.ACTION_PAUSE_BETWEEN);
+            if (gameManager.GetScore(1) >= Constants.Game.TARGET_SCORE || gameManager.GetScore(2) >= Constants.Game.TARGET_SCORE)
+            {
+                gameOver = true;
+                break;
+            }
+            // Run P2's move
             if (i < p2Moves.Length)
                 yield return StartCoroutine(RunCommand(player2, p2Moves[i]));
             yield return new WaitForSeconds(Constants.Game.ACTION_PAUSE_BETWEEN);
+            if (gameManager.GetScore(1) >= Constants.Game.TARGET_SCORE || gameManager.GetScore(2) >= Constants.Game.TARGET_SCORE)
+            {
+                gameOver = true;
+                break;
+            }
+        }
+        if (gameOver)
+        {
+            gameManager.EndGame();
+        }
+        else
+        {
+            // Pause before continuing to the next turn
+            yield return new WaitForSeconds(Constants.Game.END_TURN_PAUSE);
+
+            // Both robots have finished running, so do some cleanup
+            // TODO: Reset the camera position back to programming state
         }
 
-        // Both robots have finished running, so do some cleanup
-        // TODO: Reset the camera position back to programming state
     }
 
     /// RunCommand takes in a robot and a command char and tells the robot to do the corresponding command.
@@ -205,9 +335,11 @@ public class BoardManager : MonoBehaviour
                 break;
             case 'F': // Move forward
                 yield return StartCoroutine(robot.Move(Direction.Up));
+                CheckForCollectable(robot);
                 break;
             case 'B': // Move back
                 yield return StartCoroutine(robot.Move(Direction.Down));
+                CheckForCollectable(robot);
                 break;
             case 'M': // Mine
                 yield return StartCoroutine(robot.Mine());
@@ -218,5 +350,16 @@ public class BoardManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    /// Takes a tile and a list of unoccupied spaces, then places the tile in a random one of those spaces
+    private Vector3Int PlaceRandomCollectable(TileBase tile, List<Vector3Int> spaces)
+    {
+        if (spaces.Count <= 0)
+            return new Vector3Int(-1, -1, 0);
+        Vector3Int pos = spaces[Random.Range(0, spaces.Count)];
+        objectTilemap.SetTile(pos, tile);
+        spaces.Remove(pos);
+        return pos;
     }
 }

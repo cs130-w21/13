@@ -692,7 +692,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da0abf20e9a8c5e4e96542d045e31894, type: 2}
   - {fileID: 11400000, guid: b5dcc6f86858f504289cb33e6b9f5e71, type: 2}
   - {fileID: 11400000, guid: a5d99e50b7654304f9e1dd766fcf78c3, type: 2}
-  borderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  gemTiles:
+  - {fileID: 11400000, guid: f5e5a9214f22b9f4e938af3e919a9822, type: 2}
+  - {fileID: 11400000, guid: 52e6db7a24c34e849a2ee9ce01a425a3, type: 2}
+  - {fileID: 11400000, guid: d9618cfe116a7e248ae14af4c19707d9, type: 2}
+  powerupTile: {fileID: 11400000, guid: 8609b9e4f1be7ac4883cd4a53890334e, type: 2}
+  borderColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
   cam: {fileID: 1533503341}
   player1: {fileID: 1473349419}
   player2: {fileID: 1863907324}
