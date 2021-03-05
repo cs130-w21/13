@@ -5,6 +5,8 @@
  * game state or to manage client actions, etc.), so see the Unity side of the
  * project for the actual game logic.
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserProps = void 0;
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
@@ -15,7 +17,7 @@ var user_id = 0;
  * if client hits GET endpoint "localhost:3000/user_id",
  * then let user have a unique id
  */
-app.get('/user_id', (req, res) => {
+app.get('/user_id', (_, res) => {
     user_id++;
     res.end(user_id.toString());
 });
@@ -31,6 +33,7 @@ class UserProps {
         this.commands = "*";
     }
 }
+exports.UserProps = UserProps;
 let user1;
 let user2;
 /******************************************************************************/
@@ -61,8 +64,8 @@ io.on('connection', (socket) => {
             user2 = new UserProps(msg.name, msg.id, socket.id);
             // Returns 2 to indicate player 2
             socket.emit("initiate", 2);
-            socket.emit("gameplay", user1);
             socket.to(user1.socketId).emit("gameplay", user2); // sends message to specific client based on clientId
+            socket.emit("gameplay", user1);
             current_state = 0;
             // for excess users, cya 
         }
@@ -77,7 +80,7 @@ io.on('connection', (socket) => {
     *   0 : no commands submitted, 1: P1 only submitted, 2: P2 only submitted, 3: both submitted
     */
     socket.on('submittingTurn', (msg) => {
-        console.log("Server has received commands from a user");
+        //console.log("Server has received commands from a user");
         msg = JSON.parse(msg);
         // Check which user has submitted and change state accordingly
         if (user1.id == msg.playerId) {
@@ -86,6 +89,7 @@ io.on('connection', (socket) => {
                 current_state++;
             }
             console.log("Received commands from player 1");
+            console.log("Current State: " + current_state);
         }
         else if (user2.id == msg.playerId) {
             user2.commands = msg.commandString;
@@ -93,11 +97,13 @@ io.on('connection', (socket) => {
                 current_state += 2;
             }
             console.log("Received commands from player 2");
+            console.log("Current State: " + current_state);
         }
         // If we've received both sets of commands, send back to players
         if (current_state == 3) {
             socket.to(user1.socketId).emit("receiveTurn", user2.commands);
             socket.to(user2.socketId).emit("receiveTurn", user1.commands);
+            console.log("Sending commands to both players");
             current_state = 0;
         }
     });
@@ -106,7 +112,7 @@ io.on('connection', (socket) => {
     *   an end game message
     */
     socket.on('endGameRequest', () => {
-        console.log('user would like to end game');
+        console.log('Server received an end game request');
         socket.to(user1.socketId).emit("endGameConfirmation", "");
         socket.to(user2.socketId).emit("endGameConfirmation", "");
     });
