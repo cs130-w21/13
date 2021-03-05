@@ -4,7 +4,7 @@
 
 import { SocketTurnInfo } from "../UserInfoClasses";
 
-const { http, io } = require("../server.ts");
+const { http, io } = require("../server");
 const Client = require("socket.io-client");
 const assert = require("chai").assert;
 const { promisify } = require('util')
