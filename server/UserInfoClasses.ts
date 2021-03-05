@@ -55,7 +55,7 @@ export class ClientSentUserInfo {
 }
 
 /******************************************************************************/
-// CLASSES SENT AND RECEIVED FROM CLIENT
+// CLASSES SENT BY SERVER AND RECEIVED FROM CLIENT
 
 export class SocketTurnInfo {
   id!: number;

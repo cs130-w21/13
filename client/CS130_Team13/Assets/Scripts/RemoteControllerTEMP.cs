@@ -37,12 +37,10 @@ public class RemoteController
     return "*";
   }
 }
+  //////// CLIENT PEEPS LOOK NO FURTHER :0
 
 namespace RemoteControllerNamespace
 {
-
-  //////// CLIENT PEEPS LOOK NO FURTHER :0
-
   public class RemoteControllerTEMP : MonoBehaviour
   {
     private QSocket socket;
