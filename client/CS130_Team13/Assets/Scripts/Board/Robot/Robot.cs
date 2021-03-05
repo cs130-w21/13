@@ -74,13 +74,13 @@ public class Robot : MonoBehaviour
     public IEnumerator Rotate90(Direction dir)
     {
         // Check battery cost
-        if (batteryCharge < Constants.Costs.TURN)
+        if (batteryCharge < Constants.EnergyCosts.TURN)
         {
             OutOfBattery();
         }
         else
         {
-            batteryCharge -= Constants.Costs.TURN;
+            batteryCharge -= Constants.EnergyCosts.TURN;
             int dirMultiplier = 0;
             switch (dir)
             {
@@ -111,7 +111,7 @@ public class Robot : MonoBehaviour
     public IEnumerator Move(Direction dir)
     {
         // Check battery cost
-        int moveCost = moveBoostTurns > 0 ? Constants.Costs.BOOSTED_MOVE : Constants.Costs.MOVE;
+        int moveCost = moveBoostTurns > 0 ? Constants.EnergyCosts.BOOSTED_MOVE : Constants.EnergyCosts.MOVE;
         if (batteryCharge < moveCost)
         {
             OutOfBattery();
@@ -172,7 +172,7 @@ public class Robot : MonoBehaviour
     /// Mines the tile in front of the robot
     public IEnumerator Mine()
     {
-        int mineCost = moveBoostTurns > 0 ? Constants.Costs.BOOSTED_MINE : Constants.Costs.MINE;
+        int mineCost = moveBoostTurns > 0 ? Constants.EnergyCosts.BOOSTED_MINE : Constants.EnergyCosts.MINE;
         if (batteryCharge < mineCost)
         {
             OutOfBattery();
@@ -209,13 +209,13 @@ public class Robot : MonoBehaviour
     /// Places a rock in front of the robot
     public IEnumerator Place()
     {
-        if (batteryCharge < Constants.Costs.PLACE)
+        if (batteryCharge < Constants.EnergyCosts.PLACE)
         {
             OutOfBattery();
         }
         else
         {
-            batteryCharge -= Constants.Costs.PLACE;
+            batteryCharge -= Constants.EnergyCosts.PLACE;
             // Play an animation that moves the robot forward and back
             Vector3 start = transform.position;
             Vector3 facingDir = transform.up;

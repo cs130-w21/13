@@ -130,6 +130,7 @@ public class BoardManager : MonoBehaviour
         // Set player positions at opposite corners
         player1.transform.position = backgroundTilemap.LocalToWorld(new Vector3(0.5f, 0.5f, 0));
         player2.transform.position = backgroundTilemap.LocalToWorld(new Vector3(boardWidth - 0.5f, boardHeight - 0.5f, 0));
+        player2.transform.rotation = Quaternion.Euler(0,0,180);
         unoccupiedTiles.Remove(new Vector3Int(0, 0, 0));
         unoccupiedTiles.Remove(new Vector3Int(boardHeight - 1, boardWidth - 1, 0));
 

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         //rc.GameFound();
         int seed = (int)Random.Range(0, 100);
         boardManager.CreateBoard(this, seed);
-        boardManager.RunTurn("MPMFRMFMFMFLMFMFMPBPBPB", "LLMFRMFMFMFLMFMFMPBPBPB");
+        boardManager.RunTurn("MPMFRMFMFMFLMFMFMPBPBPB", "MFRMFMFMFLMFMFMPBPBPB");
         /*
         for 10 turns
 
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
         
         */
+        
     }
 
     private void RunGame()
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
             // Get client's input
 
             // 
-            boardManager.RunTurn("MPMFRMFMFMFLMFMFMPBPBPB", "LLMFRMFMFMFLMFMFMPBPBPB");
+            boardManager.RunTurn("", "");
 
         }
     }
@@ -62,8 +63,12 @@ public class GameManager : MonoBehaviour
         return 0;
     }
 
+    ///     
     public int GetScore(int player)
     {
+        // Please just ignore this awful code
         return player == 1 ? p1Score : player == 2 ? p2Score : 0;
     }
+
+
 }

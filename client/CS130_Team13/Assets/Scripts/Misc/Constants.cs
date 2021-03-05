@@ -1,8 +1,15 @@
 ﻿/// Static class that holds all of the constant values for the game
 /// Ex: access with Constants.Costs.TURN
+
 public static class Constants
 {
-    public static class Costs 
+    public static class Server
+    {
+        public const string SERVER_URL = "https://cs130-hacman.herokuapp.com/";
+    }
+    
+    // Costs for Robot action
+    public static class EnergyCosts 
     {
         public const int TURN = 5;
         public const int MOVE = 5;
@@ -10,6 +17,12 @@ public static class Constants
         public const int PLACE = 10;
         public const int BOOSTED_MINE = 5;
         public const int BOOSTED_MOVE = 2;
+    }
+
+    // Costs for blocks in the UI
+    public static class MemoryCosts
+    {
+
     }
 
     public static class Points 
@@ -46,7 +59,7 @@ public static class Constants
 
     public static class Board
     {
-        public const int BOARD_WIDTH = 7;
-        public const int BOARD_HEIGHT = 7;
+        public const int BOARD_WIDTH = 20;
+        public const int BOARD_HEIGHT = 16;
     }
 }
