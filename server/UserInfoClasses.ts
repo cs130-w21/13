@@ -8,19 +8,19 @@ export default class UserInfo {
   id!: number;
   socketId!: string;
   commands!: string | null;
-  playerOrder!: number;
+  playerNumber!: number;
   randomSeed!: number;
 
-  constructor(name: string, id: number, socketId: string, playerOrder: number, randomSeed: number) {
+  constructor(name: string, id: number, socketId: string, playerNumber: number, randomSeed: number) {
     this.name = name;
     this.id = id;
     this.socketId = socketId;
     this.commands = null;
-    this.playerOrder = playerOrder;
+    this.playerNumber = playerNumber;
     this.randomSeed = randomSeed;
   }
   exportClientRequiredUserInfo() : ClientRequiredUserInfo {
-    return new ClientRequiredUserInfo(this.name, this.playerOrder, this.randomSeed);
+    return new ClientRequiredUserInfo(this.name, this.playerNumber, this.randomSeed);
   }
   exportClientRequiredTurnInfo() : SocketTurnInfo {
     return new SocketTurnInfo(this.id, this.commands);
@@ -35,11 +35,11 @@ export default class UserInfo {
  */
 export class ClientRequiredUserInfo {
   name!: string;
-  playerOrder!: number;
+  playerNumber!: number;
   randomSeed!: number;
-  constructor(name: string, playerOrder: number, randomSeed: number) {
+  constructor(name: string, playerNumber: number, randomSeed: number) {
     this.name = name;
-    this.playerOrder = playerOrder;
+    this.playerNumber = playerNumber;
     this.randomSeed = randomSeed;
   }
 }
@@ -50,7 +50,7 @@ export class ClientSentUserInfo {
   name!: string;
   id!: number;
   isInvalid() : boolean {
-    return (this.name !== undefined) && (this.id !== undefined);
+    return !this.name || !this.id;
   }
 }
 
@@ -59,9 +59,9 @@ export class ClientSentUserInfo {
 
 export class SocketTurnInfo {
   id!: number;
-  commands!: string | null;
+  commands!: string | null; // TODO UASDOIA UNDEFINED NULL PICKLES
   isInvalid() : boolean {
-    return (this.id !== undefined) && (this.commands !== undefined);
+    return !this.id || !this.commands;
   }
   constructor(id: number, commands: string | null) {
     this.id = id;
