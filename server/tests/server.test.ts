@@ -41,37 +41,36 @@ describe("test-client-pairing-socket-events", () => {
   /**
    * Tests whether two clients can connect to the server.
    */
-  it("hello-test-two-clients", (done) => {
+  it("hello-test-two-clients", async () => {
     clientSocket1.emit('hello', '{"name":"client1","id":1,"playerNumber":0}');
-    clientSocket1.on('pairing', (msg) => {
+    await clientSocket1.on('pairing', (msg) => {
       assert.equal(msg, 'currently pairing');
-      clientSocket2.emit('hello', '{"name":"client2","id":2,"playerNumber":0}');
-      clientSocket2.on('pairing', (msg) => {
-        assert.equal(msg, 'currently pairing');
-        done();
-      });
+    });
+    clientSocket2.emit('hello', '{"name":"client2","id":2,"playerNumber":0}');
+    await clientSocket2.on('pairing', (msg) => {
+      assert.equal(msg, 'currently pairing');
     });
   });
 
-  /**
-   * Tests whether two clients can be paired
-   */
-  it("hello-test-pair-two-clients", async () => {
-    clientSocket1.emit('hello', '{"name":"client1","id":1,"playerNumber":0}');
-    clientSocket1.on('pairing', (msg) => { });
-    clientSocket2.emit('hello', '{"name":"client2","id":2,"playerNumber":0}');
-    clientSocket2.on('pairing', (msg) => { });
-    await clientSocket1.on('gameplay', (msg) => {
-      assert.equal(msg.name, "client2");
-      assert.equal(msg.playerNumber, 2);
-      assert.equal(msg.commands, undefined);
+  //   /**
+  //    * Tests whether two clients can be paired
+  //    */
+    it("hello-test-pair-two-clients", async () => {
+      clientSocket1.emit('hello', '{"name":"client1","id":1,"playerNumber":0}');
+      clientSocket1.on('pairing', (msg) => { });
+      clientSocket2.emit('hello', '{"name":"client2","id":2,"playerNumber":0}');
+      clientSocket2.on('pairing', (msg) => { });
+      await clientSocket1.on('gameplay', (msg) => {
+        assert.equal(msg.name, "client2");
+        assert.equal(msg.playerNumber, 2);
+        assert.equal(msg.commands, undefined);
+      });
+      await clientSocket2.on('gameplay', (msg) => {
+        assert.equal(msg.name, "client1");
+        assert.equal(msg.playerNumber, 1);
+        assert.equal(msg.commands, undefined);
+      });
     });
-    await clientSocket2.on('gameplay', (msg) => {
-      assert.equal(msg.name, "client1");
-      assert.equal(msg.playerNumber, 1);
-      assert.equal(msg.commands, undefined);
-    });
-  });
 });
 
 /******************************************************************************/
