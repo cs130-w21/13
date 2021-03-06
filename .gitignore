@@ -1,5 +1,6 @@
 .DS_Store
 .vscode/
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
@@ -189,3 +190,6 @@ server/.tern-port
 
 # package lock file
 server/package-lock.json
+
+# Miscellanea
+docs/class_diagrams/*.py
