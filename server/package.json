@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "4.17.1",
+    "mutex-promise": "^0.1.0",
     "socket.io": "2.3.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2"
@@ -32,5 +33,5 @@
   },
   "engines": {
     "node": "14.x"
-    }
+  }
 }
