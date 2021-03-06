@@ -5,7 +5,7 @@ namespace RemoteControllerNamespace
   {
     public string name;
     public int id;
-    public int playerOrder;
+    public int playerNumber;
     public double randomSeed;
 
     public UserInfo(string name, int id)
