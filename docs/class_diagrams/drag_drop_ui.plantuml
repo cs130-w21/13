@@ -1,0 +1,161 @@
+@startuml drag_drop_ui
+
+' Interfaces
+
+interface ICodeInfo {
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+interface IDraggable implements IPointerDownHandler, IPointerUpHandler {
+    + ForceInto(droppable: GameObject): void
+}
+
+interface IDroppable {
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetCurrentItem(): GameObject
+    + IsOccupied(): bool
+    + GetLayer(): string
+}
+
+interface ISubPanel {
+    + IsOccupied(): void
+    + ItemCame(): void
+}
+
+' Physical Layer
+
+' also implements MonoBehaviour
+class DraggablePhysics implements IDraggable {
+    - string: myLayer
+    - currentSeat: GameObject = null
+    - isDragged: bool = false
+    - mouseLockPos: Vector2 = Vector2.zero
+    - myLockPos: Vector2 = Vector2.zero
+    - candidateSeat: GameObject = null
+    + ForceInto(droppable: GameObject): void
+    + OnPointerDown(eventData: PointerEventData): void
+    + OnPointerUp(eventData: PointerEventData): void
+    + Start(): void
+    + Update(): void
+}
+DraggablePhysics "0..1" o-- "1" IDroppable : "held in"
+
+' also implements MonoBehaviour
+class DroppablePhysics implements IDroppable {
+    - string: myLayer
+    - currentObject: GameObject = null
+    - myTransform: RectTransform
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetCurrentItem(): GameObject
+    + IsOccupied(): bool
+    + GetLayer(): string
+    + Start(): void
+}
+DroppablePhysics "0..1" o-- "1" IDraggable: "holds"
+
+' Coding Panel Dependencies
+
+class PanelSlot extends DroppablePhysics implements ICodeInfo {
+    + myPanel: CodingPanel
+    - myInfo: string = ""
+    - myCost: int = 0
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+class PanelItem extends DraggablePhysics implements ICodeInfo {
+    - myInformation: string = ""
+    - myCost: int = 1
+    + OnPointerDown(eventData: PointerEventData): void
+    + OnPointerUp(eventData: PointerEventData): void
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+' also implements MonoBehaviour
+class PanelGuard implements IDroppable {
+    - myLayer: string
+    - myPanel: CodingPanel
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetCurrentItem(): GameObject
+    + IsOccupied(): bool
+    + GetLayer(): string
+    + Update(): void
+}
+
+' Coding Panel
+
+class SourceGrid extends DroppablePhysics {
+    - myItem: GameObject = null
+    - itemPrefab: GameObject
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + Start(): void
+    - Count2Frames(item: GameObject): IEnumerator
+}
+
+' also implements MonoBehaviour
+class CodingPanel implements ICodeInfo {
+    - mySlotInstance: GameObject
+    - guardProbed: bool
+    - mySlots: GameObject [*] {ordered | nonunique}
+    - hoveringSlot: GameObject
+    - maxCost: int
+    - myItems: GameObject [*] {nonordered | unique}
+    - lastSubPanel: GameObject
+    + GetInformation(): string
+    + GetCost(): string
+    + PutItem(newItem: GameObject): void
+    + ReportGuardProbe(): bool
+    + LateUpdate(): void
+    + ReorderSlot(index: int, slot: GameObject): void
+    + FormatNewSlot(index: int): GameObject
+    + RemoveSlot(deprecatedSlot: GameObject): void
+    + PanelHasEnoughSpace(): bool
+}
+CodingPanel "0..1" o-- "*" PanelSlot
+CodingPanel "0..1" o-- "*" PanelItem
+
+' For Loop Blocks
+
+class ForLoopBlock extends PanelItem implements ISubPanel {
+    - myPanel : GameObject = null
+    - loopCounter: GameObject = null
+    + IsOccupied(): void
+    + ItemCame(): void
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+class ForLoopPanel extends CodingPanel {}
+
+class ForLoopStatementHolder extends PanelGuard {}
+
+' Utils / Other
+
+class ContainerResizer implements MonoBehaviour {
+    + FixedUpdate(): void
+}
+
+class JohnnyUITools {
+    + GetCanvasCoord(gameObject: GameObject): Vector2
+    + GetCenterCanvasCoord(gameObject: GameObject): Vector2
+    + GetMyCanvas(gameObject: GameObject): Canvas
+    + GetMousePosInMyCanvas(gameObject: GameObject): Vector2
+}
+
+class DragDropManager implements MonoBehaviour {
+    + instance: DragDropManager = null
+    - containerDuringDragging: GameObject = null
+    - currentlyDraggedItem: GameObject = null
+    - Awake(): void
+    + GetDraggingContainer() : Transform
+}
+
+@enduml
