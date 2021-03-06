@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
 
     // scene management
     [SerializeField]
-    private string startMenu, gameScene, failScene, creditScene;
+    private string gameScene;
     private string currentScene;
 
     // system messages /////////////////////////////////////////////////
@@ -32,5 +32,9 @@ public class SceneLoader : MonoBehaviour
     /// <param name="sceneName">Name of the scene to swtich to</param>
     public void ToSpecificScene(string sceneName) {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void StartGame() {
+        ToSpecificScene(gameScene);
     }
 }
