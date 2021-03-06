@@ -1,4 +1,4 @@
-@startuml Drag_and_Drop_UI
+@startuml Drag_and_Drop_UI_old
 
 interface IDraggable implements IPointerDownHandler, IPointerUpHandler {
 
