@@ -2,9 +2,9 @@
  * This is the test file corresponding to ../server.ts.
  */
 
-import { SocketTurnInfo } from "../UserInfoClasses";
+import { SocketTurnInfo } from "../src/UserInfoClasses";
 
-const { http, io } = require("../server");
+const { http, io } = require("../src/server");
 const Client = require("socket.io-client");
 const assert = require("chai").assert;
 const { promisify } = require('util')
@@ -44,10 +44,10 @@ describe("test-client-pairing-socket-events", () => {
   it("hello-test-two-clients", (done) => {
     clientSocket1.emit('hello', '{"name":"client1","id":1,"playerNumber":0}');
     clientSocket1.on('pairing', (msg) => {
-      assert.equal(msg, '1');
+      assert.equal(msg, 'currently pairing');
       clientSocket2.emit('hello', '{"name":"client2","id":2,"playerNumber":0}');
       clientSocket2.on('pairing', (msg) => {
-        assert.equal(msg, '2');
+        assert.equal(msg, 'currently pairing');
         done();
       });
     });
@@ -75,7 +75,7 @@ describe("test-client-pairing-socket-events", () => {
 });
 
 /******************************************************************************/
-describe("test-gameplay-socket-events", () => {
+describe("test-restart-gameplay-socket-events", () => {
   let clientSocket1, clientSocket2;
 
   /**
@@ -123,11 +123,11 @@ describe("test-gameplay-socket-events", () => {
   /**
  * Tests whether server sends new moves after both clients send their moves
  */
-  it("gameplay-test-send-multiple-info", async() => {
+  it("gameplay-test-send-multiple-info", async () => {
     clientSocket1.emit('submittingTurn', '{"id":1,"commands":"LELELEAP"}');
     clientSocket2.emit('submittingTurn', '{"id":2,"commands":"DUE VLA"}');
-    await clientSocket1.on('receiveTurn', () => {});
-    await clientSocket2.on('receiveTurn', () => {});
+    await clientSocket1.on('receiveTurn', () => { });
+    await clientSocket2.on('receiveTurn', () => { });
     clientSocket1.emit('submittingTurn', '{"id":1,"commands":"OS"}');
     clientSocket2.emit('submittingTurn', '{"id":2,"commands":"MEOW"}');
     await clientSocket1.on('receiveTurn', (msg) => {
@@ -146,8 +146,8 @@ describe("test-gameplay-socket-events", () => {
     clientSocket2.emit('submittingTurn', '{"id":2,"commands":"DUE VLA"}');
     clientSocket1.emit('submittingTurn', '{"id":1,"commands":"OS"}');
     clientSocket2.emit('submittingTurn', '{"id":2,"commands":"MEOW"}');
-    clientSocket1.emit('endGameRequest', '');
-    clientSocket2.emit('endGameRequest', '');
+    clientSocket1.emit('endGameRequest', '{"name":"client1","id":1}');
+    clientSocket2.emit('endGameRequest', '{"name":"client2","id":2}');
     await clientSocket1.on('endGameConfirmation', (msg) => {
       assert.equal(msg, '');
     });

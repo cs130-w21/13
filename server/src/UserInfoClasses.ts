@@ -10,20 +10,30 @@ export default class UserInfo {
   commands!: string | null;
   playerNumber!: number;
   randomSeed!: number;
-
-  constructor(name: string, id: number, socketId: string, playerNumber: number, randomSeed: number) {
+  opponentId!: number;
+  date!: Date;
+  constructor(name: string, id: number, socketId: string, randomSeed: number) {
     this.name = name;
     this.id = id;
     this.socketId = socketId;
     this.commands = null;
-    this.playerNumber = playerNumber;
     this.randomSeed = randomSeed;
+    this.pinged();
   }
   exportClientRequiredUserInfo() : ClientRequiredUserInfo {
     return new ClientRequiredUserInfo(this.name, this.playerNumber, this.randomSeed);
   }
   exportClientRequiredTurnInfo() : SocketTurnInfo {
     return new SocketTurnInfo(this.id, this.commands);
+  }
+  setPlayerNumber(playerNumber: number) : void {
+    this.playerNumber = playerNumber;
+  }
+  setOpponentId(opponentId: number) : void {
+    this.opponentId = opponentId;
+  }
+  pinged() : void {
+    this.date = new Date();
   }
 }
 
