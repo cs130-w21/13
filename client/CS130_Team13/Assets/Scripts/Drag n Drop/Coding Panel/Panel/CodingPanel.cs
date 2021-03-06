@@ -39,7 +39,7 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         foreach (GameObject slot in mySlots) {
             if (slot.GetComponent<PanelSlot>().IsOccupied()) {
                 if (slot.GetComponent<ICodeInfo>().GetInformation() != "") {
-                    newInformation += slot.GetComponent<ICodeInfo>().GetInformation() + " ";
+                    newInformation += slot.GetComponent<ICodeInfo>().GetInformation();
                 }
             }
         }
