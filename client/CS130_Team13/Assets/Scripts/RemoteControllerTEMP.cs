@@ -17,7 +17,8 @@ public class RemoteController
 
   public bool GetGameStarted()
   {
-    return gameStarted;
+    return true;
+    //return gameStarted;
   }
 
   public int GetPlayerOrder()
@@ -34,7 +35,8 @@ public class RemoteController
   /// </summary>
   public string getOpponentCommands()
   {
-    return "*";
+    //return "*";
+    return null;
   }
 }
   //////// CLIENT PEEPS LOOK NO FURTHER :0
