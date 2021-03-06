@@ -2,7 +2,7 @@
  * This file just starts the server in server.ts.
  */
 
-const { http, io } = require("./server");
+const { http, io } = require("./src/server");
 
 /******************************************************************************/
 

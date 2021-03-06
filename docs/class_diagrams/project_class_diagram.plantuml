@@ -1,0 +1,336 @@
+@startuml project_class_diagram 
+
+' Interfaces
+
+interface ICodeInfo {
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+interface IDraggable implements IPointerDownHandler, IPointerUpHandler {
+    + ForceInto(droppable: GameObject): void
+}
+
+interface IDroppable {
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetCurrentItem(): GameObject
+    + IsOccupied(): bool
+    + GetLayer(): string
+}
+
+interface ISubPanel {
+    + IsOccupied(): void
+    + ItemCame(): void
+}
+
+' Physical Layer
+
+' also implements MonoBehaviour
+class DraggablePhysics implements IDraggable {
+    - string: myLayer
+    - currentSeat: GameObject = null
+    - isDragged: bool = false
+    - mouseLockPos: Vector2 = Vector2.zero
+    - myLockPos: Vector2 = Vector2.zero
+    - candidateSeat: GameObject = null
+    + ForceInto(droppable: GameObject): void
+    + OnPointerDown(eventData: PointerEventData): void
+    + OnPointerUp(eventData: PointerEventData): void
+    + Start(): void
+    + Update(): void
+}
+DraggablePhysics "0..1" o-- "1" IDroppable : "held in"
+
+' also implements MonoBehaviour
+class DroppablePhysics implements IDroppable {
+    - string: myLayer
+    - currentObject: GameObject = null
+    - myTransform: RectTransform
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetCurrentItem(): GameObject
+    + IsOccupied(): bool
+    + GetLayer(): string
+    + Start(): void
+}
+DroppablePhysics "0..1" o-- "1" IDraggable: "holds"
+
+' Coding Panel Dependencies
+
+class PanelSlot extends DroppablePhysics implements ICodeInfo {
+    + myPanel: CodingPanel
+    - myInfo: string = ""
+    - myCost: int = 0
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+class PanelItem extends DraggablePhysics implements ICodeInfo {
+    - myInformation: string = ""
+    - myCost: int = 1
+    + OnPointerDown(eventData: PointerEventData): void
+    + OnPointerUp(eventData: PointerEventData): void
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+' also implements MonoBehaviour
+class PanelGuard implements IDroppable {
+    - myLayer: string
+    - myPanel: CodingPanel
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + GetCurrentItem(): GameObject
+    + IsOccupied(): bool
+    + GetLayer(): string
+    + Update(): void
+}
+
+' Coding Panel
+
+class SourceGrid extends DroppablePhysics {
+    - myItem: GameObject = null
+    - itemPrefab: GameObject
+    + ItemLeft(item: GameObject): void
+    + ItemCame(item: GameObject): void
+    + Start(): void
+    - Count2Frames(item: GameObject): IEnumerator
+}
+
+' also implements MonoBehaviour
+class CodingPanel implements ICodeInfo {
+    - mySlotInstance: GameObject
+    - guardProbed: bool
+    - mySlots: GameObject [*] {ordered | nonunique}
+    - hoveringSlot: GameObject
+    - maxCost: int
+    - myItems: GameObject [*] {nonordered | unique}
+    - lastSubPanel: GameObject
+    + GetInformation(): string
+    + GetCost(): string
+    + PutItem(newItem: GameObject): void
+    + ReportGuardProbe(): bool
+    + LateUpdate(): void
+    + ReorderSlot(index: int, slot: GameObject): void
+    + FormatNewSlot(index: int): GameObject
+    + RemoveSlot(deprecatedSlot: GameObject): void
+    + PanelHasEnoughSpace(): bool
+}
+CodingPanel "0..1" o-- "*" PanelSlot
+CodingPanel "0..1" o-- "*" PanelItem
+
+' For Loop Blocks
+
+class ForLoopBlock extends PanelItem implements ISubPanel {
+    - myPanel : GameObject = null
+    - loopCounter: GameObject = null
+    + IsOccupied(): void
+    + ItemCame(): void
+    + GetInformation(): string
+    + GetCost(): string
+}
+
+class ForLoopPanel extends CodingPanel {}
+
+class ForLoopStatementHolder extends PanelGuard {}
+
+' Utils / Other
+
+class ContainerResizer implements MonoBehaviour {
+    + FixedUpdate(): void
+}
+
+class JohnnyUITools {
+    + GetCanvasCoord(gameObject: GameObject): Vector2
+    + GetCenterCanvasCoord(gameObject: GameObject): Vector2
+    + GetMyCanvas(gameObject: GameObject): Canvas
+    + GetMousePosInMyCanvas(gameObject: GameObject): Vector2
+}
+
+class DragDropManager implements MonoBehaviour {
+    + instance: DragDropManager = null
+    - containerDuringDragging: GameObject = null
+    - currentlyDraggedItem: GameObject = null
+    - Awake(): void
+    + GetDraggingContainer() : Transform
+}
+
+
+' Robot
+
+enum Direction {
+    Up
+    Down
+    Left
+    Right
+}
+Robot ..> Direction
+
+' also implements MonoBehaviour
+class Robot {
+    + outOfBatteryEffect : ParticleSystem
+    - batteryCharge : int
+    - batteryBoostTurns : int
+    - moveBoostTurns : int
+    - mineBoostTurns : int
+    - boardManager: BoardManager
+    + Init(bm : BoardManager) : void
+    + Recharge() : void
+    + OutOfBattery() : void
+    + PowerupBatteryBoost() : void
+    + PowerupMoveCostReduction(): void
+    + PowerupMineBoost(): void
+    + Rotate90(dir : Direction): IEnumerator
+    + Move(dir : Direction): IEnumerator
+    + Mine(): IEnumerator
+    + Place(): IEnumerator
+}
+
+' BoardManager
+
+enum TileState {
+    Null
+    Empty
+    Occupied
+    Powerup
+}
+BoardManager ..> TileState
+
+' also implements MonoBehaviour
+class BoardManager {
+    + backgroundTilemap : Tilemap
+    + objectTilemap : Tilemap
+    + bgTile : TileBase
+    + placedRock : TileBase
+    + rockTiles : TileBase [*] {ordered | nonunique}
+    + gemTiles : TileBase [3]
+    + powerupTile : TileBase
+    - powerupLocations : <Vector3Int, int> [*] {nonordered | unique}
+    + cam : Camera
+    + player1 : Robot
+    + player2 : Robot
+    - boardWidth : int = Constants.Board.BOARD_WIDTH {readOnly}
+    - boardHeight : int = Constants.Board.BOARD_HEIGHT {readOnly}
+    - gameManager : GameManager
+    + CreateBoard(gm: GameManager, seed: int) : void
+    + GetTileState(tilePos : Vector3) : TileState
+    + MineTile(tilePos : Vector3, robot: Robot) : void
+    + PlaceTile(tilePos : Vector3) : void
+    + CheckForCollectable(robot : Robot) : void
+    + RunTurn(p1Moves : string, p2Moves : string) : void
+    - RunTurnHelper(p1Moves : string, p2Moves : string) : IEnumerator
+    - RunCommand(robot : Robot, command : char) : IEnumerator
+    - PlaceRandomCollectible(tile : TileBase, spaces : Vector3Int [*]) : Vector3Int
+}
+BoardManager "0..1" o-- "2" Robot
+BoardManager "1" o--o "1" GameManager
+
+' GameManager
+
+' also implements MonoBehaviour
+class GameManager {
+    + boardManager : BoardManager
+    - rc : RemoteController
+    + cp : CodingPanel
+    - p1Score : int
+    - p2Score : int
+    + Start() : void
+    - RunGame() : void
+    - EndGame() : void
+    + UpdateScore(player : int, scoreChange: int) : int
+    + GetScore(player: int) : int
+}
+GameManager "0..1" *-- "1" RemoteController
+GameManager "0..1" *-- "1" CodingPanel
+
+' CodeProcessor
+
+class CodeProcessor {
+    - code : string = ""
+    - result: string = ""
+    - ProcessCode() : void
+    + GetResult(pCode: string) : string
+}
+
+' Remote Info Classes
+
+class UserInfo {
+    + name: string
+    + id: string
+    + playerOrder: string
+    + randomSeed: double
+    + UserInfo(name: string, id: string)
+}
+UserInfo ..> RemoteController
+
+class TurnInfo {
+    + commands: string
+    + id: string
+    + TurnInfo(commands: string, id: string)
+}
+TurnInfo ..> RemoteController
+
+' RemoteController
+
+class RemoteController {
+    - socket: QSocket
+    - userInfo: UserInfo
+    - opponentInfo: UserInfo
+    - turnInfo: TurnInfo
+    - username: string
+    - SERVER_URL: string {readOnly}
+    - opponentCommands: string
+    - gameStarted: bool = false
+    + RemoteController(name: string)
+    + SendPlayerCommands_ToServer(commands: string) : void
+    + EndCurrentGame_ToServer() : void
+    + GetGameStarted() : bool
+    + GetPlayerOrder() : int
+    + getOpponentCommands() : string
+    + Start(): void
+    + InitializeGame(): IEnumerator
+    - setupSocket(): void
+    - Destroy(): void
+}
+
+
+' User Info Classes
+
+class UserInfo {
+    + name: string
+    + id: number
+    + socketId: string
+    + commands: string
+    + playerNumber: number
+    + randomSeed: number
+    + constructor(name: string, id: number, socketId: string, playerNumber: number, randomSeed: number)
+    + exportClientRequiredUserInfo() : ClientRequiredUserInfo
+    + exportClientRequiredTurnInfo() : SocketTurnInfo
+}
+
+class ClientRequiredUserInfo {
+    + name: string
+    + playerNumber: number
+    + randomSeed: number
+    + constructor(name: string, playerNumber: number, randomSeed: number)
+}
+ClientRequiredUserInfo ..> UserInfo
+
+class ClientSentUserInfo {
+    + name: string
+    + id: number
+    + isInvalid() : boolean
+}
+
+class SocketTurnInfo {
+    + id: number
+    + commands: string
+    + isInvalid() : boolean
+    + constructor(id: number, commands: string)
+}
+SocketTurnInfo ..> UserInfo
+
+@enduml 

@@ -1,0 +1,39 @@
+@startuml server
+
+' User Info Classes
+
+class UserInfo {
+    + name: string
+    + id: number
+    + socketId: string
+    + commands: string
+    + playerNumber: number
+    + randomSeed: number
+    + constructor(name: string, id: number, socketId: string, playerNumber: number, randomSeed: number)
+    + exportClientRequiredUserInfo() : ClientRequiredUserInfo
+    + exportClientRequiredTurnInfo() : SocketTurnInfo
+}
+
+class ClientRequiredUserInfo {
+    + name: string
+    + playerNumber: number
+    + randomSeed: number
+    + constructor(name: string, playerNumber: number, randomSeed: number)
+}
+ClientRequiredUserInfo ..> UserInfo
+
+class ClientSentUserInfo {
+    + name: string
+    + id: number
+    + isInvalid() : boolean
+}
+
+class SocketTurnInfo {
+    + id: number
+    + commands: string
+    + isInvalid() : boolean
+    + constructor(id: number, commands: string)
+}
+SocketTurnInfo ..> UserInfo
+
+@enduml

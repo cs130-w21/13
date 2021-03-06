@@ -1,0 +1,140 @@
+@startuml robot_movement
+
+' Robot
+
+enum Direction {
+    Up
+    Down
+    Left
+    Right
+}
+Robot ..> Direction
+
+' also implements MonoBehaviour
+class Robot {
+    + outOfBatteryEffect : ParticleSystem
+    - batteryCharge : int
+    - batteryBoostTurns : int
+    - moveBoostTurns : int
+    - mineBoostTurns : int
+    - boardManager: BoardManager
+    + Init(bm : BoardManager) : void
+    + Recharge() : void
+    + OutOfBattery() : void
+    + PowerupBatteryBoost() : void
+    + PowerupMoveCostReduction(): void
+    + PowerupMineBoost(): void
+    + Rotate90(dir : Direction): IEnumerator
+    + Move(dir : Direction): IEnumerator
+    + Mine(): IEnumerator
+    + Place(): IEnumerator
+}
+
+' BoardManager
+
+enum TileState {
+    Null
+    Empty
+    Occupied
+    Powerup
+}
+BoardManager ..> TileState
+
+' also implements MonoBehaviour
+class BoardManager {
+    + backgroundTilemap : Tilemap
+    + objectTilemap : Tilemap
+    + bgTile : TileBase
+    + placedRock : TileBase
+    + rockTiles : TileBase [*] {ordered | nonunique}
+    + gemTiles : TileBase [3]
+    + powerupTile : TileBase
+    - powerupLocations : <Vector3Int, int> [*] {nonordered | unique}
+    + cam : Camera
+    + player1 : Robot
+    + player2 : Robot
+    - boardWidth : int = Constants.Board.BOARD_WIDTH {readOnly}
+    - boardHeight : int = Constants.Board.BOARD_HEIGHT {readOnly}
+    - gameManager : GameManager
+    + CreateBoard(gm: GameManager, seed: int) : void
+    + GetTileState(tilePos : Vector3) : TileState
+    + MineTile(tilePos : Vector3, robot: Robot) : void
+    + PlaceTile(tilePos : Vector3) : void
+    + CheckForCollectable(robot : Robot) : void
+    + RunTurn(p1Moves : string, p2Moves : string) : void
+    - RunTurnHelper(p1Moves : string, p2Moves : string) : IEnumerator
+    - RunCommand(robot : Robot, command : char) : IEnumerator
+    - PlaceRandomCollectible(tile : TileBase, spaces : Vector3Int [*]) : Vector3Int
+}
+BoardManager "0..1" o-- "2" Robot
+BoardManager "1" o--o "1" GameManager
+
+' GameManager
+
+' also implements MonoBehaviour
+class GameManager {
+    + boardManager : BoardManager
+    - rc : RemoteController
+    + cp : CodingPanel
+    - p1Score : int
+    - p2Score : int
+    + Start() : void
+    - RunGame() : void
+    - EndGame() : void
+    + UpdateScore(player : int, scoreChange: int) : int
+    + GetScore(player: int) : int
+}
+GameManager "0..1" *-- "1" RemoteController
+GameManager "0..1" *-- "1" CodingPanel
+
+' CodeProcessor
+
+class CodeProcessor {
+    - code : string = ""
+    - result: string = ""
+    - ProcessCode() : void
+    + GetResult(pCode: string) : string
+}
+
+' Remote Info Classes
+
+class UserInfo {
+    + name: string
+    + id: string
+    + playerOrder: string
+    + randomSeed: double
+    + UserInfo(name: string, id: string)
+}
+UserInfo ..> RemoteController
+
+class TurnInfo {
+    + commands: string
+    + id: string
+    + TurnInfo(commands: string, id: string)
+}
+TurnInfo ..> RemoteController
+
+' RemoteController
+
+class RemoteController {
+    - socket: QSocket
+    - userInfo: UserInfo
+    - opponentInfo: UserInfo
+    - turnInfo: TurnInfo
+    - username: string
+    - SERVER_URL: string {readOnly}
+    - opponentCommands: string
+    - gameStarted: bool = false
+    + RemoteController(name: string)
+    + SendPlayerCommands_ToServer(commands: string) : void
+    + EndCurrentGame_ToServer() : void
+    + GetGameStarted() : bool
+    + GetPlayerOrder() : int
+    + getOpponentCommands() : string
+    + Start(): void
+    + InitializeGame(): IEnumerator
+    - setupSocket(): void
+    - Destroy(): void
+}
+
+@enduml
