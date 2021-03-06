@@ -7,13 +7,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public BoardManager boardManager;
-    private RemoteControllerTEMP rc;
+    //private RemoteController rc;
+    public CodingPanel cp;
     private int p1Score;
     private int p2Score;
     void Start()
     {
         // Temporary setup for demoing
-        rc = this.gameObject.AddComponent<RemoteControllerTEMP>();
+        //rc = this.gameObject.AddComponent<RemoteController>();
         //rc.GameFound();
         int seed = (int)Random.Range(0, 100);
         boardManager.CreateBoard(this, seed);
@@ -30,10 +31,12 @@ public class GameManager : MonoBehaviour
 
     private void RunGame()
     {
+        string ci;
         for (int i = 0; i < Constants.Game.MAX_TURNS; i++)
         {
             // Get client's input
-
+            ci = cp.GetComponent<CodingPanel>().GetInformation();
+            Debug.Log(ci);
             // 
             boardManager.RunTurn("", "");
 

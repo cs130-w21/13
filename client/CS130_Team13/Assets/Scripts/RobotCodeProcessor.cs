@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 /// <summary>
 /// Class that gets the string of codes from the panel and turns in into the
