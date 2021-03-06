@@ -75,7 +75,7 @@ describe("test-client-pairing-socket-events", () => {
 });
 
 /******************************************************************************/
-describe("test-restart-gameplay-socket-events", () => {
+describe("test-gameplay-socket-events", () => {
   let clientSocket1, clientSocket2;
 
   /**

@@ -6,6 +6,7 @@ using System.Collections;
 using System;
 
 /////// USE THIS FOR CLIENT COMMUNICATION FOR NOW :)
+<<<<<<< HEAD
 public interface Opponent
 {
   void SendPlayerCommands_ToServer(string commands);
@@ -21,11 +22,50 @@ public interface Opponent
 namespace RemoteControllerNamespace
 {
   public class RemoteController : Opponent
+=======
+public class RemoteController
+{
+  public RemoteController(string name) { }
+  public void SendPlayerCommands_ToServer(string commands) { }
+  public void EndCurrentGame_ToServer() { }
+
+  private string opponentCommands;
+  private bool gameStarted = false;
+
+  public bool GetGameStarted()
+  {
+    return gameStarted;
+  }
+
+  public int GetPlayerOrder()
+  {
+    return 1;
+  }
+
+  /// <summary>
+  /// Returns the opponent's current commands
+  /// Returns NULL if opponents have not submitted their commands, or there are no new commands
+  ///
+  /// This should be called by C# functions within Unity, and it should call
+  /// Socket.IO-related functions within RemoteController.
+  /// </summary>
+  public string getOpponentCommands()
+  {
+    return "*";
+  }
+}
+  //////// CLIENT PEEPS LOOK NO FURTHER :0
+
+namespace RemoteControllerNamespace
+{
+  public class RemoteControllerTEMP : MonoBehaviour
+>>>>>>> master
   {
     private QSocket socket;
     private UserInfo userInfo;
     private UserInfo opponentInfo;
     private TurnInfo turnInfo;
+<<<<<<< HEAD
     private string username;
     private const string SERVER_URL = "https://cs130-hacman.herokuapp.com";
     //http://localhost:3000
@@ -38,6 +78,18 @@ namespace RemoteControllerNamespace
     {
       username = name;
       InitializeGame();
+=======
+
+    // TODO: have non-hardcoded usernames
+    private string username = "pickles";
+    private const string SERVER_URL = "http://localhost:3000";
+    private string opponentCommands;
+    private bool gameStarted = false;
+
+    void Start()
+    {
+      StartCoroutine(InitializeGame());
+>>>>>>> master
     }
 
     IEnumerator InitializeGame()
@@ -59,6 +111,17 @@ namespace RemoteControllerNamespace
       this.userInfo = new UserInfo(username, id);
 
       setupSocket();
+<<<<<<< HEAD
+=======
+
+      // TODO send a turn
+      for (int i = 0; i < 15; i++)
+      {
+        yield return new WaitForSeconds(20);
+        SendPlayerCommands_ToServer("F");
+      }
+      EndCurrentGame_ToServer();
+>>>>>>> master
     }
 
     private void setupSocket()
@@ -84,19 +147,32 @@ namespace RemoteControllerNamespace
       // We retreive the opponent info from this
       socket.On("gameplay", (data) =>
       {
+<<<<<<< HEAD
         gameStarted = true;
         opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
         userInfo.playerNumber = (opponentInfo.playerNumber == 1) ? 2 : 1;
         Debug.Log("Player " + userInfo.playerNumber
             + " sees that the game has started");
         randomSeed = userInfo.randomSeed;
+=======
+        Debug.Log("SEEEE");
+        gameStarted = true;
+        opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
+        userInfo.playerOrder = (opponentInfo.playerOrder == 1) ? 2 : 1;
+        Debug.Log("Player " + userInfo.playerOrder
+            + " sees that the game has started");
+>>>>>>> master
       });
 
       // We receive opponent's commands from the server
       socket.On("receiveTurn", (data) =>
       {
         TurnInfo opponentTurnInfo = JsonUtility.FromJson<TurnInfo>(data.ToString());
+<<<<<<< HEAD
         Debug.Log("Player " + userInfo.playerNumber +
+=======
+        Debug.Log("Player " + userInfo.playerOrder +
+>>>>>>> master
             " has received the opponent's turn data");
         opponentCommands = opponentTurnInfo.commands;
       });
@@ -105,8 +181,12 @@ namespace RemoteControllerNamespace
       // Data should contain an empty string uder current implementation
       socket.On("endGameConfirmation", (data) =>
       {
+<<<<<<< HEAD
         gameEnded = true;
         Debug.Log("Player " + userInfo.playerNumber +
+=======
+        Debug.Log("Player " + userInfo.playerOrder +
+>>>>>>> master
             " has received the instruction to end the game");
         Destroy();
       });
@@ -137,7 +217,11 @@ namespace RemoteControllerNamespace
     public void SendPlayerCommands_ToServer(string commands)
     {
       // Create a TurnInfo object
+<<<<<<< HEAD
       Debug.Log("Player " + userInfo.playerNumber + " is submitting their turn");
+=======
+      Debug.Log("Player " + userInfo.playerOrder + " is submitting their turn");
+>>>>>>> master
       this.turnInfo = new TurnInfo(commands, this.userInfo.id);
       socket.Emit("submittingTurn", JsonUtility.ToJson(turnInfo));
     }
@@ -153,7 +237,11 @@ namespace RemoteControllerNamespace
       // According to our current specs, either user can end a game at any time
       // If that were to change, we can adjust the event to send verification, etc.
       Debug.Log("Client is ending game end request");
+<<<<<<< HEAD
       socket.Emit("endGameRequest", JsonUtility.ToJson(this.userInfo));
+=======
+      socket.Emit("endGameRequest", "");
+>>>>>>> master
     }
 
     /// <summary>
@@ -189,6 +277,7 @@ namespace RemoteControllerNamespace
     ///      2 : this user is player 2 
     /// Should not be called unless the game has started (GetGameStarted returns true)
     /// </summary>
+<<<<<<< HEAD
     public int GetPlayerNumber()
     {
       return userInfo.playerNumber;
@@ -200,6 +289,11 @@ namespace RemoteControllerNamespace
     public bool GetGameEnded()
     {
       return gameEnded;
+=======
+    public int GetPlayerOrder()
+    {
+      return userInfo.playerOrder;
+>>>>>>> master
     }
   }
 }
