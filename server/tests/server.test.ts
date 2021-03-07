@@ -38,7 +38,7 @@ describe("test-client-pairing-socket-events", () => {
     clientSocket2.close();
     clearInterval(intervalCheck);
   });
-
+  
   /**
    * Tests whether two clients can connect to the server.
    */
