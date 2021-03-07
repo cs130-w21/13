@@ -1844,8 +1844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5fc56aae0a930448d129fb564650d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardManager: {fileID: 691428969514827972}
-  codingPanel: {fileID: 0}
+  bm: {fileID: 691428969514827972}
+  cp: {fileID: 0}
   ConnectingUI: {fileID: 625015838}
   nameInput: {fileID: 269169639}
   WaitingUI: {fileID: 865396977}
