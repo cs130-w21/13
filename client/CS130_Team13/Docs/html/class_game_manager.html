@@ -82,12 +82,18 @@ $(document).ready(function(){initNavTree('class_game_manager.html',''); initResi
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_game_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GameManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The Game Manager handles all of the server interaction and initializes turns which are handled by the Board Manager.  
+ <a href="class_game_manager.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for GameManager:</div>
 <div class="dyncontent">
@@ -95,22 +101,425 @@ Inheritance diagram for GameManager:</div>
   <img src="class_game_manager.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a809dec58b5681fc1ebcc22eb428a914c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameState</a> { <br />
+&#160;&#160;<a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914cae321c53b354930ba96f0243e652df458">Connecting</a>
+, <a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914ca2b00faeb30706e2186a363948c851bec">WaitingForOpponent</a>
+, <a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914ca8a7b88cd602849e993a8ba3cdef39462">StartGame</a>
+, <a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914cab4d4401c173eca6729f8083a387e0022">CodingPhase</a>
+, <br />
+&#160;&#160;<a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914ca08a10bc22b53aded56ce6c4fe32a25ab">AwaitingOpponentCommands</a>
+, <a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914ca02da2b4fa7312fe909ec1d3f01fcf6d9">ExecutionPhase</a>
+, <a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914caf0f29c4900d44c9e32d203ca799163e1">EndGame</a>
+<br />
+ }</td></tr>
+<tr class="separator:a809dec58b5681fc1ebcc22eb428a914c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a1488cce8ebacabd3b3e2ddb7e7182bb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a1488cce8ebacabd3b3e2ddb7e7182bb4">SetCurrentState</a> (<a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameState</a> state)</td></tr>
+<tr class="separator:a1488cce8ebacabd3b3e2ddb7e7182bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc59aba7ddf82ad406f4bbd0e92f3ec5"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#afc59aba7ddf82ad406f4bbd0e92f3ec5">endGameInAMinute</a> ()</td></tr>
+<tr class="separator:afc59aba7ddf82ad406f4bbd0e92f3ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c10b4d89c6e37a4433a54a5b7b04500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a0c10b4d89c6e37a4433a54a5b7b04500">EndGame</a> ()</td></tr>
+<tr class="separator:a0c10b4d89c6e37a4433a54a5b7b04500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5e20dd1a7244a6043e5f8c87a30133b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ac5e20dd1a7244a6043e5f8c87a30133b">UpdateScore</a> (int player, int scoreChange)</td></tr>
+<tr class="memdesc:ac5e20dd1a7244a6043e5f8c87a30133b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the player score. 1 = player 1, 2 = player 2.  <a href="class_game_manager.html#ac5e20dd1a7244a6043e5f8c87a30133b">More...</a><br /></td></tr>
+<tr class="separator:ac5e20dd1a7244a6043e5f8c87a30133b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71a8419fc46a1ab0ac025b9aad6c5ce6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a71a8419fc46a1ab0ac025b9aad6c5ce6">GetScore</a> (int player)</td></tr>
+<tr class="memdesc:a71a8419fc46a1ab0ac025b9aad6c5ce6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the score of a given player.  <a href="class_game_manager.html#a71a8419fc46a1ab0ac025b9aad6c5ce6">More...</a><br /></td></tr>
+<tr class="separator:a71a8419fc46a1ab0ac025b9aad6c5ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c2b795a440e02c67065b2716d401f2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ad8c2b795a440e02c67065b2716d401f2">getTimeRemaining</a> ()</td></tr>
+<tr class="separator:ad8c2b795a440e02c67065b2716d401f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd734709e27922799af5a8417cdeb431"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#afd734709e27922799af5a8417cdeb431">getP1Score</a> ()</td></tr>
+<tr class="separator:afd734709e27922799af5a8417cdeb431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d0b5298cd2d165975ea0eaacf02f6e0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a6d0b5298cd2d165975ea0eaacf02f6e0">getP2Score</a> ()</td></tr>
+<tr class="separator:a6d0b5298cd2d165975ea0eaacf02f6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80bf227c0b85a959903b42dd72f63d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ae80bf227c0b85a959903b42dd72f63d4">SubmitCode</a> ()</td></tr>
+<tr class="separator:ae80bf227c0b85a959903b42dd72f63d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe07ad67e2f847640d9396dc1456cb64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#abe07ad67e2f847640d9396dc1456cb64">SetNameSubmitted</a> (bool b)</td></tr>
+<tr class="separator:abe07ad67e2f847640d9396dc1456cb64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa2b26cfc6307f3ed0383ae4f5b8cd334"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_board_manager.html">BoardManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#aa2b26cfc6307f3ed0383ae4f5b8cd334">boardManager</a></td></tr>
-<tr class="separator:aa2b26cfc6307f3ed0383ae4f5b8cd334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277a064df474faf1a0930059eb8ddf05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_board_manager.html">BoardManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a277a064df474faf1a0930059eb8ddf05">bm</a></td></tr>
+<tr class="separator:a277a064df474faf1a0930059eb8ddf05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab360dfa1dde82a3edd46f57b30b17cef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_coding_panel.html">CodingPanel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ab360dfa1dde82a3edd46f57b30b17cef">cp</a></td></tr>
+<tr class="separator:ab360dfa1dde82a3edd46f57b30b17cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a837967bb5855836ce6e159acf7c3fd90"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a837967bb5855836ce6e159acf7c3fd90">ConnectingUI</a></td></tr>
+<tr class="separator:a837967bb5855836ce6e159acf7c3fd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd1275a654ff6e872407f864fe210df"><td class="memItemLeft" align="right" valign="top">InputField&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a9cd1275a654ff6e872407f864fe210df">nameInput</a></td></tr>
+<tr class="separator:a9cd1275a654ff6e872407f864fe210df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a749e6a554cbaa96b449f7c6304f87a1b"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a749e6a554cbaa96b449f7c6304f87a1b">WaitingUI</a></td></tr>
+<tr class="separator:a749e6a554cbaa96b449f7c6304f87a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf22417241294515409cd49a35e752a"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#aabf22417241294515409cd49a35e752a">GameOverUI</a></td></tr>
+<tr class="separator:aabf22417241294515409cd49a35e752a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66752bc81fe26eca590efb5865af2464"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a66752bc81fe26eca590efb5865af2464">CodingUI</a></td></tr>
+<tr class="separator:a66752bc81fe26eca590efb5865af2464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f4391613bc4991854387f27261da09"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ae6f4391613bc4991854387f27261da09">SubmitButton</a></td></tr>
+<tr class="separator:ae6f4391613bc4991854387f27261da09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a73601b9a24c0d38b2161fb0b07296618"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a73601b9a24c0d38b2161fb0b07296618">isRunningTurn</a> = false<code> [get, set]</code></td></tr>
+<tr class="separator:a73601b9a24c0d38b2161fb0b07296618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa2b26cfc6307f3ed0383ae4f5b8cd334"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2b26cfc6307f3ed0383ae4f5b8cd334">&#9670;&nbsp;</a></span>boardManager</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The Game Manager handles all of the server interaction and initializes turns which are handled by the Board Manager. </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a809dec58b5681fc1ebcc22eb428a914c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a809dec58b5681fc1ebcc22eb428a914c">&#9670;&nbsp;</a></span>GameState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameManager.GameState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a809dec58b5681fc1ebcc22eb428a914cae321c53b354930ba96f0243e652df458"></a>Connecting&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a809dec58b5681fc1ebcc22eb428a914ca2b00faeb30706e2186a363948c851bec"></a>WaitingForOpponent&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a809dec58b5681fc1ebcc22eb428a914ca8a7b88cd602849e993a8ba3cdef39462"></a>StartGame&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a809dec58b5681fc1ebcc22eb428a914cab4d4401c173eca6729f8083a387e0022"></a>CodingPhase&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a809dec58b5681fc1ebcc22eb428a914ca08a10bc22b53aded56ce6c4fe32a25ab"></a>AwaitingOpponentCommands&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a809dec58b5681fc1ebcc22eb428a914ca02da2b4fa7312fe909ec1d3f01fcf6d9"></a>ExecutionPhase&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a809dec58b5681fc1ebcc22eb428a914caf0f29c4900d44c9e32d203ca799163e1"></a>EndGame&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0c10b4d89c6e37a4433a54a5b7b04500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c10b4d89c6e37a4433a54a5b7b04500">&#9670;&nbsp;</a></span>EndGame()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_board_manager.html">BoardManager</a> GameManager.boardManager</td>
+          <td class="memname">void GameManager.EndGame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc59aba7ddf82ad406f4bbd0e92f3ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc59aba7ddf82ad406f4bbd0e92f3ec5">&#9670;&nbsp;</a></span>endGameInAMinute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator GameManager.endGameInAMinute </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd734709e27922799af5a8417cdeb431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd734709e27922799af5a8417cdeb431">&#9670;&nbsp;</a></span>getP1Score()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameManager.getP1Score </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6d0b5298cd2d165975ea0eaacf02f6e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d0b5298cd2d165975ea0eaacf02f6e0">&#9670;&nbsp;</a></span>getP2Score()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameManager.getP2Score </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71a8419fc46a1ab0ac025b9aad6c5ce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71a8419fc46a1ab0ac025b9aad6c5ce6">&#9670;&nbsp;</a></span>GetScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameManager.GetScore </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>player</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the score of a given player. </p>
+
+</div>
+</div>
+<a id="ad8c2b795a440e02c67065b2716d401f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8c2b795a440e02c67065b2716d401f2">&#9670;&nbsp;</a></span>getTimeRemaining()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameManager.getTimeRemaining </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1488cce8ebacabd3b3e2ddb7e7182bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1488cce8ebacabd3b3e2ddb7e7182bb4">&#9670;&nbsp;</a></span>SetCurrentState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameManager.SetCurrentState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameState</a>&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe07ad67e2f847640d9396dc1456cb64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe07ad67e2f847640d9396dc1456cb64">&#9670;&nbsp;</a></span>SetNameSubmitted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameManager.SetNameSubmitted </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae80bf227c0b85a959903b42dd72f63d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae80bf227c0b85a959903b42dd72f63d4">&#9670;&nbsp;</a></span>SubmitCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameManager.SubmitCode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5e20dd1a7244a6043e5f8c87a30133b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5e20dd1a7244a6043e5f8c87a30133b">&#9670;&nbsp;</a></span>UpdateScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameManager.UpdateScore </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>scoreChange</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the player score. 1 = player 1, 2 = player 2. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a277a064df474faf1a0930059eb8ddf05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a277a064df474faf1a0930059eb8ddf05">&#9670;&nbsp;</a></span>bm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_board_manager.html">BoardManager</a> GameManager.bm</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66752bc81fe26eca590efb5865af2464"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66752bc81fe26eca590efb5865af2464">&#9670;&nbsp;</a></span>CodingUI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject GameManager.CodingUI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a837967bb5855836ce6e159acf7c3fd90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a837967bb5855836ce6e159acf7c3fd90">&#9670;&nbsp;</a></span>ConnectingUI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject GameManager.ConnectingUI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab360dfa1dde82a3edd46f57b30b17cef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab360dfa1dde82a3edd46f57b30b17cef">&#9670;&nbsp;</a></span>cp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_coding_panel.html">CodingPanel</a> GameManager.cp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aabf22417241294515409cd49a35e752a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf22417241294515409cd49a35e752a">&#9670;&nbsp;</a></span>GameOverUI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject GameManager.GameOverUI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cd1275a654ff6e872407f864fe210df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd1275a654ff6e872407f864fe210df">&#9670;&nbsp;</a></span>nameInput</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">InputField GameManager.nameInput</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae6f4391613bc4991854387f27261da09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f4391613bc4991854387f27261da09">&#9670;&nbsp;</a></span>SubmitButton</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject GameManager.SubmitButton</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a749e6a554cbaa96b449f7c6304f87a1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a749e6a554cbaa96b449f7c6304f87a1b">&#9670;&nbsp;</a></span>WaitingUI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject GameManager.WaitingUI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
+<a id="a73601b9a24c0d38b2161fb0b07296618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73601b9a24c0d38b2161fb0b07296618">&#9670;&nbsp;</a></span>isRunningTurn</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameManager.isRunningTurn = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -124,7 +533,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_game_manager.html">GameManager</a></li>
-    <li class="footer">Generated on Fri Feb 26 2021 17:34:40 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Mar 7 2021 15:31:51 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

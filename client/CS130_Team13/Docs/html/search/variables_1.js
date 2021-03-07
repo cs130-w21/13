@@ -1,12 +1,20 @@
 var searchData=
 [
-  ['backgroundtilemap_2854',['backgroundTilemap',['../class_board_manager.html#a117f13c0e032d4a9f67050538c87c39b',1,'BoardManager']]],
-  ['badrequest_2855',['BadRequest',['../class_socket_1_1_web_socket4_net_1_1_default_1_1_op_code.html#a2f5ddaabb9611682d4d8f8d0ab0096f3',1,'Socket::WebSocket4Net::Default::OpCode']]],
-  ['basefilestring_2856',['BaseFileString',['../class_doxygen_window.html#a7a4acfac0a07a2a05f183e4f0bc53b62',1,'DoxygenWindow']]],
-  ['bgtile_2857',['bgTile',['../class_board_manager.html#ac26152dd12748ed2865deb3ea43e9eac',1,'BoardManager']]],
-  ['binary_2858',['Binary',['../class_socket_1_1_web_socket4_net_1_1_default_1_1_op_code.html#a5f619c6236f2a436f15b121c0ca1de7e',1,'Socket::WebSocket4Net::Default::OpCode']]],
-  ['binary_5fack_2859',['BINARY_ACK',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_parser.html#adfd83754f982fd6429c0a0ee47b699c8',1,'Socket::Quobject::SocketIoClientDotNet::Parser::Parser']]],
-  ['binary_5fevent_2860',['BINARY_EVENT',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_parser.html#af6a25d17338d4ef55346546881a4adbd',1,'Socket::Quobject::SocketIoClientDotNet::Parser::Parser']]],
-  ['boardmanager_2861',['boardManager',['../class_game_manager.html#aa2b26cfc6307f3ed0383ae4f5b8cd334',1,'GameManager']]],
-  ['buffers_2862',['Buffers',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_binary_1_1_deconstructed_packet.html#a3d7d91b5790d879abf1c11a9a16f956e',1,'Socket.Quobject.SocketIoClientDotNet.Parser.Binary.DeconstructedPacket.Buffers()'],['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_parser_1_1_binary_reconstructor.html#aede10a65c43736ce23c669e6737bb1c6',1,'Socket.Quobject.SocketIoClientDotNet.Parser.Parser.BinaryReconstructor.Buffers()']]]
+  ['backgroundtilemap_3059',['backgroundTilemap',['../class_board_manager.html#a117f13c0e032d4a9f67050538c87c39b',1,'BoardManager']]],
+  ['badrequest_3060',['BadRequest',['../class_socket_1_1_web_socket4_net_1_1_default_1_1_op_code.html#a2f5ddaabb9611682d4d8f8d0ab0096f3',1,'Socket::WebSocket4Net::Default::OpCode']]],
+  ['base_5fbattery_5fcharge_3061',['BASE_BATTERY_CHARGE',['../class_constants_1_1_robot.html#aaaddefd838f291ddf73c73ba69bdf58d',1,'Constants::Robot']]],
+  ['basefilestring_3062',['BaseFileString',['../class_doxygen_window.html#a7a4acfac0a07a2a05f183e4f0bc53b62',1,'DoxygenWindow']]],
+  ['battery_5fpack_5fbonus_3063',['BATTERY_PACK_BONUS',['../class_constants_1_1_robot.html#a3a49df4e4d36c6cb913b2304adc7d18f',1,'Constants::Robot']]],
+  ['battery_5fpack_5fturns_3064',['BATTERY_PACK_TURNS',['../class_constants_1_1_robot.html#a8ae92c906878e68cf518a8aed7e7f436',1,'Constants::Robot']]],
+  ['bgtile_3065',['bgTile',['../class_board_manager.html#a0e53ac159a88fcbd567af0f57ee71d65',1,'BoardManager']]],
+  ['binary_3066',['Binary',['../class_socket_1_1_web_socket4_net_1_1_default_1_1_op_code.html#a5f619c6236f2a436f15b121c0ca1de7e',1,'Socket::WebSocket4Net::Default::OpCode']]],
+  ['binary_5fack_3067',['BINARY_ACK',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_parser.html#adfd83754f982fd6429c0a0ee47b699c8',1,'Socket::Quobject::SocketIoClientDotNet::Parser::Parser']]],
+  ['binary_5fevent_3068',['BINARY_EVENT',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_parser.html#af6a25d17338d4ef55346546881a4adbd',1,'Socket::Quobject::SocketIoClientDotNet::Parser::Parser']]],
+  ['bm_3069',['bm',['../class_game_manager.html#a277a064df474faf1a0930059eb8ddf05',1,'GameManager']]],
+  ['board_5fheight_3070',['BOARD_HEIGHT',['../class_constants_1_1_board.html#aefefad97a7916bb19c5bc7a87218be1c',1,'Constants::Board']]],
+  ['board_5fwidth_3071',['BOARD_WIDTH',['../class_constants_1_1_board.html#ae4ba06ffd6e57c852fd53a9d0cd5b902',1,'Constants::Board']]],
+  ['boosted_5fmine_3072',['BOOSTED_MINE',['../class_constants_1_1_energy_costs.html#a2a95c4396cb338ffe0bc171aed9b8221',1,'Constants::EnergyCosts']]],
+  ['boosted_5fmove_3073',['BOOSTED_MOVE',['../class_constants_1_1_energy_costs.html#ac1ebdb450a33b7a5e73c0a21c5e84f88',1,'Constants::EnergyCosts']]],
+  ['bordercolor_3074',['borderColor',['../class_board_manager.html#aef0bc6fbe3a55fefec86a6cf25de1392',1,'BoardManager']]],
+  ['buffers_3075',['Buffers',['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_binary_1_1_deconstructed_packet.html#a3d7d91b5790d879abf1c11a9a16f956e',1,'Socket.Quobject.SocketIoClientDotNet.Parser.Binary.DeconstructedPacket.Buffers()'],['../class_socket_1_1_quobject_1_1_socket_io_client_dot_net_1_1_parser_1_1_parser_1_1_binary_reconstructor.html#aede10a65c43736ce23c669e6737bb1c6',1,'Socket.Quobject.SocketIoClientDotNet.Parser.Parser.BinaryReconstructor.Buffers()']]]
 ];

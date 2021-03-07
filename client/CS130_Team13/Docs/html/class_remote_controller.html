@@ -82,6 +82,7 @@ $(document).ready(function(){initNavTree('class_remote_controller.html',''); ini
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_remote_controller-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RemoteController Class Reference</div>  </div>
@@ -91,10 +92,254 @@ $(document).ready(function(){initNavTree('class_remote_controller.html',''); ini
 Inheritance diagram for RemoteController:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="class_remote_controller.png" alt=""/>
- </div></div>
+  <img src="class_remote_controller.png" usemap="#RemoteController_map" alt=""/>
+  <map id="RemoteController_map" name="RemoteController_map">
+<area href="interface_opponent.html" alt="Opponent" shape="rect" coords="0,0,109,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab7b62bf8e5ae1ddd49f37932f9994248"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#ab7b62bf8e5ae1ddd49f37932f9994248">InitializeGame</a> (string name)</td></tr>
+<tr class="separator:ab7b62bf8e5ae1ddd49f37932f9994248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82c18cc50325a49d21059e0cc5e9f97b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#a82c18cc50325a49d21059e0cc5e9f97b">SendPlayerCommands_ToServer</a> (string commands)</td></tr>
+<tr class="memdesc:a82c18cc50325a49d21059e0cc5e9f97b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send the current player's command inputs to the server.  <a href="class_remote_controller.html#a82c18cc50325a49d21059e0cc5e9f97b">More...</a><br /></td></tr>
+<tr class="separator:a82c18cc50325a49d21059e0cc5e9f97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c7d5e0fc4e173226a7e5fc3bb7b45f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#a85c7d5e0fc4e173226a7e5fc3bb7b45f">EndCurrentGame_ToServer</a> ()</td></tr>
+<tr class="memdesc:a85c7d5e0fc4e173226a7e5fc3bb7b45f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to the server and tell it that the game has ended.  <a href="class_remote_controller.html#a85c7d5e0fc4e173226a7e5fc3bb7b45f">More...</a><br /></td></tr>
+<tr class="separator:a85c7d5e0fc4e173226a7e5fc3bb7b45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3666ad4ae778ea11c579d4e25d609ab6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#a3666ad4ae778ea11c579d4e25d609ab6">GetOpponentCommands</a> ()</td></tr>
+<tr class="memdesc:a3666ad4ae778ea11c579d4e25d609ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the opponent's current commands Returns NULL if opponents have not submitted their commands, or there are no new commands  <a href="class_remote_controller.html#a3666ad4ae778ea11c579d4e25d609ab6">More...</a><br /></td></tr>
+<tr class="separator:a3666ad4ae778ea11c579d4e25d609ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a299f935f7aa422c76a077e5283521a3a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#a299f935f7aa422c76a077e5283521a3a">GetOpponentName</a> ()</td></tr>
+<tr class="separator:a299f935f7aa422c76a077e5283521a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa43aa00b3ee16e4395b1d08eb13162bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#aa43aa00b3ee16e4395b1d08eb13162bc">GetGameStarted</a> ()</td></tr>
+<tr class="memdesc:aa43aa00b3ee16e4395b1d08eb13162bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a boolean that describes if the game has started true: client has received gameplay event, game has started false: client has been initialized but have not connected to server or no opponent has been found yet  <a href="class_remote_controller.html#aa43aa00b3ee16e4395b1d08eb13162bc">More...</a><br /></td></tr>
+<tr class="separator:aa43aa00b3ee16e4395b1d08eb13162bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb82a441486fe23ad16d086e36e0cf37"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#acb82a441486fe23ad16d086e36e0cf37">GetPlayerNumber</a> ()</td></tr>
+<tr class="memdesc:acb82a441486fe23ad16d086e36e0cf37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an int that describes the player's order number null : the players is not a valid player 1 or player 2, likely because there are already 2 players 1 : this user is player 1 2 : this user is player 2 Should not be called unless the game has started (GetGameStarted returns true)  <a href="class_remote_controller.html#acb82a441486fe23ad16d086e36e0cf37">More...</a><br /></td></tr>
+<tr class="separator:acb82a441486fe23ad16d086e36e0cf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0940ca8ccb02beaab6c8fbecf1651694"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#a0940ca8ccb02beaab6c8fbecf1651694">GetRandomSeed</a> ()</td></tr>
+<tr class="separator:a0940ca8ccb02beaab6c8fbecf1651694"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31926bd6dd711d3557a754a82f4edc6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#a31926bd6dd711d3557a754a82f4edc6d">GetGameEnded</a> ()</td></tr>
+<tr class="separator:a31926bd6dd711d3557a754a82f4edc6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20efd759416ebec54fee94af1b621fca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_remote_controller.html#a20efd759416ebec54fee94af1b621fca">SetCurrentState</a> (<a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameManager.GameState</a> state)</td></tr>
+<tr class="separator:a20efd759416ebec54fee94af1b621fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a85c7d5e0fc4e173226a7e5fc3bb7b45f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c7d5e0fc4e173226a7e5fc3bb7b45f">&#9670;&nbsp;</a></span>EndCurrentGame_ToServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RemoteController.EndCurrentGame_ToServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Connect to the server and tell it that the game has ended. </p>
+<p>This should be called by C# functions within Unity, and it should call Socket.IO-related functions within <a class="el" href="class_remote_controller.html">RemoteController</a>.</p>
+
+<p>Implements <a class="el" href="interface_opponent.html#a37b4d9306de75c4bfa116acbaa5d1f6b">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="a31926bd6dd711d3557a754a82f4edc6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31926bd6dd711d3557a754a82f4edc6d">&#9670;&nbsp;</a></span>GetGameEnded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RemoteController.GetGameEnded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_opponent.html#a350463f390c4605daf85e57169583841">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="aa43aa00b3ee16e4395b1d08eb13162bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa43aa00b3ee16e4395b1d08eb13162bc">&#9670;&nbsp;</a></span>GetGameStarted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RemoteController.GetGameStarted </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a boolean that describes if the game has started true: client has received gameplay event, game has started false: client has been initialized but have not connected to server or no opponent has been found yet </p>
+
+<p>Implements <a class="el" href="interface_opponent.html#af7f9a2325e915e47f2aee3a4fd428469">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="a3666ad4ae778ea11c579d4e25d609ab6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3666ad4ae778ea11c579d4e25d609ab6">&#9670;&nbsp;</a></span>GetOpponentCommands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RemoteController.GetOpponentCommands </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the opponent's current commands Returns NULL if opponents have not submitted their commands, or there are no new commands </p>
+
+<p>Implements <a class="el" href="interface_opponent.html#a2e69b526ef472078dd5ee357e3cb72fd">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="a299f935f7aa422c76a077e5283521a3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a299f935f7aa422c76a077e5283521a3a">&#9670;&nbsp;</a></span>GetOpponentName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RemoteController.GetOpponentName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_opponent.html#a68b22eb26352f82c067f49938ca418c9">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="acb82a441486fe23ad16d086e36e0cf37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb82a441486fe23ad16d086e36e0cf37">&#9670;&nbsp;</a></span>GetPlayerNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RemoteController.GetPlayerNumber </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns an int that describes the player's order number null : the players is not a valid player 1 or player 2, likely because there are already 2 players 1 : this user is player 1 2 : this user is player 2 Should not be called unless the game has started (GetGameStarted returns true) </p>
+
+<p>Implements <a class="el" href="interface_opponent.html#a17acbb8fb9739219d579826c1f424478">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="a0940ca8ccb02beaab6c8fbecf1651694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0940ca8ccb02beaab6c8fbecf1651694">&#9670;&nbsp;</a></span>GetRandomSeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RemoteController.GetRandomSeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_opponent.html#a8f4657838eaf301a8d8b91af89d038e6">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="ab7b62bf8e5ae1ddd49f37932f9994248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b62bf8e5ae1ddd49f37932f9994248">&#9670;&nbsp;</a></span>InitializeGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator RemoteController.InitializeGame </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_opponent.html#a1b6c778f81db7bd21abbb46c059c5341">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="a82c18cc50325a49d21059e0cc5e9f97b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82c18cc50325a49d21059e0cc5e9f97b">&#9670;&nbsp;</a></span>SendPlayerCommands_ToServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RemoteController.SendPlayerCommands_ToServer </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>commands</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send the current player's command inputs to the server. </p>
+<p>This should be called by C# functions within Unity, and it should call Socket.IO-related functions within <a class="el" href="class_remote_controller.html">RemoteController</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">commands</td><td>the player's commands, to be sent to the server</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interface_opponent.html#a359c96f17b8aa2a60dc2e425cf856283">Opponent</a>.</p>
+
+</div>
+</div>
+<a id="a20efd759416ebec54fee94af1b621fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20efd759416ebec54fee94af1b621fca">&#9670;&nbsp;</a></span>SetCurrentState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RemoteController.SetCurrentState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameManager.GameState</a>&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_opponent.html#a64a55e619008b1de66dda304dcccbf5e">Opponent</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/<a class="el" href="_remote_controller_8cs.html">RemoteController.cs</a></li>
+<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/Networking/<a class="el" href="_remote_controller_t_e_m_p_8cs.html">RemoteControllerTEMP.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -102,7 +347,7 @@ Inheritance diagram for RemoteController:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_remote_controller.html">RemoteController</a></li>
-    <li class="footer">Generated on Fri Feb 26 2021 17:34:40 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Mar 7 2021 15:31:51 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
