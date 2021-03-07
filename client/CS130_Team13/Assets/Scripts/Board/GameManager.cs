@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     private string playerName;
     private int myPlayerOrder = 0;
-    private int seed = 0;
+    private double seed = 0f;
     private GameState currentState;
     private GameState previousState;
     private int p1Score = 0;
@@ -83,11 +83,11 @@ public class GameManager : MonoBehaviour
                     if (nameSubmitted)
                     {
                         // Initialize the server connection
-                        playerName = nameInput.name;
+                        playerName = nameInput.text;
                         Debug.Log("Submitted name " + playerName);
                         rc = new RemoteController(playerName);
                         StartCoroutine(rc.InitializeGame());
-                        Debug.Log("Connected");
+                        Debug.Log("Initializing connection");
                         // Toggle UI                  
                         ConnectingUI.SetActive(false);
                         WaitingUI.SetActive(true);
@@ -110,8 +110,8 @@ public class GameManager : MonoBehaviour
             case GameState.StartGame:
                 {
                     myPlayerOrder = rc.GetPlayerNumber();
-                    seed = (int)rc.GetRandomSeed();
-                    bm.CreateBoard(this, seed);
+                    seed = rc.GetRandomSeed();
+                    bm.CreateBoard(this, (int)(seed * 1000000000));
                     turnStartTime = Time.time;
                     currentState = GameState.CodingPhase;
                     previousState = GameState.StartGame;
@@ -183,6 +183,10 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.EndGame:
                 {
+                    if (previousState != GameState.EndGame)
+                    {
+                        rc.EndCurrentGame_ToServer();
+                    }
                     GameOverUI.SetActive(true);
                     previousState = GameState.EndGame;
                     break;

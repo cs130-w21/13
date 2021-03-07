@@ -13,6 +13,7 @@ public interface Opponent
     bool GetGameStarted();
     int GetPlayerNumber();
     string GetOpponentCommands();
+    string GetOpponentName();
     double GetRandomSeed();
     bool GetGameEnded();
 }
@@ -25,8 +26,8 @@ public class RemoteController : Opponent
     private UserInfo opponentInfo;
     private TurnInfo turnInfo;
     private string username;
-    private const string SERVER_URL = "https://cs130-hacman.herokuapp.com";
-    //http://localhost:3000
+    private const string SERVER_URL = //"https://cs130-hacman.herokuapp.com";
+    "http://localhost:3000";
     private string opponentCommands;
     private bool gameStarted = false;
     private bool gameEnded = false;
@@ -36,6 +37,11 @@ public class RemoteController : Opponent
     {
         username = name;
         //InitializeGame();
+    }
+
+    ~RemoteController()
+    {
+        Destroy();
     }
 
     public IEnumerator InitializeGame()
@@ -167,6 +173,11 @@ public class RemoteController : Opponent
             return temp;
         }
         return null;
+    }
+
+    public string GetOpponentName()
+    {
+        return opponentInfo.name;
     }
 
     /// <summary>

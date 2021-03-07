@@ -74,11 +74,11 @@ function getGamePlayers(id: number): UserInfo[] {
   return [curUser, curOpponent];
 }
 
-// io.attach(http, {
-//   pingInterval: 300,
-//   pingTimeout: 30000,
-//   cookie: false
-// });
+io.attach(http, {
+  pingInterval: 500,
+  pingTimeout: 30000,
+  cookie: false
+});
 
 /**
  * Server waits for both players to connect, and sends a "gameplay" event to both
