@@ -1,0 +1,166 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>server</title>
+	<meta name="description" content="Documentation for server">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">server</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>server</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://dashboard.heroku.com/apps/cs130-hacman">Server config site</a> and <a href="https://cs130-hacman.herokuapp.com/">server link</a></p>
+				<a href="#how-to-start-up-this-server" id="how-to-start-up-this-server" style="color: inherit; text-decoration: none;">
+					<h1>How to start up this server</h1>
+				</a>
+				<p><code>cd server</code> ==&gt; make sure that path ends with <code>13\server</code>, or <code>13/server</code> on UNIX
+					<code>npm install</code>
+				<code>npm run watch-node</code></p>
+				<a href="#multiplayer-development-instructions" id="multiplayer-development-instructions" style="color: inherit; text-decoration: none;">
+					<h1>Multiplayer Development Instructions</h1>
+				</a>
+				<ol>
+					<li>In Unity, use <a href="https://github.com/VeriorPies/ParrelSync/tree/1.4.1">ParallelSync</a> to run two different clients with Debug at once<ul>
+							<li>If confused what it does, watch 4 minute video, <a href="https://www.youtube.com/watch?v=9r-hwXPJIMo&amp;ab_channel=JasonWeimann">https://www.youtube.com/watch?v=9r-hwXPJIMo&amp;ab_channel=JasonWeimann</a>, to understand</li>
+							<li>On top bar in Unity, go to ParallelSync &gt; Clones Manager &gt; Add new clone &gt; Open in New Editor</li>
+						</ul>
+					</li>
+				</ol>
+				<a href="#server-prep" id="server-prep" style="color: inherit; text-decoration: none;">
+					<h2>Server prep</h2>
+				</a>
+				<ol start="2">
+					<li>Run <code>npm install</code></li>
+					<li>Run <code>npm run watch-node</code> everytime you want to reset the game (will be changed in future)<ul>
+							<li>In VSCode, you can <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">have a terminal</a> as part of the screen so that you don&#39;t have to have a thousand tabs</li>
+						</ul>
+					</li>
+					<li>Checkout index.ts, server.ts for the socket code<ul>
+							<li>(may possibly add other files in future)</li>
+						</ul>
+					</li>
+					<li>Modify server.ts<ul>
+							<li>(or add new ts files and import them in the index.ts file!)</li>
+						</ul>
+					</li>
+				</ol>
+				<a href="#client-prep" id="client-prep" style="color: inherit; text-decoration: none;">
+					<h2>Client Prep</h2>
+				</a>
+				<ol start="6">
+					<li>Checkout Asset/Scripts/RemoteController script for client socket info (and change if you&#39;d like)</li>
+					<li>Run scene &quot;Sockets&quot; in both Unity&#39;s and check out Console for debug info<ul>
+							<li>Currently, RemoteController.cs is attached to the RemoteController GameObject</li>
+						</ul>
+					</li>
+				</ol>
+				<a href="#update-documentation" id="update-documentation" style="color: inherit; text-decoration: none;">
+					<h2>Update Documentation</h2>
+				</a>
+				<ol start="8">
+					<li>From <code>13\server</code>, run <code>npx typedoc --out ..\docs\server-docs index.ts server.ts</code><ul>
+							<li>On UNIX, <code>npx typedoc --out ../docs/server-docs *.ts</code>.</li>
+							<li>Autogenerated documentation should appear in <code>13\docs\server-docs</code>.</li>
+						</ul>
+					</li>
+				</ol>
+				<a href="#run-tests" id="run-tests" style="color: inherit; text-decoration: none;">
+					<h2>Run Tests</h2>
+				</a>
+				<ol start="9">
+					<li>From <code>13\server</code>, run <code>npm test</code>.</li>
+				</ol>
+				<p>WARNING: when debugging, I highly highly recommend stopping both Unity clients AND the server between each test. Unity networking is kind of wonky + also if you don&#39;t stop it, your computer might become super slow (running 2 Unitys) + how server is set up right now.</p>
+				<p>Note: Unity clients often connect and disconnect (dw it&#39;s normal). We can live with it, or we can figure out fixes/optimizations in future.</p>
+				<a href="#unimportant-records-no-need-to-read-lawl" id="unimportant-records-no-need-to-read-lawl" style="color: inherit; text-decoration: none;">
+					<h1>Unimportant records (no need to read lawl)</h1>
+				</a>
+				<a href="#server-init-for-typescript-server-this-server" id="server-init-for-typescript-server-this-server" style="color: inherit; text-decoration: none;">
+					<h3>Server init for typescript server (this server)</h3>
+				</a>
+				<p>followed <a href="https://blog.logrocket.com/typescript-with-node-js-and-express/">https://blog.logrocket.com/typescript-with-node-js-and-express/</a></p>
+				<a href="#server-init-for-javascript-server" id="server-init-for-javascript-server" style="color: inherit; text-decoration: none;">
+					<h3>Server init for javascript server</h3>
+				</a>
+				<p><code>npm install express-generator -g</code>
+				<code>express server</code></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
