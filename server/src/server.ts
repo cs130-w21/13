@@ -10,7 +10,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const MutexPromise = require('mutex-promise'); // in NodeJS, in browser this is not needed
 
-import UserInfo, { SocketTurnInfo, ClientSentUserInfo } from './UserInfoClasses';
+import UserInfo, { ClientSentTurnInfo, ClientSentUserInfo } from './UserInfoClasses';
 import * as CONSTANTS from './ServerConstants';
 
 var mutex = new MutexPromise('very-unique-key');
@@ -31,26 +31,54 @@ app.get('/user_id', (_, res) => {
 
 /******************************************************************************/
 
-// cleanse every minute, check if anyone hasn't pinged in 1 minute
-let usersSearchingForGame: UserInfo[] = [];
+// cleanse 5 seconds, check if anyone hasn't pinged in 7 seconds
+let usersSearchingForGame: number[] = [];
 let idMap: Map<number, UserInfo> = new Map();
+let finishedUsers: number[] = [];
+
+setInterval(async () => {
+  await mutex.promise()
+    .then(function (mutex) {
+      mutex.lock();
+      idMap.forEach((value: UserInfo, key: number) => {
+        if (value.closed && value.closeTime) {
+          if ((Date.now() - value.closeTime.getTime()) > CONSTANTS.CONNECTION_TIMEOUT_INTERVAL) {
+            finishedUsers.push(key);
+            idMap.delete(key);
+            usersSearchingForGame = usersSearchingForGame.filter(function (value) {
+              return value !== key;
+            });
+          }
+        }
+      })
+      mutex.unlock();
+    });
+}, CONSTANTS.CHECK_TIMEOUT_INTERVAL);
+
 
 /******************************************************************************/
 // attempts to add player to game. if already exists, return empty list
 // if no other players, return [client] and note waiting for game
 // if game found, return [user1, user2]
 function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): UserInfo[] {
-  if (idMap.get(info.id)) {
-    idMap.get(info.id)?.pinged()
+  let curUser: UserInfo | undefined = idMap.get(info.id);
+  if (curUser) {
+    curUser.open();
+    idMap.set(info.id, curUser);
+    return []; 
+  }
+  if (finishedUsers.includes(info.id)) {
     return [];
   }
   if (usersSearchingForGame.length === 0) {
     let temp: UserInfo = new UserInfo(info.name, info.id, socketId, Math.random());
-    usersSearchingForGame.push(temp);
+    usersSearchingForGame.push(temp.id);
     idMap.set(info.id, temp);
     return [temp];
   }
-  let user1: UserInfo = usersSearchingForGame.shift()!;
+  let user1id: number = usersSearchingForGame.shift()!;
+  let user1: UserInfo = idMap.get(user1id)!;
+
   user1.setOpponentId(info.id);
   let user2 = new UserInfo(info.name, info.id, socketId, user1.randomSeed);
   user2.setOpponentId(user1.id);
@@ -69,14 +97,16 @@ function getGamePlayers(id: number): UserInfo[] {
   let curOpponent = idMap.get(curUser.opponentId);
   if (!curOpponent) {
     idMap.delete(id);
+    finishedUsers.push(id);
     return [curUser];
   }
   return [curUser, curOpponent];
 }
 
 io.attach(http, {
-  pingInterval: 500,
-  pingTimeout: 30000,
+  serveClient: true,
+  pingInterval: 20000,
+  pingTimeout: 5000,
   cookie: false
 });
 
@@ -87,11 +117,12 @@ io.attach(http, {
  */
 io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   console.log('a user connected');
+  let id;
 
   // The "hello" event is how a user initially connects to the server
   socket.on(CONSTANTS.CLIENT_INITIATE_EVENT, async (data: string) => {
-
     let clientUserInfo: ClientSentUserInfo = JSON.parse(data);
+    id = clientUserInfo.id;
     console.log(clientUserInfo);
     if (!clientUserInfo.isInvalid) {
       let gamePlayers: UserInfo[] = await mutex.promise()
@@ -114,7 +145,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
         socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, user1.exportClientRequiredUserInfo());
       }
     } else {
-      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.INVALID_USER_DATA)
+      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.INVALID_USER_DATA);
     }
   });
 
@@ -123,7 +154,8 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   *   players have submitted
   */
   socket.on(CONSTANTS.SUBMIT_TURN_EVENT, async (data: string) => {
-    let socketTurnInfo: SocketTurnInfo = JSON.parse(data);
+    let socketTurnInfo: ClientSentTurnInfo = JSON.parse(data);
+    id = socketTurnInfo.id;
     if (!socketTurnInfo.isInvalid) {
       await mutex.promise()
         .then(function (mutex) {
@@ -136,17 +168,16 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           } else if (players.length === 2) {
             let player: UserInfo = players[0];
             let opponent: UserInfo = players[1];
-            player.commands = socketTurnInfo.commands;
-            player.pinged();
-            console.log("Received commands from player %s: %s", player.playerNumber, player.commands);
+            let lastUpdatedPlayerCommands = player.commandsUpdated;
+            let lastUpdatedOpponentCommands = opponent.commandsUpdated;
+            player.setCommands(socketTurnInfo.commands);
+            console.log("Received commands from player %s: %s", player.playerNumber);
 
             // If we've received both sets of commands, send back to players
-            if (player.commands !== null && opponent.commands !== null) {
+            if (lastUpdatedPlayerCommands !== lastUpdatedOpponentCommands) {
               socket.emit(CONSTANTS.RECEIVE_TURN_EVENT, opponent.exportClientRequiredTurnInfo());
               socket.to(opponent.socketId).emit(CONSTANTS.RECEIVE_TURN_EVENT, player.exportClientRequiredTurnInfo());
               console.log("Sending commands to both players")
-              player.commands = null;
-              opponent.commands = null;
               idMap.set(opponent.id, opponent);
             }
             idMap.set(player.id, player);
@@ -165,11 +196,15 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   socket.on(CONSTANTS.END_GAME_REQUEST_EVENT, async (data: string) => {//// TODO FIX CLIENT
     console.log('Server received an end game request');
     let clientUserInfo: ClientSentUserInfo = JSON.parse(data);
+    id = clientUserInfo.id;
     let players: UserInfo[] = await mutex.promise()
       .then(function (mutex) {
         mutex.lock();
         let players: UserInfo[] = getGamePlayers(clientUserInfo.id);
-        players.forEach(userInfo => idMap.delete(userInfo.id));
+        players.forEach(userInfo => {
+          idMap.delete(userInfo.id)
+          finishedUsers.push(userInfo.id);
+        });
         mutex.unlock();
         return players;
       });
@@ -183,8 +218,17 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
     }
   });
 
-  socket.on(CONSTANTS.SOCKET_DISCONNECT_EVENT, () => {
+  socket.on(CONSTANTS.SOCKET_DISCONNECT_EVENT, async () => {
     console.log('user disconnected');
+    await mutex.promise()
+      .then(function (mutex) {
+        let curUser: UserInfo | undefined = idMap.get(id);
+        if (curUser) {
+          curUser.close();
+          idMap.set(id, curUser);
+        }
+        mutex.unlock();
+      });
   });
 });
 

@@ -19,3 +19,7 @@ export const NO_PARTICULAR_RESPONSE = '';
 export const INVALID_USER_DATA = 'invalid user data';
 export const INVALID_TURN_DATA = 'invalid turn data';
 export const COULD_NOT_FIND_USER_IN_GAME = 'could not find user in game; have we paired a game for you yet?';
+
+// timeout intervals
+export const CHECK_TIMEOUT_INTERVAL = 5000;
+export const CONNECTION_TIMEOUT_INTERVAL = 7000;
