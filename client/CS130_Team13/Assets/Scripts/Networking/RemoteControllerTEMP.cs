@@ -26,9 +26,6 @@ public class RemoteController : Opponent
   private QSocket socket;
   private UserInfo userInfo;
   private UserInfo opponentInfo;
-  private const string SERVER_URL =
-  "https://cs130-hacman.herokuapp.com";
-  // "http://localhost:3000";
   private bool gameStarted = false;
   private bool gameEnded = false;
   ~RemoteController()
@@ -40,7 +37,7 @@ public class RemoteController : Opponent
   {
     int id;
     // Request and wait for the desired page.
-    using (UnityWebRequest webRequest = UnityWebRequest.Get(SERVER_URL + "/user_id"))
+    using (UnityWebRequest webRequest = UnityWebRequest.Get(Constants.Server.SERVER_URL + "/user_id"))
     {
       yield return webRequest.SendWebRequest();
       string result = webRequest.downloadHandler.text;
@@ -48,8 +45,8 @@ public class RemoteController : Opponent
       {
         throw new Exception(webRequest.error);
       }
-      id = System.Convert.ToInt32(result);
       Debug.Log(webRequest.downloadHandler.text);
+      id = System.Convert.ToInt32(result);
     }
     // set User Info
     this.userInfo = new UserInfo(name, id);
@@ -59,7 +56,7 @@ public class RemoteController : Opponent
 
   private void setupSocket()
   {
-    socket = IO.Socket(SERVER_URL);
+    socket = IO.Socket(Constants.Server.SERVER_URL);
 
     // this happens on connect
     socket.On(QSocket.EVENT_CONNECT, () =>

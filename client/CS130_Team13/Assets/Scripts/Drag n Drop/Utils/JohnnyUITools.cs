@@ -50,6 +50,15 @@ public class JohnnyUITools
     }
 
     /// <summary>
+    /// Find the coordinates of object's top right corner with respect to its most immediate canvas.
+    /// </summary>
+    /// <param name="gameObject">GameObject: the game object in question, must have RectTransform attached</param>
+    /// <returns>Vector2: relative coordinate of top right corner of object</returns>
+    public static Vector2 GetTopCanvasCoord(GameObject gameObject) {
+        return GetCanvasCoord(gameObject) + gameObject.GetComponent<RectTransform>().sizeDelta;
+    }
+
+    /// <summary>
     /// return the canvas the input game object is currently under
     /// </summary>
     /// <param name="gameObject">game object to start the search</param>

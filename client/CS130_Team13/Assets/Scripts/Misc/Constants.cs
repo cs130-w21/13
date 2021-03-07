@@ -5,7 +5,8 @@ public static class Constants
 {
     public static class Server
     {
-        public const string SERVER_URL = "https://cs130-hacman.herokuapp.com/";
+        public const string SERVER_URL = "https://cs130-hacman.herokuapp.com";
+          // "http://localhost:3000";
     }
     
     // Costs for Robot action
@@ -55,6 +56,7 @@ public static class Constants
         public const float END_TURN_PAUSE = 2f;
         public const int GEM_COUNT = 10;
         public const int POWERUP_COUNT = 10;
+        public const int SECONDS_TO_OPPONENT_TIMEOUT = 45;
     }
 
     public static class Board

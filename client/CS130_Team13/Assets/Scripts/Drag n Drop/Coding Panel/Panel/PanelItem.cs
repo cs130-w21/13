@@ -23,6 +23,10 @@ public class PanelItem : DraggablePhysics, ICodeInfo
     }
 
     public override void OnPointerDown(PointerEventData eventData) {
+        if (!DragDropManager.instance.allowDrag) {
+            return;
+        }
+
         base.OnPointerDown(eventData);
 
         DragDropManager.instance.currentlyDraggedItem = gameObject;
