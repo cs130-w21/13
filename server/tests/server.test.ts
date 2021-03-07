@@ -2,9 +2,9 @@
  * This is the test file corresponding to ../server.ts.
  */
 
-import { SocketTurnInfo } from "../src/UserInfoClasses";
+import { ClientSentTurnInfo } from "../src/UserInfoClasses";
 
-const { http, io } = require("../src/server");
+const { http, io, intervalCheck } = require("../src/server");
 const Client = require("socket.io-client");
 const assert = require("chai").assert;
 const { promisify } = require('util')
@@ -36,6 +36,7 @@ describe("test-client-pairing-socket-events", () => {
     io.close();
     clientSocket1.close();
     clientSocket2.close();
+    clearInterval(intervalCheck);
   });
 
   /**
@@ -101,14 +102,15 @@ describe("test-gameplay-socket-events", () => {
     io.close();
     clientSocket1.close();
     clientSocket2.close();
+    clearInterval(intervalCheck);
   });
 
   /**
    * Tests whether server sends moves after both clients send their moves
    */
   it("gameplay-test-send-info", async () => {
-    const player1Turn = new SocketTurnInfo(1, "LELELEAP");
-    const player2Turn = new SocketTurnInfo(2, "DUE VLA");
+    const player1Turn = new ClientSentTurnInfo(1, "LELELEAP");
+    const player2Turn = new ClientSentTurnInfo(2, "DUE VLA");
     clientSocket1.emit('submittingTurn', JSON.stringify(player1Turn));
     clientSocket2.emit('submittingTurn', JSON.stringify(player2Turn));
     await clientSocket1.on('receiveTurn', (msg) => {

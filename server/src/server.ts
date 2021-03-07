@@ -36,7 +36,7 @@ let usersSearchingForGame: number[] = [];
 let idMap: Map<number, UserInfo> = new Map();
 let finishedUsers: number[] = [];
 
-setInterval(async () => {
+const intervalCheck = setInterval(async () => {
   await mutex.promise()
     .then(function (mutex) {
       mutex.lock();
@@ -237,4 +237,5 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
 module.exports = {
   http: http,
   io: io,
+  intervalCheck: intervalCheck,
 };
