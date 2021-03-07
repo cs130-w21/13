@@ -16,6 +16,11 @@ public class DragDropManager : MonoBehaviour
     /// </summary>
     public GameObject currentlyDraggedItem = null;
 
+    /// <summary>
+    /// The switch controlling if player can drag panel items.
+    /// </summary>
+    public bool allowDrag = true;
+
     private void Awake() {
         // singleton
         if (instance == null) instance = this;
