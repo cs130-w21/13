@@ -36,7 +36,7 @@ let usersSearchingForGame: number[] = [];
 let idMap: Map<number, UserInfo> = new Map();
 let finishedUsers: number[] = [];
 
-setInterval(async () => {
+const intervalCheck = setInterval(async () => {
   await mutex.promise()
     .then(function (mutex) {
       mutex.lock();
@@ -65,7 +65,7 @@ function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): Use
   if (curUser) {
     curUser.open();
     idMap.set(info.id, curUser);
-    return []; 
+    return [];
   }
   if (finishedUsers.includes(info.id)) {
     return [];
@@ -218,17 +218,15 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
     }
   });
 
-  socket.on(CONSTANTS.SOCKET_DISCONNECT_EVENT, async () => {
+  socket.on(CONSTANTS.SOCKET_DISCONNECT_EVENT, () => {
     console.log('user disconnected');
-    await mutex.promise()
-      .then(function (mutex) {
-        let curUser: UserInfo | undefined = idMap.get(id);
-        if (curUser) {
-          curUser.close();
-          idMap.set(id, curUser);
-        }
-        mutex.unlock();
-      });
+    mutex.lock();
+    let curUser: UserInfo | undefined = idMap.get(id);
+    if (curUser) {
+      curUser.close();
+      idMap.set(id, curUser);
+    }
+    mutex.unlock();
   });
 });
 
@@ -237,4 +235,5 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
 module.exports = {
   http: http,
   io: io,
+  intervalCheck: intervalCheck,
 };

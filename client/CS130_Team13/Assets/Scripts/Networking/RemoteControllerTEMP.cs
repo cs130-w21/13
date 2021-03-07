@@ -27,7 +27,7 @@ public class RemoteController : Opponent
   private UserInfo userInfo;
   private UserInfo opponentInfo;
   private const string SERVER_URL =
-  //"https://cs130-hacman.herokuapp.com";
+  // "https://cs130-hacman.herokuapp.com";
   "http://localhost:3000";
   private bool gameStarted = false;
   private bool gameEnded = false;
