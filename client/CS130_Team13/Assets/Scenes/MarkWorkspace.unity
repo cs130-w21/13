@@ -214,6 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 68387228}
+  - component: {fileID: 68387229}
   m_Layer: 5
   m_Name: Scoreboard
   m_TagString: Untagged
@@ -247,6 +248,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &68387229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68387227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d7128d643d4a4439ce2cad0b7d7b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1: {fileID: 1996157286}
+  p2: {fileID: 1263232338}
+  timer: {fileID: 1040809038}
+  gameManager: {fileID: 691428971500770428}
 --- !u!1 &132743805
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +823,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &679084155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8237446100241267782, guid: 2736e1db253b0eb41b2295498be1b2f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1883968430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &738610326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,6 +2512,7 @@ MonoBehaviour:
   WaitingUI: {fileID: 865396977}
   GameOverUI: {fileID: 1216739661}
   CodingUI: {fileID: 10468334}
+  SubmitButton: {fileID: 679084155}
 --- !u!1 &691428971500770429
 GameObject:
   m_ObjectHideFlags: 0
