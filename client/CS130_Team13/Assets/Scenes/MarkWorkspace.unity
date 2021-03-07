@@ -1106,7 +1106,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 691428971500770428}
-        m_MethodName: setNameSubmitted
+        m_MethodName: SetNameSubmitted
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -84,7 +84,10 @@ public class GameManager : MonoBehaviour
                     {
                         // Initialize the server connection
                         playerName = nameInput.name;
+                        Debug.Log("Submitted name " + playerName);
                         rc = new RemoteController(playerName);
+                        StartCoroutine(rc.InitializeGame());
+                        Debug.Log("Connected");
                         // Toggle UI                  
                         ConnectingUI.SetActive(false);
                         WaitingUI.SetActive(true);
@@ -106,8 +109,8 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.StartGame:
                 {
-                    myPlayerOrder = rc.GetPlayerOrder();
-                    //seed = rc.GetSeed();
+                    myPlayerOrder = rc.GetPlayerNumber();
+                    seed = (int)rc.GetRandomSeed();
                     bm.CreateBoard(this, seed);
                     turnStartTime = Time.time;
                     currentState = GameState.CodingPhase;
@@ -122,6 +125,7 @@ public class GameManager : MonoBehaviour
                         //clientCmd = cp.GetInformation();
                         clientCmd = "MFMF";
                         rc.SendPlayerCommands_ToServer(clientCmd);
+                        WaitingUI.SetActive(true);
                         currentState = GameState.AwaitingOpponentCommands;
                     }
                     previousState = GameState.CodingPhase;
@@ -129,13 +133,14 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.AwaitingOpponentCommands:
                 {
-                    opponentCmd = rc.getOpponentCommands();
+                    opponentCmd = rc.GetOpponentCommands();
                     if (opponentCmd == null)
                     {
                         break;
                     }
                     else
                     {
+                        WaitingUI.SetActive(false);
                         currentState = GameState.ExecutionPhase;
                     }
 

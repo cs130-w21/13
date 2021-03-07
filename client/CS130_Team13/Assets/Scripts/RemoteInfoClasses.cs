@@ -1,8 +1,7 @@
-namespace RemoteControllerNamespace
+
+[System.Serializable]
+public class UserInfo
 {
-  [System.Serializable]
-  public class UserInfo
-  {
     public string name;
     public int id;
     public int playerNumber;
@@ -10,21 +9,20 @@ namespace RemoteControllerNamespace
 
     public UserInfo(string name, int id)
     {
-      this.name = name;
-      this.id = id;
+        this.name = name;
+        this.id = id;
     }
-  }
+}
 
-  [System.Serializable]
-  public class TurnInfo
-  {
+[System.Serializable]
+public class TurnInfo
+{
     public string commands;
     public int id;
 
     public TurnInfo(string commands, int id)
     {
-      this.commands = commands;
-      this.id = id;
+        this.commands = commands;
+        this.id = id;
     }
-  }
 }

@@ -35,10 +35,10 @@ public class RemoteController : Opponent
     public RemoteController(string name)
     {
         username = name;
-        InitializeGame();
+        //InitializeGame();
     }
 
-    IEnumerator InitializeGame()
+    public IEnumerator InitializeGame()
     {
         int id;
         // Request and wait for the desired page.
