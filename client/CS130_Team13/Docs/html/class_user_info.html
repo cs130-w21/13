@@ -94,8 +94,10 @@ $(document).ready(function(){initNavTree('class_user_info.html',''); initResizab
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1b98c272c19cdaad645ddaa5136ad891"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a1b98c272c19cdaad645ddaa5136ad891">UserInfo</a> (string <a class="el" href="class_user_info.html#a3d3c8fe618a35469bf2af86052359f91">name</a>, int <a class="el" href="class_user_info.html#a33611e3d3f13089522186acce3be1c7e">id</a>)</td></tr>
 <tr class="separator:a1b98c272c19cdaad645ddaa5136ad891"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad56666ac79ff5ca46e4621d1876b06f7"><td class="memItemLeft" align="right" valign="top">override string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#ad56666ac79ff5ca46e4621d1876b06f7">ToString</a> ()</td></tr>
-<tr class="separator:ad56666ac79ff5ca46e4621d1876b06f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77476cba2af32b740e56e0fe6760402"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_server_required_user_connection_info.html">ServerRequiredUserConnectionInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#ad77476cba2af32b740e56e0fe6760402">exportConnectToServerRequiredInfo</a> ()</td></tr>
+<tr class="separator:ad77476cba2af32b740e56e0fe6760402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bcca8de1323acfe7b6f4f3eee74f5f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_turn_info.html">TurnInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a7bcca8de1323acfe7b6f4f3eee74f5f3">exportTurnInfo</a> ()</td></tr>
+<tr class="separator:a7bcca8de1323acfe7b6f4f3eee74f5f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -103,6 +105,16 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a3d3c8fe618a35469bf2af86052359f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33611e3d3f13089522186acce3be1c7e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a33611e3d3f13089522186acce3be1c7e">id</a></td></tr>
 <tr class="separator:a33611e3d3f13089522186acce3be1c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60dd5fd535478bbc07442f36ede0c7af"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a60dd5fd535478bbc07442f36ede0c7af">playerNumber</a></td></tr>
+<tr class="separator:a60dd5fd535478bbc07442f36ede0c7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180c25c29ac4c403611aeec125af0764"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a180c25c29ac4c403611aeec125af0764">randomSeed</a></td></tr>
+<tr class="separator:a180c25c29ac4c403611aeec125af0764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a716eed65d48bd8cf31468e10e51e2193"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a716eed65d48bd8cf31468e10e51e2193">commands</a></td></tr>
+<tr class="separator:a716eed65d48bd8cf31468e10e51e2193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23695359570bd36489f3c60c61ada624"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameManager.GameState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a23695359570bd36489f3c60c61ada624">state</a></td></tr>
+<tr class="separator:a23695359570bd36489f3c60c61ada624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d1ad6996e0d641f4f57518a82aeaf8a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_info.html#a8d1ad6996e0d641f4f57518a82aeaf8a">commandsUpdated</a></td></tr>
+<tr class="separator:a8d1ad6996e0d641f4f57518a82aeaf8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1b98c272c19cdaad645ddaa5136ad891"></a>
@@ -134,14 +146,31 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad56666ac79ff5ca46e4621d1876b06f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad56666ac79ff5ca46e4621d1876b06f7">&#9670;&nbsp;</a></span>ToString()</h2>
+<a id="ad77476cba2af32b740e56e0fe6760402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad77476cba2af32b740e56e0fe6760402">&#9670;&nbsp;</a></span>exportConnectToServerRequiredInfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">override string UserInfo.ToString </td>
+          <td class="memname"><a class="el" href="class_server_required_user_connection_info.html">ServerRequiredUserConnectionInfo</a> UserInfo.exportConnectToServerRequiredInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7bcca8de1323acfe7b6f4f3eee74f5f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bcca8de1323acfe7b6f4f3eee74f5f3">&#9670;&nbsp;</a></span>exportTurnInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_turn_info.html">TurnInfo</a> UserInfo.exportTurnInfo </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -152,6 +181,34 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a716eed65d48bd8cf31468e10e51e2193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716eed65d48bd8cf31468e10e51e2193">&#9670;&nbsp;</a></span>commands</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string UserInfo.commands</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d1ad6996e0d641f4f57518a82aeaf8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d1ad6996e0d641f4f57518a82aeaf8a">&#9670;&nbsp;</a></span>commandsUpdated</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string UserInfo.commandsUpdated</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a33611e3d3f13089522186acce3be1c7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33611e3d3f13089522186acce3be1c7e">&#9670;&nbsp;</a></span>id</h2>
 
@@ -180,8 +237,50 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a60dd5fd535478bbc07442f36ede0c7af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60dd5fd535478bbc07442f36ede0c7af">&#9670;&nbsp;</a></span>playerNumber</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UserInfo.playerNumber</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a180c25c29ac4c403611aeec125af0764"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a180c25c29ac4c403611aeec125af0764">&#9670;&nbsp;</a></span>randomSeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double UserInfo.randomSeed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a23695359570bd36489f3c60c61ada624"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23695359570bd36489f3c60c61ada624">&#9670;&nbsp;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_game_manager.html#a809dec58b5681fc1ebcc22eb428a914c">GameManager.GameState</a> UserInfo.state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/<a class="el" href="_remote_controller_8cs.html">RemoteController.cs</a></li>
+<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/Networking/<a class="el" href="_remote_info_classes_8cs.html">RemoteInfoClasses.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -189,7 +288,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_user_info.html">UserInfo</a></li>
-    <li class="footer">Generated on Fri Feb 26 2021 17:34:40 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Mar 7 2021 15:31:51 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

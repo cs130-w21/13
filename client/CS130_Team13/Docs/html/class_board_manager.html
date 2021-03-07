@@ -89,6 +89,9 @@ $(document).ready(function(){initNavTree('class_board_manager.html',''); initRes
 <div class="title">BoardManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The Board Manager handles the state of everything on the board, and communicates with the player objects.  
+ <a href="class_board_manager.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for BoardManager:</div>
 <div class="dyncontent">
@@ -98,30 +101,83 @@ Inheritance diagram for BoardManager:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a061ba11883da9a871f45a79fd50055e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a061ba11883da9a871f45a79fd50055e3">CreateBoard</a> (int seed)</td></tr>
-<tr class="memdesc:a061ba11883da9a871f45a79fd50055e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a board based on the board width and height The board is centered on the screen, and the bottom square left is (0,0)  <a href="class_board_manager.html#a061ba11883da9a871f45a79fd50055e3">More...</a><br /></td></tr>
-<tr class="separator:a061ba11883da9a871f45a79fd50055e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a579ddbc6030f6e814dcd445f38331bc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_board_manager_8cs.html#ac84d9b534c1947f639684269d09f7921">TileState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a579ddbc6030f6e814dcd445f38331bc3">GetTileState</a> (int x, int y)</td></tr>
-<tr class="separator:a579ddbc6030f6e814dcd445f38331bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb1d2496aaa4894849fa7c7cbdbd554a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#abb1d2496aaa4894849fa7c7cbdbd554a">CreateBoard</a> (<a class="el" href="class_game_manager.html">GameManager</a> gm, int seed)</td></tr>
+<tr class="memdesc:abb1d2496aaa4894849fa7c7cbdbd554a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a board based on the board width and height The board is centered on the screen, and the bottom square left is (0,0)  <a href="class_board_manager.html#abb1d2496aaa4894849fa7c7cbdbd554a">More...</a><br /></td></tr>
+<tr class="separator:abb1d2496aaa4894849fa7c7cbdbd554a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4507b67d0711049ecdda66ac3e0f15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_board_manager_8cs.html#ac84d9b534c1947f639684269d09f7921">TileState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a3a4507b67d0711049ecdda66ac3e0f15">GetTileState</a> (Vector3 tilePos)</td></tr>
+<tr class="memdesc:a3a4507b67d0711049ecdda66ac3e0f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in a World space Vector3 and gets the state of the tile at that position.  <a href="class_board_manager.html#a3a4507b67d0711049ecdda66ac3e0f15">More...</a><br /></td></tr>
+<tr class="separator:a3a4507b67d0711049ecdda66ac3e0f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4e33bbe8f9c92c2693550a17bfd014b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#ad4e33bbe8f9c92c2693550a17bfd014b">MineTile</a> (Vector3 tilePos, <a class="el" href="class_robot.html">Robot</a> robot)</td></tr>
+<tr class="memdesc:ad4e33bbe8f9c92c2693550a17bfd014b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a tile for a robot. Adds points if the tile is a gem.  <a href="class_board_manager.html#ad4e33bbe8f9c92c2693550a17bfd014b">More...</a><br /></td></tr>
+<tr class="separator:ad4e33bbe8f9c92c2693550a17bfd014b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb1ab7893cbda397f4159e6eaf5564b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#acb1ab7893cbda397f4159e6eaf5564b8">PlaceTile</a> (Vector3 tilePos)</td></tr>
+<tr class="memdesc:acb1ab7893cbda397f4159e6eaf5564b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places a tile for a robot.  <a href="class_board_manager.html#acb1ab7893cbda397f4159e6eaf5564b8">More...</a><br /></td></tr>
+<tr class="separator:acb1ab7893cbda397f4159e6eaf5564b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d77d07c976b99aa6afe7a9787da5a08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a2d77d07c976b99aa6afe7a9787da5a08">CheckForCollectable</a> (<a class="el" href="class_robot.html">Robot</a> robot)</td></tr>
+<tr class="memdesc:a2d77d07c976b99aa6afe7a9787da5a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the robot is on a tile that gives points.  <a href="class_board_manager.html#a2d77d07c976b99aa6afe7a9787da5a08">More...</a><br /></td></tr>
+<tr class="separator:a2d77d07c976b99aa6afe7a9787da5a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0546cbdecac6a8280e9b60ae25bb6f7"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#aa0546cbdecac6a8280e9b60ae25bb6f7">RunTurn</a> (string p1Moves, string p2Moves)</td></tr>
+<tr class="memdesc:aa0546cbdecac6a8280e9b60ae25bb6f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in two command strings and runs them on the board.  <a href="class_board_manager.html#aa0546cbdecac6a8280e9b60ae25bb6f7">More...</a><br /></td></tr>
+<tr class="separator:aa0546cbdecac6a8280e9b60ae25bb6f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a117f13c0e032d4a9f67050538c87c39b"><td class="memItemLeft" align="right" valign="top">Tilemap&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a117f13c0e032d4a9f67050538c87c39b">backgroundTilemap</a></td></tr>
+<tr class="memdesc:a117f13c0e032d4a9f67050538c87c39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">References for tilemaps that handle the objects on the screen.  <a href="class_board_manager.html#a117f13c0e032d4a9f67050538c87c39b">More...</a><br /></td></tr>
 <tr class="separator:a117f13c0e032d4a9f67050538c87c39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0d6ae5aa77fc5ecc5b7e32b755c54f4"><td class="memItemLeft" align="right" valign="top">Tilemap&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#ad0d6ae5aa77fc5ecc5b7e32b755c54f4">objectTilemap</a></td></tr>
 <tr class="separator:ad0d6ae5aa77fc5ecc5b7e32b755c54f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac26152dd12748ed2865deb3ea43e9eac"><td class="memItemLeft" align="right" valign="top">Tile&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#ac26152dd12748ed2865deb3ea43e9eac">bgTile</a></td></tr>
-<tr class="separator:ac26152dd12748ed2865deb3ea43e9eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e53ac159a88fcbd567af0f57ee71d65"><td class="memItemLeft" align="right" valign="top">TileBase&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a0e53ac159a88fcbd567af0f57ee71d65">bgTile</a></td></tr>
+<tr class="memdesc:a0e53ac159a88fcbd567af0f57ee71d65"><td class="mdescLeft">&#160;</td><td class="mdescRight">References for tiles to fill the tilemap.  <a href="class_board_manager.html#a0e53ac159a88fcbd567af0f57ee71d65">More...</a><br /></td></tr>
+<tr class="separator:a0e53ac159a88fcbd567af0f57ee71d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b1f1537adc6d61873c3d1dffbec61a"><td class="memItemLeft" align="right" valign="top">TileBase&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a24b1f1537adc6d61873c3d1dffbec61a">placedRock</a></td></tr>
+<tr class="separator:a24b1f1537adc6d61873c3d1dffbec61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af08312c603451c94855714f53b3ddbc9"><td class="memItemLeft" align="right" valign="top">List&lt; TileBase &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#af08312c603451c94855714f53b3ddbc9">rockTiles</a></td></tr>
+<tr class="memdesc:af08312c603451c94855714f53b3ddbc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can contain any number of tiles that will randomly fill the board.  <a href="class_board_manager.html#af08312c603451c94855714f53b3ddbc9">More...</a><br /></td></tr>
+<tr class="separator:af08312c603451c94855714f53b3ddbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ca7826a4bd65254a9fec1a2c66c3dd"><td class="memItemLeft" align="right" valign="top">List&lt; TileBase &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a67ca7826a4bd65254a9fec1a2c66c3dd">gemTiles</a></td></tr>
+<tr class="memdesc:a67ca7826a4bd65254a9fec1a2c66c3dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filled with 3 tiles in editor: small, medium, large, in that order.  <a href="class_board_manager.html#a67ca7826a4bd65254a9fec1a2c66c3dd">More...</a><br /></td></tr>
+<tr class="separator:a67ca7826a4bd65254a9fec1a2c66c3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71b32558fd0e89e36e3e2122ef1f6b8"><td class="memItemLeft" align="right" valign="top">TileBase&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#ab71b32558fd0e89e36e3e2122ef1f6b8">powerupTile</a></td></tr>
+<tr class="memdesc:ab71b32558fd0e89e36e3e2122ef1f6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference for the powerup tile icon. Types of powerups are randomized.  <a href="class_board_manager.html#ab71b32558fd0e89e36e3e2122ef1f6b8">More...</a><br /></td></tr>
+<tr class="separator:ab71b32558fd0e89e36e3e2122ef1f6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef0bc6fbe3a55fefec86a6cf25de1392"><td class="memItemLeft" align="right" valign="top">Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#aef0bc6fbe3a55fefec86a6cf25de1392">borderColor</a> = new Color(0.5f, 0.5f, 0.5f, 1.0f)</td></tr>
+<tr class="separator:aef0bc6fbe3a55fefec86a6cf25de1392"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12913ef93ca422622f34d87a16eb3dae"><td class="memItemLeft" align="right" valign="top">Camera&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a12913ef93ca422622f34d87a16eb3dae">cam</a></td></tr>
+<tr class="memdesc:a12913ef93ca422622f34d87a16eb3dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference for camera so it can properly be scaled to fit the board.  <a href="class_board_manager.html#a12913ef93ca422622f34d87a16eb3dae">More...</a><br /></td></tr>
 <tr class="separator:a12913ef93ca422622f34d87a16eb3dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e048e86090ef55bed0193c4963cc536"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a6e048e86090ef55bed0193c4963cc536">player1</a></td></tr>
-<tr class="separator:a6e048e86090ef55bed0193c4963cc536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace6a25747618aa0391888dbdb72fede9"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#ace6a25747618aa0391888dbdb72fede9">player2</a></td></tr>
-<tr class="separator:ace6a25747618aa0391888dbdb72fede9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab301ccb2e1ca21ce5ae6cf44de2952be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot.html">Robot</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#ab301ccb2e1ca21ce5ae6cf44de2952be">player1</a></td></tr>
+<tr class="memdesc:ab301ccb2e1ca21ce5ae6cf44de2952be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference for each of the players; needs to probably be switched to their base class later, but is temporarily a gameobject for testing.  <a href="class_board_manager.html#ab301ccb2e1ca21ce5ae6cf44de2952be">More...</a><br /></td></tr>
+<tr class="separator:ab301ccb2e1ca21ce5ae6cf44de2952be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f710d4b6c6572b8df170910c109ffdb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_robot.html">Robot</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_board_manager.html#a6f710d4b6c6572b8df170910c109ffdb">player2</a></td></tr>
+<tr class="separator:a6f710d4b6c6572b8df170910c109ffdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a061ba11883da9a871f45a79fd50055e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a061ba11883da9a871f45a79fd50055e3">&#9670;&nbsp;</a></span>CreateBoard()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The Board Manager handles the state of everything on the board, and communicates with the player objects. </p>
+<p>This facilitates the ordering of all of the motion of a turn, and controls some of the game logic.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2d77d07c976b99aa6afe7a9787da5a08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d77d07c976b99aa6afe7a9787da5a08">&#9670;&nbsp;</a></span>CheckForCollectable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BoardManager.CheckForCollectable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_robot.html">Robot</a>&#160;</td>
+          <td class="paramname"><em>robot</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the robot is on a tile that gives points. </p>
+
+</div>
+</div>
+<a id="abb1d2496aaa4894849fa7c7cbdbd554a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb1d2496aaa4894849fa7c7cbdbd554a">&#9670;&nbsp;</a></span>CreateBoard()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -129,34 +185,14 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void BoardManager.CreateBoard </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>seed</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a board based on the board width and height The board is centered on the screen, and the bottom square left is (0,0) </p>
-
-</div>
-</div>
-<a id="a579ddbc6030f6e814dcd445f38331bc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a579ddbc6030f6e814dcd445f38331bc3">&#9670;&nbsp;</a></span>GetTileState()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="_board_manager_8cs.html#ac84d9b534c1947f639684269d09f7921">TileState</a> BoardManager.GetTileState </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
+          <td class="paramtype"><a class="el" href="class_game_manager.html">GameManager</a>&#160;</td>
+          <td class="paramname"><em>gm</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
+          <td class="paramname"><em>seed</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -165,6 +201,109 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a board based on the board width and height The board is centered on the screen, and the bottom square left is (0,0) </p>
+
+</div>
+</div>
+<a id="a3a4507b67d0711049ecdda66ac3e0f15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a4507b67d0711049ecdda66ac3e0f15">&#9670;&nbsp;</a></span>GetTileState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_board_manager_8cs.html#ac84d9b534c1947f639684269d09f7921">TileState</a> BoardManager.GetTileState </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>tilePos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Takes in a World space Vector3 and gets the state of the tile at that position. </p>
+
+</div>
+</div>
+<a id="ad4e33bbe8f9c92c2693550a17bfd014b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4e33bbe8f9c92c2693550a17bfd014b">&#9670;&nbsp;</a></span>MineTile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BoardManager.MineTile </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>tilePos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_robot.html">Robot</a>&#160;</td>
+          <td class="paramname"><em>robot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes a tile for a robot. Adds points if the tile is a gem. </p>
+
+</div>
+</div>
+<a id="acb1ab7893cbda397f4159e6eaf5564b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb1ab7893cbda397f4159e6eaf5564b8">&#9670;&nbsp;</a></span>PlaceTile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BoardManager.PlaceTile </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>tilePos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Places a tile for a robot. </p>
+
+</div>
+</div>
+<a id="aa0546cbdecac6a8280e9b60ae25bb6f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0546cbdecac6a8280e9b60ae25bb6f7">&#9670;&nbsp;</a></span>RunTurn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator BoardManager.RunTurn </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p1Moves</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p2Moves</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Takes in two command strings and runs them on the board. </p>
+<p>Alternates between P1 and P2, but runs both to completion if one is shorter than the other. </p>
 
 </div>
 </div>
@@ -181,16 +320,34 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References for tilemaps that handle the objects on the screen. </p>
+
 </div>
 </div>
-<a id="ac26152dd12748ed2865deb3ea43e9eac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac26152dd12748ed2865deb3ea43e9eac">&#9670;&nbsp;</a></span>bgTile</h2>
+<a id="a0e53ac159a88fcbd567af0f57ee71d65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e53ac159a88fcbd567af0f57ee71d65">&#9670;&nbsp;</a></span>bgTile</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Tile BoardManager.bgTile</td>
+          <td class="memname">TileBase BoardManager.bgTile</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>References for tiles to fill the tilemap. </p>
+
+</div>
+</div>
+<a id="aef0bc6fbe3a55fefec86a6cf25de1392"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef0bc6fbe3a55fefec86a6cf25de1392">&#9670;&nbsp;</a></span>borderColor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Color BoardManager.borderColor = new Color(0.5f, 0.5f, 0.5f, 1.0f)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -209,6 +366,24 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Reference for camera so it can properly be scaled to fit the board. </p>
+
+</div>
+</div>
+<a id="a67ca7826a4bd65254a9fec1a2c66c3dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ca7826a4bd65254a9fec1a2c66c3dd">&#9670;&nbsp;</a></span>gemTiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;TileBase&gt; BoardManager.gemTiles</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Filled with 3 tiles in editor: small, medium, large, in that order. </p>
+
 </div>
 </div>
 <a id="ad0d6ae5aa77fc5ecc5b7e32b755c54f4"></a>
@@ -225,31 +400,79 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6e048e86090ef55bed0193c4963cc536"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e048e86090ef55bed0193c4963cc536">&#9670;&nbsp;</a></span>player1</h2>
+<a id="a24b1f1537adc6d61873c3d1dffbec61a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b1f1537adc6d61873c3d1dffbec61a">&#9670;&nbsp;</a></span>placedRock</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GameObject BoardManager.player1</td>
+          <td class="memname">TileBase BoardManager.placedRock</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ace6a25747618aa0391888dbdb72fede9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace6a25747618aa0391888dbdb72fede9">&#9670;&nbsp;</a></span>player2</h2>
+<a id="ab301ccb2e1ca21ce5ae6cf44de2952be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab301ccb2e1ca21ce5ae6cf44de2952be">&#9670;&nbsp;</a></span>player1</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GameObject BoardManager.player2</td>
+          <td class="memname"><a class="el" href="class_robot.html">Robot</a> BoardManager.player1</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reference for each of the players; needs to probably be switched to their base class later, but is temporarily a gameobject for testing. </p>
+
+</div>
+</div>
+<a id="a6f710d4b6c6572b8df170910c109ffdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f710d4b6c6572b8df170910c109ffdb">&#9670;&nbsp;</a></span>player2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_robot.html">Robot</a> BoardManager.player2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab71b32558fd0e89e36e3e2122ef1f6b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab71b32558fd0e89e36e3e2122ef1f6b8">&#9670;&nbsp;</a></span>powerupTile</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TileBase BoardManager.powerupTile</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reference for the powerup tile icon. Types of powerups are randomized. </p>
+
+</div>
+</div>
+<a id="af08312c603451c94855714f53b3ddbc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af08312c603451c94855714f53b3ddbc9">&#9670;&nbsp;</a></span>rockTiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;TileBase&gt; BoardManager.rockTiles</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Can contain any number of tiles that will randomly fill the board. </p>
 
 </div>
 </div>
@@ -262,7 +485,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_board_manager.html">BoardManager</a></li>
-    <li class="footer">Generated on Fri Feb 26 2021 17:34:40 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Mar 7 2021 15:31:51 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

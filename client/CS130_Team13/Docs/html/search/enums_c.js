@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['undefinedschemaidhandling_3044',['UndefinedSchemaIdHandling',['../namespace_socket_1_1_newtonsoft_1_1_json_1_1_schema.html#a9355fbd0c6099625a05146762a912d87',1,'Socket::Newtonsoft::Json::Schema']]]
+  ['tilestate_3293',['TileState',['../_board_manager_8cs.html#ac84d9b534c1947f639684269d09f7921',1,'BoardManager.cs']]],
+  ['typenameassemblyformathandling_3294',['TypeNameAssemblyFormatHandling',['../namespace_socket_1_1_newtonsoft_1_1_json.html#a951d27ab45386da7490af724b991a482',1,'Socket::Newtonsoft::Json']]],
+  ['typenamehandling_3295',['TypeNameHandling',['../namespace_socket_1_1_newtonsoft_1_1_json.html#a57924806d4f60ab9ff52fbc5f0d593be',1,'Socket::Newtonsoft::Json']]]
 ];

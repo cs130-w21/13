@@ -88,23 +88,27 @@ $(document).ready(function(){initNavTree('class_panel_item.html',''); initResiza
 <div class="title">PanelItem Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>attach to object to make it a <a class="el" href="class_panel_item.html" title="attach to object to make it a PanelItem, derived class of DraggablePhysics; panel item adds to the Dr...">PanelItem</a>, derived class of <a class="el" href="class_draggable_physics.html" title="attach this to a UI element to allow user to drag it around and find touching droppable objects to sn...">DraggablePhysics</a>; panel item adds to the <a class="el" href="class_draggable_physics.html" title="attach this to a UI element to allow user to drag it around and find touching droppable objects to sn...">DraggablePhysics</a> behavior by: 1) destroys self if it can't snap into a droppable on mouse release, 2) registers itself with <a class="el" href="class_drag_drop_manager.html">DragDropManager</a> to allow global access from other objects; in addition, it implements <a class="el" href="interface_i_code_info.html">ICodeInfo</a> interface  
+ <a href="class_panel_item.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PanelItem:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_panel_item.png" usemap="#PanelItem_map" alt=""/>
   <map id="PanelItem_map" name="PanelItem_map">
-<area href="class_draggable_physics.html" alt="DraggablePhysics" shape="rect" coords="71,112,203,136"/>
+<area href="class_draggable_physics.html" title="attach this to a UI element to allow user to drag it around and find touching droppable objects to sn..." alt="DraggablePhysics" shape="rect" coords="71,112,203,136"/>
 <area href="interface_i_code_info.html" alt="ICodeInfo" shape="rect" coords="213,112,345,136"/>
 <area href="interface_i_draggable.html" alt="IDraggable" shape="rect" coords="142,56,274,80"/>
+<area href="class_for_loop_block.html" alt="ForLoopBlock" shape="rect" coords="142,224,274,248"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a474660fcbb778acdcafec2f4acef7b78"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_panel_item.html#a474660fcbb778acdcafec2f4acef7b78">GetInformation</a> ()</td></tr>
-<tr class="memdesc:a474660fcbb778acdcafec2f4acef7b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function should return a draggable item (code block)'s information.  <a href="class_panel_item.html#a474660fcbb778acdcafec2f4acef7b78">More...</a><br /></td></tr>
-<tr class="separator:a474660fcbb778acdcafec2f4acef7b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3000f41aeab47843759d78870cf29b9"><td class="memItemLeft" align="right" valign="top">virtual string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_panel_item.html#ad3000f41aeab47843759d78870cf29b9">GetInformation</a> ()</td></tr>
+<tr class="memdesc:ad3000f41aeab47843759d78870cf29b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function should return a draggable item (code block)'s information.  <a href="class_panel_item.html#ad3000f41aeab47843759d78870cf29b9">More...</a><br /></td></tr>
+<tr class="separator:ad3000f41aeab47843759d78870cf29b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5d1b5c1b0011b493e39ace85efe38fd"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_panel_item.html#ac5d1b5c1b0011b493e39ace85efe38fd">OnPointerDown</a> (PointerEventData eventData)</td></tr>
 <tr class="separator:ac5d1b5c1b0011b493e39ace85efe38fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e9393e01d31f84c6ee66859affe4fc9"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_panel_item.html#a7e9393e01d31f84c6ee66859affe4fc9">OnPointerUp</a> (PointerEventData eventData)</td></tr>
@@ -116,7 +120,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aca7d21c32eb34af21f7378c316030fc0 inherit pub_methods_class_draggable_physics"><td class="mdescLeft">&#160;</td><td class="mdescRight">backdoor to force this item to be attached to an <a class="el" href="interface_i_droppable.html">IDroppable</a>, make sure you know what you are doing when calling this  <a href="class_draggable_physics.html#aca7d21c32eb34af21f7378c316030fc0">More...</a><br /></td></tr>
 <tr class="separator:aca7d21c32eb34af21f7378c316030fc0 inherit pub_methods_class_draggable_physics"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>attach to object to make it a <a class="el" href="class_panel_item.html" title="attach to object to make it a PanelItem, derived class of DraggablePhysics; panel item adds to the Dr...">PanelItem</a>, derived class of <a class="el" href="class_draggable_physics.html" title="attach this to a UI element to allow user to drag it around and find touching droppable objects to sn...">DraggablePhysics</a>; panel item adds to the <a class="el" href="class_draggable_physics.html" title="attach this to a UI element to allow user to drag it around and find touching droppable objects to sn...">DraggablePhysics</a> behavior by: 1) destroys self if it can't snap into a droppable on mouse release, 2) registers itself with <a class="el" href="class_drag_drop_manager.html">DragDropManager</a> to allow global access from other objects; in addition, it implements <a class="el" href="interface_i_code_info.html">ICodeInfo</a> interface </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1d46562fb0e836228fd4b92a44641ac1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d46562fb0e836228fd4b92a44641ac1">&#9670;&nbsp;</a></span>GetCost()</h2>
 
@@ -142,21 +148,31 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="interface_i_code_info.html#ab28374da69915663604e182c8e83b127">ICodeInfo</a>.</p>
 
+<p>Reimplemented in <a class="el" href="class_for_loop_block.html#a1bb2942a9683ec3c835b744973621d97">ForLoopBlock</a>.</p>
+
 </div>
 </div>
-<a id="a474660fcbb778acdcafec2f4acef7b78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a474660fcbb778acdcafec2f4acef7b78">&#9670;&nbsp;</a></span>GetInformation()</h2>
+<a id="ad3000f41aeab47843759d78870cf29b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3000f41aeab47843759d78870cf29b9">&#9670;&nbsp;</a></span>GetInformation()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string PanelItem.GetInformation </td>
+          <td class="memname">virtual string PanelItem.GetInformation </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>this function should return a draggable item (code block)'s information. </p>
@@ -164,6 +180,8 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>string: the information extracted from this block</dd></dl>
 
 <p>Implements <a class="el" href="interface_i_code_info.html#acb84bdcf0af84eb405b8f22052dac04a">ICodeInfo</a>.</p>
+
+<p>Reimplemented in <a class="el" href="class_for_loop_block.html#a342ff73010f2dcf850f409953593918b">ForLoopBlock</a>.</p>
 
 </div>
 </div>
@@ -224,7 +242,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/Drag n Drop/Prototypes/Prototype Coding Panel/Panel/<a class="el" href="_panel_item_8cs.html">PanelItem.cs</a></li>
+<li>D:/CS Projects/CS130/ProjectRepo/13/client/CS130_Team13/Assets/Scripts/Drag n Drop/Coding Panel/Panel/<a class="el" href="_panel_item_8cs.html">PanelItem.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -232,7 +250,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_panel_item.html">PanelItem</a></li>
-    <li class="footer">Generated on Fri Feb 26 2021 17:34:40 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Mar 7 2021 15:31:51 for CS130_Team13 by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
