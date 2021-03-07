@@ -9,5 +9,13 @@ using UnityEngine;
 public interface ISubPanel
 {
     void IsOccupied();
+
     void ItemCame(GameObject item);
+
+    /// <summary>
+    /// Test if the item should be added inside the subpanel, or should be included in the outer panel.
+    /// </summary>
+    /// <param name="item">GameObject: the item whose position is in question</param>
+    /// <returns>bool: if the item should be included in the subpanel</returns>
+    bool InTriggerRange(GameObject item);
 }

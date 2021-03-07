@@ -134,7 +134,9 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                             matched = true;
                             
                             if (slot == hoveringSlot) break;
-                            else if (slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>() != null) {
+                            // TODO: Check also if the center of current block is in some range of the subpanel
+                            else if (slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>() != null
+                                && slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>().InTriggerRange(DragDropManager.instance.currentlyDraggedItem)) {
                                 // clear hovering slot
                                 if (hoveringSlot) {
                                     RemoveSlot(hoveringSlot);
