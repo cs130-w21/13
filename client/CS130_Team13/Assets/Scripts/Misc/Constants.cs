@@ -47,12 +47,12 @@ public static class Constants
 
     public static class Game
     {
-        public const int TURN_DURATION_SECS = 60;
+        public const int TURN_DURATION_SECS = 3;
         public const int MAX_TURNS = 10;
         public const int TARGET_SCORE = 100;
         public const float ACTION_SPEED = 0.3f;
         public const float ACTION_PAUSE_BETWEEN = 0.1f;
-        public const float END_TURN_PAUSE = 1f;
+        public const float END_TURN_PAUSE = 2f;
         public const int GEM_COUNT = 10;
         public const int POWERUP_COUNT = 10;
     }

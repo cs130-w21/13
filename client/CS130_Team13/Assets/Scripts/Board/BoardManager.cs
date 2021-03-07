@@ -128,11 +128,13 @@ public class BoardManager : MonoBehaviour
         ////////////////////////////////
 
         // Set player positions at opposite corners
+        player1.gameObject.SetActive(true);
+        player2.gameObject.SetActive(true);
         player1.transform.position = backgroundTilemap.LocalToWorld(new Vector3(0.5f, 0.5f, 0));
         player2.transform.position = backgroundTilemap.LocalToWorld(new Vector3(boardWidth - 0.5f, boardHeight - 0.5f, 0));
-        player2.transform.rotation = Quaternion.Euler(0,0,180);
+        player2.transform.rotation = Quaternion.Euler(0, 0, 180);
         unoccupiedTiles.Remove(new Vector3Int(0, 0, 0));
-        unoccupiedTiles.Remove(new Vector3Int(boardHeight - 1, boardWidth - 1, 0));
+        unoccupiedTiles.Remove(new Vector3Int(boardWidth - 1, boardHeight - 1, 0));
 
         // Pass this BoardManager to the players so they can access its functions
         player1.Init(this);
@@ -271,18 +273,10 @@ public class BoardManager : MonoBehaviour
 
     /// Takes in two command strings and runs them on the board.
     /// Alternates between P1 and P2, but runs both to completion if one is shorter than the other.
-    public void RunTurn(string p1Moves, string p2Moves)
-    {
-        StartCoroutine(RunTurnHelper(p1Moves, p2Moves));
-        player1.Recharge();
-        player2.Recharge();
-    }
-
-    // Helper function to make RunTurn a coroutine.
-    private IEnumerator RunTurnHelper(string p1Moves, string p2Moves)
+    public IEnumerator RunTurn(string p1Moves, string p2Moves)
     {
         // TODO: Shift camera position to fit UI
-
+        gameManager.isRunningTurn = true;
         bool gameOver = false;
         // Players give input, run the commands
         int len = Mathf.Max(p1Moves.Length, p2Moves.Length);
@@ -318,8 +312,10 @@ public class BoardManager : MonoBehaviour
 
             // Both robots have finished running, so do some cleanup
             // TODO: Reset the camera position back to programming state
+            player1.Recharge();
+            player2.Recharge();
         }
-
+        gameManager.isRunningTurn = false;
     }
 
     /// RunCommand takes in a robot and a command char and tells the robot to do the corresponding command.
