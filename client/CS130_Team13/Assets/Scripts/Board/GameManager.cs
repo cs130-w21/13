@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public BoardManager bm;
-    private RemoteController rc;
-    public CodingPanel cp;
+    public BoardManager boardManager;
+    private RemoteController remoteController;
+    public CodingPanel codingPanel;
 
     public GameObject ConnectingUI;
     public InputField nameInput;
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool isRunningTurn { get; set; } = false;
 
+    private CodeProcessor codeProcessor;
     private string playerName;
     private int myPlayerOrder = 0;
     private double seed = 0f;
@@ -42,16 +43,14 @@ public class GameManager : MonoBehaviour
     private int p2Score = 0;
     private int currentTurn = 0;
     private float turnStartTime = 0;
-
-
     private float timeRemaining;
-
     private string clientCmd = null;
     private string opponentCmd = null;
     void Start()
     {
         currentState = GameState.Connecting;
         currentTurn = 1;
+        codeProcessor = new CodeProcessor();
         // Get player name
         //playerName = "player";
         //rc = new RemoteController(playerName);
@@ -85,8 +84,8 @@ public class GameManager : MonoBehaviour
                         // Initialize the server connection
                         playerName = nameInput.text;
                         Debug.Log("Submitted name " + playerName);
-                        rc = new RemoteController(playerName);
-                        StartCoroutine(rc.InitializeGame());
+                        remoteController = new RemoteController(playerName);
+                        StartCoroutine(remoteController.InitializeGame());
                         Debug.Log("Initializing connection");
                         // Toggle UI                  
                         ConnectingUI.SetActive(false);
@@ -98,7 +97,7 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.WaitingForOpponent:
                 {
-                    if (rc.GetGameStarted())
+                    if (remoteController.GetGameStarted())
                     {
                         // Game was found, so initialize the board
                         WaitingUI.SetActive(false);
@@ -109,9 +108,9 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.StartGame:
                 {
-                    myPlayerOrder = rc.GetPlayerNumber();
-                    seed = rc.GetRandomSeed();
-                    bm.CreateBoard(this, (int)(seed * 1000000000));
+                    myPlayerOrder = remoteController.GetPlayerNumber();
+                    seed = remoteController.GetRandomSeed();
+                    boardManager.CreateBoard(this, (int)(seed * 1000000000));
                     turnStartTime = Time.time;
                     currentState = GameState.CodingPhase;
                     previousState = GameState.StartGame;
@@ -124,7 +123,7 @@ public class GameManager : MonoBehaviour
                     {
                         //clientCmd = cp.GetInformation();
                         clientCmd = "MFMF";
-                        rc.SendPlayerCommands_ToServer(clientCmd);
+                        remoteController.SendPlayerCommands_ToServer(clientCmd);
                         WaitingUI.SetActive(true);
                         currentState = GameState.AwaitingOpponentCommands;
                     }
@@ -133,7 +132,7 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.AwaitingOpponentCommands:
                 {
-                    opponentCmd = rc.GetOpponentCommands();
+                    opponentCmd = remoteController.GetOpponentCommands();
                     if (opponentCmd == null)
                     {
                         break;
@@ -155,12 +154,14 @@ public class GameManager : MonoBehaviour
                     string p2Cmd;
                     p1Cmd = (myPlayerOrder == 1) ? clientCmd : opponentCmd;
                     p2Cmd = (myPlayerOrder == 1) ? opponentCmd : clientCmd;
+                    p1Cmd = codeProcessor.GetResult(p1Cmd);
+                    p2Cmd = codeProcessor.GetResult(p2Cmd);
 
                     if (previousState != GameState.ExecutionPhase)
                     {
                         isRunningTurn = true;
                         Debug.Log("Turn starting");
-                        StartCoroutine(bm.RunTurn(p1Cmd, p2Cmd));
+                        StartCoroutine(boardManager.RunTurn(p1Cmd, p2Cmd));
 
                     }
                     else if (!isRunningTurn)
@@ -185,7 +186,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (previousState != GameState.EndGame)
                     {
-                        rc.EndCurrentGame_ToServer();
+                        remoteController.EndCurrentGame_ToServer();
                     }
                     GameOverUI.SetActive(true);
                     previousState = GameState.EndGame;

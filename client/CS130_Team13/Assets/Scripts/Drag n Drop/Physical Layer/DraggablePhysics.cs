@@ -30,7 +30,7 @@ public class DraggablePhysics : MonoBehaviour, IDraggable {
     /// </summary>
     /// <param name="droppable">the game object containing IDroppable component</param>
     public void ForceInto(GameObject droppable) {
-        Debug.Log("forced");
+        //Debug.Log("forced");
         if (currentSeat)
             currentSeat.GetComponent<IDroppable>().ItemLeft(gameObject);
 
