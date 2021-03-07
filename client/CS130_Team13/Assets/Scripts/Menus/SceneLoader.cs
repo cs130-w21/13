@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
 
     // scene management
     [SerializeField]
-    private string gameScene;
+    private string menuScene, gameScene;
     private string currentScene;
 
     // system messages /////////////////////////////////////////////////
