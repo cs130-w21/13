@@ -45,12 +45,13 @@ public class GameManager : MonoBehaviour
   private float timeRemaining;
   private string clientCmd = null;
   private string opponentCmd = null;
+  private const int SECONDS_TO_OPPONENT_TIMEOUT = 45;
 
   public void SetCurrentState(GameState state)
   {
     currentState = state;
     if (rc != null)
-        rc.SetCurrentState(state);
+      rc.SetCurrentState(state);
   }
   void Start()
   {
@@ -153,7 +154,8 @@ public class GameManager : MonoBehaviour
         }
       case GameState.ExecutionPhase:
         {
-
+          StopCoroutine("endGameInAMinute");
+          StartCoroutine("endGameInAMinute");
           // Assume Player 1, swap if not
           string p1Cmd;
           string p2Cmd;
@@ -202,7 +204,11 @@ public class GameManager : MonoBehaviour
 
   }
 
-
+  public IEnumerator endGameInAMinute()
+  {
+    yield return new WaitForSeconds(Constants.Game.SECONDS_TO_OPPONENT_TIMEOUT);
+    SetCurrentState(GameState.EndGame);
+  }
 
   // private void RunGame()
   // {
