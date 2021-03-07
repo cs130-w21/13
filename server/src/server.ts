@@ -133,10 +133,9 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           return gamePlayers;
         });
       if (gamePlayers.length !== 0) {
-        socket.emit(CONSTANTS.PAIRING_EVENT, CONSTANTS.PAIRING_STRING); // CHANGED TODO
+        socket.emit(CONSTANTS.PAIRING_EVENT, CONSTANTS.PAIRING_RESPONSE);
       }
       if (gamePlayers.length === 2) {
-        console.log("STARTTTT")
         console.log(gamePlayers)
 
         let user1: UserInfo = gamePlayers[0];
@@ -145,7 +144,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
         socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, user1.exportClientRequiredUserInfo());
       }
     } else {
-      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.INVALID_USER_DATA);
+      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.INVALID_USER_DATA_ERR);
     }
   });
 
@@ -162,9 +161,9 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           mutex.lock();
           let players: UserInfo[] = getGamePlayers(socketTurnInfo.id);
           if (players.length === 0) {
-            socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.COULD_NOT_FIND_USER_IN_GAME);
+            socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.COULD_NOT_FIND_USER_IN_GAME_ERR);
           } else if (players.length === 1) {
-            socket.emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.OPPONENT_DISCONNECTED);
+            socket.emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.OPPONENT_DISCONNECTED_RESPONSE);
           } else if (players.length === 2) {
             let player: UserInfo = players[0];
             let opponent: UserInfo = players[1];
@@ -185,7 +184,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           mutex.unlock();
         });
     } else {
-      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.INVALID_TURN_DATA)
+      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.INVALID_TURN_DATA_ERR)
     }
   });
 
@@ -209,9 +208,9 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
         return players;
       });
     if (players.length === 0) {
-      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.COULD_NOT_FIND_USER_IN_GAME);
+      socket.emit(CONSTANTS.ERROR_EVENT, CONSTANTS.COULD_NOT_FIND_USER_IN_GAME_ERR);
     } else if (players.length === 1) {
-      socket.emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.OPPONENT_DISCONNECTED);
+      socket.emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.OPPONENT_DISCONNECTED_RESPONSE);
     } else {
       socket.to(players[0].socketId).emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
       socket.to(players[1].socketId).emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
