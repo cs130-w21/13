@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject WaitingUI;
     public GameObject GameOverUI;
     public GameObject CodingUI;
+    public GameObject SubmitButton;
 
     [HideInInspector]
     public bool isRunningTurn { get; set; } = false;
@@ -42,11 +43,12 @@ public class GameManager : MonoBehaviour
     private int p1Score = 0;
     private int p2Score = 0;
     private int currentTurn = 0;
-    private float turnStartTime = 0;
+    private float turnStartTime = -1 * Constants.Game.TURN_DURATION_SECS;
     private float timeRemaining;
     private string clientCmd = null;
     private string opponentCmd = null;
     private const int SECONDS_TO_OPPONENT_TIMEOUT = 45;
+    private bool codeSubmitted = false;
 
     public void SetCurrentState(GameState state)
     {
@@ -103,19 +105,28 @@ public class GameManager : MonoBehaviour
                     bm.CreateBoard(this, (int)(seed * 1000000000));
                     turnStartTime = Time.time;
                     CodingUI.SetActive(true);
+                    SubmitButton.SetActive(true);
                     SetCurrentState(GameState.CodingPhase);
                     previousState = GameState.StartGame;
+                    codeSubmitted = false;
                     break;
                 }
             case GameState.CodingPhase:
                 {
-                    // Submit the command if the timer runs out or if the player hits submit
-                    if (turnStartTime + Constants.Game.TURN_DURATION_SECS < Time.time)
+                    if (rc.GetGameEnded())
                     {
+                        EndGame();
+                    }
+                    // Submit the command if the timer runs out or if the player hits submit
+                    if (turnStartTime + Constants.Game.TURN_DURATION_SECS < Time.time || codeSubmitted)
+                    {
+                        codeSubmitted = false;
                         clientCmd = cp.GetInformation();
+                        Debug.Log(clientCmd);
                         //clientCmd = "MFMF";
                         rc.SendPlayerCommands_ToServer(clientCmd);
                         WaitingUI.SetActive(true);
+                        SubmitButton.SetActive(false);
                         SetCurrentState(GameState.AwaitingOpponentCommands);
                     }
                     previousState = GameState.CodingPhase;
@@ -123,6 +134,10 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.AwaitingOpponentCommands:
                 {
+                    if (rc.GetGameEnded())
+                    {
+                        EndGame();
+                    }
                     opponentCmd = rc.GetOpponentCommands();
                     if (opponentCmd == null)
                     {
@@ -131,6 +146,7 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         WaitingUI.SetActive(false);
+                        Debug.Log("Opponent cmd: " + opponentCmd);
                         SetCurrentState(GameState.ExecutionPhase);
                     }
 
@@ -139,6 +155,10 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.ExecutionPhase:
                 {
+                    if (rc.GetGameEnded())
+                    {
+                        EndGame();
+                    }
                     if (previousState != GameState.ExecutionPhase)
                     {
                         StopCoroutine("endGameInAMinute");
@@ -167,6 +187,7 @@ public class GameManager : MonoBehaviour
                         {
                             currentTurn++;
                             turnStartTime = Time.time;
+                            SubmitButton.SetActive(true);
                             SetCurrentState(GameState.CodingPhase);
                         }
                     }
@@ -250,16 +271,25 @@ public class GameManager : MonoBehaviour
         return player == 1 ? p1Score : player == 2 ? p2Score : 0;
     }
 
-    // private IEnumerator AwaitOpponentCommand()
-    // {
-    //     string recievedCmd = rc.getOpponentCommands();
-    //     while (recievedCmd == null)
-    //     {
-    //         yield return new WaitForSeconds(0.5f);
-    //         recievedCmd = rc.getOpponentCommands();
-    //     }
-    //     opponentCmd = recievedCmd;
-    // }
+    public float getTimeRemaining()
+    {
+        return turnStartTime + Constants.Game.TURN_DURATION_SECS - Time.time;
+    }
+
+    public int getP1Score()
+    {
+        return p1Score;
+    }
+
+    public int getP2Score()
+    {
+        return p2Score;
+    }
+
+    public void SubmitCode()
+    {
+        codeSubmitted = true;
+    }
 
     public void SetNameSubmitted(bool b)
     {

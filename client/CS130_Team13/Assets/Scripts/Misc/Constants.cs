@@ -48,7 +48,7 @@ public static class Constants
 
     public static class Game
     {
-        public const int TURN_DURATION_SECS = 3;
+        public const int TURN_DURATION_SECS = 60;
         public const int MAX_TURNS = 10;
         public const int TARGET_SCORE = 100;
         public const float ACTION_SPEED = 0.3f;
