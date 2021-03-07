@@ -37,4 +37,8 @@ public class SceneLoader : MonoBehaviour
     public void StartGame() {
         ToSpecificScene(gameScene);
     }
+
+    public void GackToMenu() {
+        ToSpecificScene(menuScene);
+    }
 }
