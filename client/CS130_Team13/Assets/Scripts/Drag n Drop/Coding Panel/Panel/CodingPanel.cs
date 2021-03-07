@@ -57,6 +57,10 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return cost;
     }
 
+    /// <summary>
+    /// Use this method to put new item onto the panel.
+    /// </summary>
+    /// <param name="newItem">the item to put (panel will generate the slot)</param>
     public virtual void PutItem(GameObject newItem) {
         // force item into hovering slot
         if (hoveringSlot) {
@@ -134,7 +138,9 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
                             matched = true;
                             
                             if (slot == hoveringSlot) break;
-                            else if (slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>() != null) {
+                            // TODO: Check also if the center of current block is in some range of the subpanel
+                            else if (slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>() != null
+                                && slot.GetComponent<IDroppable>().GetCurrentItem().GetComponent<ISubPanel>().InTriggerRange(DragDropManager.instance.currentlyDraggedItem)) {
                                 // clear hovering slot
                                 if (hoveringSlot) {
                                     RemoveSlot(hoveringSlot);

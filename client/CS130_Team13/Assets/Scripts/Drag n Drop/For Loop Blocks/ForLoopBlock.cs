@@ -12,17 +12,36 @@ public class ForLoopBlock : PanelItem, ISubPanel
     [SerializeField]
     private GameObject loopCounter = null;
 
+    [SerializeField]
+    private GameObject myHeader = null;
+
     /// <summary>
     /// simulate a guard probe event if dragged item is not for loop
     /// </summary>
-    public void IsOccupied() {
+    public virtual void IsOccupied() {
         if (DragDropManager.instance.currentlyDraggedItem.GetComponent<ForLoopBlock>())
             return;
         else
             myPanel.GetComponent<CodingPanel>().ReportGuardProbe();
     }
 
-    public void ItemCame(GameObject newItem)
+    public virtual bool InTriggerRange(GameObject item) {
+        // get item position (center line)
+        Vector2 center = JohnnyUITools.GetCenterCanvasCoord(item);
+
+        // compare item position with header
+        Vector2 headerCenter = JohnnyUITools.GetCenterCanvasCoord(myHeader);
+        Vector2 headerTop = JohnnyUITools.GetTopCanvasCoord(myHeader);
+
+        if (center.y > headerCenter.y && center.y <= headerTop.y) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public virtual void ItemCame(GameObject newItem)
     {
         if (DragDropManager.instance.currentlyDraggedItem.GetComponent<ForLoopBlock>())
             return;
@@ -30,6 +49,10 @@ public class ForLoopBlock : PanelItem, ISubPanel
             myPanel.GetComponent<CodingPanel>().PutItem(newItem);
         
         Debug.Log(GetInformation());
+    }
+
+    public virtual void PutItem(GameObject item) {
+        myPanel.GetComponent<CodingPanel>().PutItem(item);
     }
 
     public override string GetInformation() {

@@ -670,6 +670,7 @@ MonoBehaviour:
   myCost: 1
   myPanel: {fileID: 7775755431316949910}
   loopCounter: {fileID: 3448843601922126451}
+  myHeader: {fileID: 3560434516188087805}
 --- !u!114 &6583109142209673117
 MonoBehaviour:
   m_ObjectHideFlags: 0
