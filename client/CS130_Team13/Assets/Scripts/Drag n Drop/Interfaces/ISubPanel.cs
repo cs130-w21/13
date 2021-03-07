@@ -18,4 +18,6 @@ public interface ISubPanel
     /// <param name="item">GameObject: the item whose position is in question</param>
     /// <returns>bool: if the item should be included in the subpanel</returns>
     bool InTriggerRange(GameObject item);
+
+    void PutItem(GameObject item);
 }

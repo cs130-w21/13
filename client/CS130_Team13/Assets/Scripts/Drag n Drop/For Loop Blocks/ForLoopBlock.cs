@@ -41,7 +41,7 @@ public class ForLoopBlock : PanelItem, ISubPanel
         }
     }
 
-    public void ItemCame(GameObject newItem)
+    public virtual void ItemCame(GameObject newItem)
     {
         if (DragDropManager.instance.currentlyDraggedItem.GetComponent<ForLoopBlock>())
             return;
@@ -49,6 +49,10 @@ public class ForLoopBlock : PanelItem, ISubPanel
             myPanel.GetComponent<CodingPanel>().PutItem(newItem);
         
         Debug.Log(GetInformation());
+    }
+
+    public virtual void PutItem(GameObject item) {
+        myPanel.GetComponent<CodingPanel>().PutItem(item);
     }
 
     public override string GetInformation() {

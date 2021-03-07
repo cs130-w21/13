@@ -57,6 +57,10 @@ public class CodingPanel : MonoBehaviour, ICodeInfo {
         return cost;
     }
 
+    /// <summary>
+    /// Use this method to put new item onto the panel.
+    /// </summary>
+    /// <param name="newItem">the item to put (panel will generate the slot)</param>
     public virtual void PutItem(GameObject newItem) {
         // force item into hovering slot
         if (hoveringSlot) {
