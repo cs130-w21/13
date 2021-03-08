@@ -11,4 +11,9 @@ public class SceneLoaderAccess : MonoBehaviour
     public void ToGameScene() {
         SceneLoader.instance.StartGame();
     }
+
+    public void EndGame() {
+        Debug.Log("exit...");
+        Application.Quit();
+    }
 }
