@@ -26,6 +26,10 @@ public class UserInfo
     else
       this.commandsUpdated = System.DateTime.Now.ToString();
   }
+  public void setCommands(string commands, string commandsUpdated) {
+    this.commands = commands;
+    this.commandsUpdated = commandsUpdated;
+  }
   public string getCommands() {
     if (this.commandsUpdated == null)
       return null;

@@ -97,9 +97,10 @@ public class RemoteController : Opponent
       TurnInfo opponentTurnInfo = JsonUtility.FromJson<TurnInfo>(data.ToString());
       Debug.Log("Player " + userInfo.playerNumber +
             " has received the opponent's turn data");
+      Debug.Log(data.ToString());
       if (opponentTurnInfo.commandsUpdated != null &&
         !String.Equals(opponentTurnInfo.commandsUpdated, opponentInfo.commandsUpdated))
-        opponentInfo.setCommands(opponentTurnInfo.commands);
+        opponentInfo.setCommands(opponentTurnInfo.commands, opponentTurnInfo.commandsUpdated);
     });
 
     // There is an error. End game.
