@@ -56,7 +56,7 @@ public static class Constants
         public const float END_TURN_PAUSE = 2f;
         public const int GEM_COUNT = 10;
         public const int POWERUP_COUNT = 10;
-        public const int SECONDS_TO_OPPONENT_TIMEOUT = 45;
+        public const int SECONDS_TO_OPPONENT_TIMEOUT = 120;
     }
 
     public static class Board
