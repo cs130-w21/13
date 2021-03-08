@@ -5,8 +5,9 @@ public static class Constants
 {
     public static class Server
     {
-        public const string SERVER_URL = "https://cs130-hacman.herokuapp.com";
-          // "http://localhost:3000";
+        public const string SERVER_URL = 
+        "https://cs130-hacman.herokuapp.com";
+        //   "http://localhost:3000";
     }
     
     // Costs for Robot action

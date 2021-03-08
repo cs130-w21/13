@@ -91,7 +91,7 @@ function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): Use
 
 function getGamePlayers(id: number): UserInfo[] {
   let curUser = idMap.get(id);
-  if (!curUser || !curUser.opponentId) {
+  if (!curUser || (!curUser.opponentId && !usersSearchingForGame.includes(curUser.id))) {
     return [];
   }
   let curOpponent = idMap.get(curUser.opponentId);
@@ -132,7 +132,9 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           mutex.unlock();
           return gamePlayers;
         });
-      if (gamePlayers.length !== 0) {
+      if (gamePlayers.length === 0) {
+        socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
+      } else {
         socket.emit(CONSTANTS.PAIRING_EVENT, CONSTANTS.PAIRING_RESPONSE);
       }
       if (gamePlayers.length === 2) {

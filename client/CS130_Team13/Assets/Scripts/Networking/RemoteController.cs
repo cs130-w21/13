@@ -62,10 +62,10 @@ public class RemoteController : Opponent
     socket.On(QSocket.EVENT_CONNECT, () =>
     {
       Debug.Log("Connected to server");
-          // The "hello" event is how a user first contacts the server to connect to a game
+      // The "hello" event is how a user first contacts the server to connect to a game
       if (userInfo.state != GameManager.GameState.AwaitingOpponentCommands)
         socket.Emit("hello", JsonUtility.ToJson(userInfo.exportConnectToServerRequiredInfo()));
-      else 
+      else
         socket.Emit("submittingTurn", JsonUtility.ToJson(userInfo.exportTurnInfo()));
     });
 
@@ -80,11 +80,14 @@ public class RemoteController : Opponent
     // We retreive the opponent info from this
     socket.On("gameplay", (data) =>
     {
-      gameStarted = true;
-      opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
-      userInfo.playerNumber = (opponentInfo.playerNumber == 1) ? 2 : 1;
-      Debug.Log("Player " + userInfo.playerNumber
-            + " sees that the game has started");
+      if (gameStarted == false)
+      {
+        gameStarted = true;
+        opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
+        userInfo.playerNumber = (opponentInfo.playerNumber == 1) ? 2 : 1;
+        Debug.Log("Player " + userInfo.playerNumber
+              + " sees that the game has started");
+      }
     });
 
     // We receive opponent's commands from the server
