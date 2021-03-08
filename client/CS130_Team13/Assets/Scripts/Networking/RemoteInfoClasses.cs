@@ -21,9 +21,7 @@ public class UserInfo
   }
   public void setCommands(string commands) {
     this.commands = commands;
-    if (commands == null || commands == "null")
-      this.commandsUpdated = null;
-    else
+    if (!(commands == null || commands == "null"))
       this.commandsUpdated = "date is " + System.DateTime.Now.ToString();
   }
   public void setCommands(string commands, string commandsUpdated) {

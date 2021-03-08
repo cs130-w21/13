@@ -162,6 +162,8 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   socket.on(CONSTANTS.SUBMIT_TURN_EVENT, async (data: string) => {
     let socketTurnInfo: TurnInfo = JSON.parse(data);
     console.log("CHECK IT: " + data    )
+    console.log(socketTurnInfo.toString()  )
+
     id = socketTurnInfo.id;
     if (!socketTurnInfo.isInvalid) {
       await mutex.promise()
@@ -175,9 +177,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           } else if (players.length === 2) {
             let player: UserInfo = players[0];
             let opponent: UserInfo = players[1];
-            let lastUpdatedPlayerCommands = player.commandsUpdated;
-            let lastUpdatedOpponentCommands = opponent.commandsUpdated;
-            player.setCommands(socketTurnInfo.commands, lastUpdatedOpponentCommands);
+            player.setCommands(socketTurnInfo.commands, socketTurnInfo.commandsUpdated);
             player.socketId = socket.id;
             console.log("Received commands from player %s: %s, updated %s", player.playerNumber, player.exportClientRequiredTurnInfo());
 
