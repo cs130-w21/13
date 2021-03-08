@@ -98,6 +98,14 @@ public class RemoteController : Opponent
         opponentInfo.commands = opponentTurnInfo.commands;
     });
 
+    // There is an error. End game.
+    socket.On("client error", (data) =>
+    {
+      gameEnded = true;
+      Debug.Log(data.ToString());
+      Destroy();
+    });
+
     // End the current game.
     // Data should contain an empty string uder current implementation
     socket.On("endGameConfirmation", (data) =>
