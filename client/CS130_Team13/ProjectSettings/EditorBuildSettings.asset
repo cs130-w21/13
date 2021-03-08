@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Sockets.unity
-    guid: 597f095b3f8c579479b68d10cdf81e4d
-  - enabled: 1
-    path: Assets/Scenes/MarkWorkspace.unity
-    guid: 6925a1ead85955847a8ec601088695ec
-  - enabled: 1
-    path: Assets/Scenes/Build Scenes/Game.unity
-    guid: 1905b140a6b0f2f4d8671b5aa8295372
   - enabled: 1
     path: Assets/Scenes/Build Scenes/OpenScene.unity
     guid: 5be841ef29c7be1448067a2f84ba6b9a
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/Game.unity
+    guid: 1905b140a6b0f2f4d8671b5aa8295372
+  - enabled: 0
+    path: Assets/Scenes/Sockets.unity
+    guid: 597f095b3f8c579479b68d10cdf81e4d
+  - enabled: 0
+    path: Assets/Scenes/MarkWorkspace.unity
+    guid: 6925a1ead85955847a8ec601088695ec
   m_configObjects: {}
