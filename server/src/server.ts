@@ -67,9 +67,10 @@ function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): Use
     curUser.open();
     curUser.socketId = socketId;
     idMap.set(info.id, curUser);
-    if (!curUser.opponentId){
+    if (!curUser.opponentId) {
       let temp = new UserInfo("", 0, socketId, 0);
-      return [temp, temp, temp, temp];    }
+      return [temp, temp, temp, temp];
+    }
     return [];
   }
   if (finishedUsers.includes(info.id)) {
@@ -142,7 +143,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
         });
       if (gamePlayers.length === 0) {
         socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
-      } else if(gamePlayers.length === 1 || gamePlayers.length === 2) {
+      } else if (gamePlayers.length === 1 || gamePlayers.length === 2) {
         socket.emit(CONSTANTS.PAIRING_EVENT, CONSTANTS.PAIRING_RESPONSE);
       } else if (gamePlayers.length === 3) {
         socket.emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
@@ -183,9 +184,9 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
 
             // // If we've received both sets of commands, send back to players
             // if (lastUpdatedPlayerCommands !== lastUpdatedOpponentCommands) {
-              socket.emit(CONSTANTS.RECEIVE_TURN_EVENT, opponent.exportClientRequiredTurnInfo());
-              socket.to(opponent.socketId).emit(CONSTANTS.RECEIVE_TURN_EVENT, player.exportClientRequiredTurnInfo());
-              idMap.set(opponent.id, opponent);
+            socket.emit(CONSTANTS.RECEIVE_TURN_EVENT, opponent.exportClientRequiredTurnInfo());
+            socket.to(opponent.socketId).emit(CONSTANTS.RECEIVE_TURN_EVENT, player.exportClientRequiredTurnInfo());
+            idMap.set(opponent.id, opponent);
             // }
             idMap.set(player.id, player);
           }

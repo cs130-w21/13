@@ -22,27 +22,27 @@ export default class UserInfo {
     this.randomSeed = randomSeed;
     this.closed = false;
   }
-  exportClientRequiredUserInfo() : ClientRequiredUserInfo {
+  exportClientRequiredUserInfo(): ClientRequiredUserInfo {
     return new ClientRequiredUserInfo(this.name, this.playerNumber, this.randomSeed);
   }
-  exportClientRequiredTurnInfo() : TurnInfo {
+  exportClientRequiredTurnInfo(): TurnInfo {
     return new TurnInfo(this.id, this.commands!, this.commandsUpdated);
   }
-  setPlayerNumber(playerNumber: number) : void {
+  setPlayerNumber(playerNumber: number): void {
     this.playerNumber = playerNumber;
   }
-  setOpponentId(opponentId: number) : void {
+  setOpponentId(opponentId: number): void {
     this.opponentId = opponentId;
   }
-  setCommands(commands : string, commandsUpdated : string) : void {
+  setCommands(commands: string, commandsUpdated: string): void {
     this.commands = commands;
     this.commandsUpdated = commandsUpdated;
   }
-  close() : void {
+  close(): void {
     this.closed = true;
     this.closeTime = new Date();
   }
-  open() : void {
+  open(): void {
     this.closed = false;
     this.closeTime = null;
   }
@@ -70,11 +70,11 @@ export class ClientRequiredUserInfo {
 export class ClientSentUserInfo {
   name!: string;
   id!: number;
-  isInvalid() : boolean {
+  isInvalid(): boolean {
     return !this.name || !this.id;
   }
 }
- 
+
 /******************************************************************************/
 // TWO WAY CLASSES
 export class TurnInfo {
@@ -86,7 +86,7 @@ export class TurnInfo {
     this.commands = commands;
     this.commandsUpdated = commandsUpdated;
   }
-  isInvalid() : boolean {
+  isInvalid(): boolean {
     return !this.id || !this.commands || !this.commandsUpdated;
   }
 }

@@ -120,7 +120,7 @@ public class RemoteController : Opponent
       Destroy();
     });
 
-        // this happens on disconnect
+    // this happens on disconnect
     socket.On(QSocket.EVENT_DISCONNECT, () =>
     {
       Debug.Log("Disconnected from server");

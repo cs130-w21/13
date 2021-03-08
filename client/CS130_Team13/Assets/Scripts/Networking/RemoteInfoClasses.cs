@@ -13,28 +13,34 @@ public class UserInfo
     this.name = name;
     this.id = id;
   }
-  public ServerRequiredUserConnectionInfo exportConnectToServerRequiredInfo() {
-    if (state == GameManager.GameState.AwaitingOpponentCommands) {
+  public ServerRequiredUserConnectionInfo exportConnectToServerRequiredInfo()
+  {
+    if (state == GameManager.GameState.AwaitingOpponentCommands)
+    {
       return new ServerRequiredUserConnectionInfo(name, id, commands, commandsUpdated);
     }
     return new ServerRequiredUserConnectionInfo(name, id);
   }
-  public void setCommands(string commands) {
+  public void setCommands(string commands)
+  {
     this.commands = commands;
     if (!(commands == null || commands == "null"))
       this.commandsUpdated = "date is " + System.DateTime.Now.ToString();
   }
-  public void setCommands(string commands, string commandsUpdated) {
+  public void setCommands(string commands, string commandsUpdated)
+  {
     this.commands = commands;
     this.commandsUpdated = commandsUpdated;
   }
-  public string getCommands() {
+  public string getCommands()
+  {
     if (this.commandsUpdated == null)
       return null;
-    
+
     return this.commands;
   }
-  public TurnInfo exportTurnInfo() {
+  public TurnInfo exportTurnInfo()
+  {
     return new TurnInfo(commands, id, commandsUpdated);
   }
 }
@@ -46,12 +52,14 @@ public class ServerRequiredUserConnectionInfo
   public int id;
   public string commands;
   public string commandsUpdated;
-  public ServerRequiredUserConnectionInfo(string name, int id) {
-    this.name = name; 
+  public ServerRequiredUserConnectionInfo(string name, int id)
+  {
+    this.name = name;
     this.id = id;
   }
-  public ServerRequiredUserConnectionInfo(string name, int id, string commands, string commandsUpdated) {
-    this.name = name; 
+  public ServerRequiredUserConnectionInfo(string name, int id, string commands, string commandsUpdated)
+  {
+    this.name = name;
     this.id = id;
     this.commands = commands;
     this.commandsUpdated = commandsUpdated;
