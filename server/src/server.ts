@@ -63,7 +63,6 @@ const intervalCheck = setInterval(async () => {
 function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): UserInfo[] {
   let curUser: UserInfo | undefined = idMap.get(info.id);
   if (curUser) {
-    console.log("HM");
     curUser.open();
     curUser.socketId = socketId;
     idMap.set(info.id, curUser);
@@ -129,7 +128,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   // The "hello" event is how a user initially connects to the server
   socket.on(CONSTANTS.CLIENT_INITIATE_EVENT, async (data: string) => {
     let clientUserInfo: ClientSentUserInfo = JSON.parse(data);
-    id = clientUserInfo.id; // TODO: SET SOCKET>ID
+    id = clientUserInfo.id;
     console.log(clientUserInfo);
     console.log(clientUserInfo.isInvalid);
 
