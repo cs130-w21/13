@@ -63,13 +63,18 @@ const intervalCheck = setInterval(async () => {
 function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): UserInfo[] {
   let curUser: UserInfo | undefined = idMap.get(info.id);
   if (curUser) {
+    console.log("HM");
     curUser.open();
     curUser.socketId = socketId;
     idMap.set(info.id, curUser);
+    if (!curUser.opponentId){
+      let temp = new UserInfo("", 0, socketId, 0);
+      return [temp, temp, temp, temp];    }
     return [];
   }
   if (finishedUsers.includes(info.id)) {
-    return [];
+    let temp = new UserInfo("", 0, socketId, 0);
+    return [temp, temp, temp];
   }
   if (usersSearchingForGame.length === 0) {
     let temp: UserInfo = new UserInfo(info.name, info.id, socketId, Math.random());
@@ -137,8 +142,10 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
         });
       if (gamePlayers.length === 0) {
         socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
-      } else {
+      } else if(gamePlayers.length === 1 || gamePlayers.length === 2) {
         socket.emit(CONSTANTS.PAIRING_EVENT, CONSTANTS.PAIRING_RESPONSE);
+      } else if (gamePlayers.length === 3) {
+        socket.emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
       }
       if (gamePlayers.length === 2) {
         let user1: UserInfo = gamePlayers[0];
