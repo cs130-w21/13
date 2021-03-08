@@ -81,6 +81,14 @@ enum GameState {
 }
 GameState ..> GameManager
 
+note "State" as n3
+n3 .. GameManager
+note "Singleton" as n4
+n4 .. GameManager
+n4 .. BoardManager
+n4 .. RemoteController
+n4 .. CodingPanel
+
 ' also implements MonoBehaviour
 class GameManager {
     + bm: BoardManager

@@ -102,6 +102,11 @@ class SourceGrid extends DroppablePhysics {
     - Count2Frames(item: GameObject): IEnumerator
 }
 
+note "Facade" as n1
+note "Proxy" as n2
+n1 .. CodingPanel
+n2 .. CodingPanel
+
 ' also implements MonoBehaviour
 class CodingPanel implements ICodeInfo {
     - mySlotInstance: GameObject
