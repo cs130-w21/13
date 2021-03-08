@@ -117,20 +117,17 @@ io.attach(http, {
  * Additional players will receive the error event "initiate"
  */
 io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
-  console.log('a user VPMSMDMFMFDM');
+  console.log('a user has connected');
   let id;
 
   // The "hello" event is how a user initially connects to the server
   socket.on(CONSTANTS.CLIENT_INITIATE_EVENT, async (data: string) => {
-    console.log("HELLO")
     let clientUserInfo: ClientSentUserInfo = JSON.parse(data);
     id = clientUserInfo.id; // TODO: SET SOCKET>ID
     console.log(clientUserInfo);
     console.log(clientUserInfo.isInvalid);
 
     if (!clientUserInfo.isInvalid) {
-      console.log("HM");
-
       let gamePlayers: UserInfo[] = await mutex.promise()
         .then(function (mutex) {
           mutex.lock();
@@ -138,7 +135,6 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           mutex.unlock();
           return gamePlayers;
         });
-      console.log("GAMEPLAYERS" + gamePlayers);
       if (gamePlayers.length === 0) {
         socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
       } else {
@@ -161,9 +157,6 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   */
   socket.on(CONSTANTS.SUBMIT_TURN_EVENT, async (data: string) => {
     let socketTurnInfo: TurnInfo = JSON.parse(data);
-    console.log("CHECK IT: " + data    )
-    console.log(socketTurnInfo.toString()  )
-
     id = socketTurnInfo.id;
     if (!socketTurnInfo.isInvalid) {
       await mutex.promise()
