@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ClientRequiredUserInfo | server</title>
+	<title>ClientSentTurnInfo | server</title>
 	<meta name="description" content="Documentation for server">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,32 +55,24 @@
 					<a href="../modules.html">server</a>
 				</li>
 				<li>
-					<a href="../modules/userinfoclasses.html">UserInfoClasses</a>
+					<a href="../modules/src_userinfoclasses.html">src/UserInfoClasses</a>
 				</li>
 				<li>
-					<a href="userinfoclasses.clientrequireduserinfo.html">ClientRequiredUserInfo</a>
+					<a href="src_userinfoclasses.clientsentturninfo.html">ClientSentTurnInfo</a>
 				</li>
 			</ul>
-			<h1>Class ClientRequiredUserInfo</h1>
+			<h1>Class ClientSentTurnInfo</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>User info that is relevant to the client.
-						SENT on game start</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ClientRequiredUserInfo</span>
+						<span class="target">ClientSentTurnInfo</span>
 					</li>
 				</ul>
 			</section>
@@ -91,15 +83,20 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="userinfoclasses.clientrequireduserinfo.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="src_userinfoclasses.clientsentturninfo.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="userinfoclasses.clientrequireduserinfo.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="userinfoclasses.clientrequireduserinfo.html#playernumber" class="tsd-kind-icon">player<wbr>Number</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="userinfoclasses.clientrequireduserinfo.html#randomseed" class="tsd-kind-icon">random<wbr>Seed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="src_userinfoclasses.clientsentturninfo.html#commands" class="tsd-kind-icon">commands</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="src_userinfoclasses.clientsentturninfo.html#id" class="tsd-kind-icon">id</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="src_userinfoclasses.clientsentturninfo.html#isinvalid" class="tsd-kind-icon">is<wbr>Invalid</a></li>
 							</ul>
 						</section>
 					</div>
@@ -111,28 +108,25 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Client<wbr>Required<wbr>User<wbr>Info<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, playerNumber<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, randomSeed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="userinfoclasses.clientrequireduserinfo.html" class="tsd-signature-type" data-tsd-kind="Class">ClientRequiredUserInfo</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Client<wbr>Sent<wbr>Turn<wbr>Info<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, commands<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="src_userinfoclasses.clientsentturninfo.html" class="tsd-signature-type" data-tsd-kind="Class">ClientSentTurnInfo</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cs130-w21/13/blob/cdbfe37/server/UserInfoClasses.ts#L39">UserInfoClasses.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/cs130-w21/13/blob/600844a/server/src/UserInfoClasses.ts#L92">src/UserInfoClasses.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<h5>id: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5>playerNumber: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>randomSeed: <span class="tsd-signature-type">number</span></h5>
+									<h5>commands: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="userinfoclasses.clientrequireduserinfo.html" class="tsd-signature-type" data-tsd-kind="Class">ClientRequiredUserInfo</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="src_userinfoclasses.clientsentturninfo.html" class="tsd-signature-type" data-tsd-kind="Class">ClientSentTurnInfo</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -140,34 +134,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="commands" class="tsd-anchor"></a>
+					<h3>commands</h3>
+					<div class="tsd-signature tsd-kind-icon">commands<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cs130-w21/13/blob/cdbfe37/server/UserInfoClasses.ts#L37">UserInfoClasses.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/cs130-w21/13/blob/600844a/server/src/UserInfoClasses.ts#L89">src/UserInfoClasses.ts:89</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="playernumber" class="tsd-anchor"></a>
-					<h3>player<wbr>Number</h3>
-					<div class="tsd-signature tsd-kind-icon">player<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cs130-w21/13/blob/cdbfe37/server/UserInfoClasses.ts#L38">UserInfoClasses.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/cs130-w21/13/blob/600844a/server/src/UserInfoClasses.ts#L88">src/UserInfoClasses.ts:88</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="randomseed" class="tsd-anchor"></a>
-					<h3>random<wbr>Seed</h3>
-					<div class="tsd-signature tsd-kind-icon">random<wbr>Seed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cs130-w21/13/blob/cdbfe37/server/UserInfoClasses.ts#L39">UserInfoClasses.ts:39</a></li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="isinvalid" class="tsd-anchor"></a>
+					<h3>is<wbr>Invalid</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Invalid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cs130-w21/13/blob/600844a/server/src/UserInfoClasses.ts#L90">src/UserInfoClasses.ts:90</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -177,42 +181,48 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/src_serverconstants.html">src/<wbr>Server<wbr>Constants</a>
+					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/userinfoclasses.html">User<wbr>Info<wbr>Classes</a>
+						<a href="../modules/src_userinfoclasses.html">src/<wbr>User<wbr>Info<wbr>Classes</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="src_userinfoclasses.clientrequiredturninfo.html" class="tsd-kind-icon">Client<wbr>Required<wbr>Turn<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="src_userinfoclasses.clientrequireduserinfo.html" class="tsd-kind-icon">Client<wbr>Required<wbr>User<wbr>Info</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="userinfoclasses.clientrequireduserinfo.html" class="tsd-kind-icon">Client<wbr>Required<wbr>User<wbr>Info</a>
+						<a href="src_userinfoclasses.clientsentturninfo.html" class="tsd-kind-icon">Client<wbr>Sent<wbr>Turn<wbr>Info</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="userinfoclasses.clientrequireduserinfo.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="src_userinfoclasses.clientsentturninfo.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="userinfoclasses.clientrequireduserinfo.html#name" class="tsd-kind-icon">name</a>
+								<a href="src_userinfoclasses.clientsentturninfo.html#commands" class="tsd-kind-icon">commands</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="userinfoclasses.clientrequireduserinfo.html#playernumber" class="tsd-kind-icon">player<wbr>Number</a>
+								<a href="src_userinfoclasses.clientsentturninfo.html#id" class="tsd-kind-icon">id</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="userinfoclasses.clientrequireduserinfo.html#randomseed" class="tsd-kind-icon">random<wbr>Seed</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="src_userinfoclasses.clientsentturninfo.html#isinvalid" class="tsd-kind-icon">is<wbr>Invalid</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="userinfoclasses.clientsentuserinfo.html" class="tsd-kind-icon">Client<wbr>Sent<wbr>User<wbr>Info</a>
+						<a href="src_userinfoclasses.clientsentuserinfo.html" class="tsd-kind-icon">Client<wbr>Sent<wbr>User<wbr>Info</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="userinfoclasses.socketturninfo.html" class="tsd-kind-icon">Socket<wbr>Turn<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="userinfoclasses.default.html" class="tsd-kind-icon">default</a>
+						<a href="src_userinfoclasses.default.html" class="tsd-kind-icon">default</a>
 					</li>
 				</ul>
 			</nav>
@@ -227,6 +237,10 @@
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 			</ul>
 		</div>
 	</div>
