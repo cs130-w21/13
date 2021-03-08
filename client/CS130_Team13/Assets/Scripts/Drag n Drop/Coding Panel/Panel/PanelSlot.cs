@@ -39,10 +39,10 @@ public class PanelSlot : DroppablePhysics, ICodeInfo
     }
 
     public string GetInformation() {
-        return myInfo;
+        return (GetCurrentItem() != null) ? GetCurrentItem().GetComponent<ICodeInfo>().GetInformation() : "";
     }
 
     public int GetCost() {
-        return myCost;
+        return (GetCurrentItem() != null) ? GetCurrentItem().GetComponent<ICodeInfo>().GetCost() : 0;
     }
 }
