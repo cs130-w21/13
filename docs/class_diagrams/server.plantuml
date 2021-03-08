@@ -1,18 +1,29 @@
 @startuml server
 
-' User Info Classes
+' User Info
 
 class UserInfo {
     + name: string
     + id: number
     + socketId: string
-    + commands: string
+    - commands: string
     + playerNumber: number
     + randomSeed: number
-    + constructor(name: string, id: number, socketId: string, playerNumber: number, randomSeed: number)
+    + opponentId: number
+    + commandsUpdated: Date
+    + closed: boolean
+    + closeTime: Date
+    + constructor(name: string, id: number, socketId: string, randomSeed: number)
     + exportClientRequiredUserInfo() : ClientRequiredUserInfo
-    + exportClientRequiredTurnInfo() : SocketTurnInfo
+    + exportClientRequiredTurnInfo() : ClientRequiredTurnInfo
+    + setPlayerNumber(playerNumber: number) : void
+    + setOpponentId(opponentId: number) : void
+    + setCommands(commands : string) : void
+    + close(): void
+    + open(): void
 }
+
+' Dependencies
 
 class ClientRequiredUserInfo {
     + name: string
@@ -22,18 +33,26 @@ class ClientRequiredUserInfo {
 }
 ClientRequiredUserInfo ..> UserInfo
 
+class ClientRequiredTurnInfo {
+    + id: number
+    + commands: string
+    + commandsUpdated: Date
+    + constructor(id: number, commands: string, commandsUpdated: Date)
+}
+ClientRequiredTurnInfo ..> UserInfo
+
 class ClientSentUserInfo {
     + name: string
     + id: number
     + isInvalid() : boolean
 }
 
-class SocketTurnInfo {
-    + id: number
+class ClientSentTurnInfo {
     + commands: string
+    + id: number
     + isInvalid() : boolean
     + constructor(id: number, commands: string)
 }
-SocketTurnInfo ..> UserInfo
+
 
 @enduml

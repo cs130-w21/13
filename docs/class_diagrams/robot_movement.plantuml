@@ -12,20 +12,20 @@ Robot ..> Direction
 
 ' also implements MonoBehaviour
 class Robot {
-    + outOfBatteryEffect : ParticleSystem
-    - batteryCharge : int
-    - batteryBoostTurns : int
-    - moveBoostTurns : int
-    - mineBoostTurns : int
+    + outOfBatteryEffect: ParticleSystem
+    - batteryCharge: int
+    - batteryBoostTurns: int
+    - moveBoostTurns: int
+    - mineBoostTurns: int
     - boardManager: BoardManager
-    + Init(bm : BoardManager) : void
-    + Recharge() : void
-    + OutOfBattery() : void
-    + PowerupBatteryBoost() : void
+    + Init(bm: BoardManager): void
+    + Recharge(): void
+    + OutOfBattery(): void
+    + PowerupBatteryBoost(): void
     + PowerupMoveCostReduction(): void
     + PowerupMineBoost(): void
-    + Rotate90(dir : Direction): IEnumerator
-    + Move(dir : Direction): IEnumerator
+    + Rotate90(dir: Direction): IEnumerator
+    + Move(dir: Direction): IEnumerator
     + Mine(): IEnumerator
     + Place(): IEnumerator
 }
@@ -42,97 +42,209 @@ BoardManager ..> TileState
 
 ' also implements MonoBehaviour
 class BoardManager {
-    + backgroundTilemap : Tilemap
-    + objectTilemap : Tilemap
-    + bgTile : TileBase
-    + placedRock : TileBase
-    + rockTiles : TileBase [*] {ordered | nonunique}
-    + gemTiles : TileBase [3]
-    + powerupTile : TileBase
-    - powerupLocations : <Vector3Int, int> [*] {nonordered | unique}
-    + cam : Camera
-    + player1 : Robot
-    + player2 : Robot
-    - boardWidth : int = Constants.Board.BOARD_WIDTH {readOnly}
-    - boardHeight : int = Constants.Board.BOARD_HEIGHT {readOnly}
-    - gameManager : GameManager
-    + CreateBoard(gm: GameManager, seed: int) : void
-    + GetTileState(tilePos : Vector3) : TileState
-    + MineTile(tilePos : Vector3, robot: Robot) : void
-    + PlaceTile(tilePos : Vector3) : void
-    + CheckForCollectable(robot : Robot) : void
-    + RunTurn(p1Moves : string, p2Moves : string) : void
-    - RunTurnHelper(p1Moves : string, p2Moves : string) : IEnumerator
-    - RunCommand(robot : Robot, command : char) : IEnumerator
-    - PlaceRandomCollectible(tile : TileBase, spaces : Vector3Int [*]) : Vector3Int
+    + backgroundTilemap: Tilemap
+    + objectTilemap: Tilemap
+    + bgTile: TileBase
+    + placedRock: TileBase
+    + rockTiles: TileBase [*] {ordered | nonunique}
+    + gemTiles: TileBase [3]
+    + powerupTile: TileBase
+    - powerupLocations: <Vector3Int, int> [*] {nonordered | unique}
+    + cam: Camera
+    + player1: Robot
+    + player2: Robot
+    - boardWidth: int = Constants.Board.BOARD_WIDTH {readOnly}
+    - boardHeight: int = Constants.Board.BOARD_HEIGHT {readOnly}
+    - gameManager: GameManager
+    + CreateBoard(gm: GameManager, seed: int): void
+    + GetTileState(tilePos: Vector3): TileState
+    + MineTile(tilePos: Vector3, robot: Robot): void
+    + PlaceTile(tilePos: Vector3): void
+    + CheckForCollectable(robot: Robot): void
+    + RunTurn(p1Moves: string, p2Moves: string): void
+    - RunCommand(robot: Robot, command: char): IEnumerator
+    - PlaceRandomCollectible(tile: TileBase, spaces: Vector3Int [*]): Vector3Int
 }
 BoardManager "0..1" o-- "2" Robot
 BoardManager "1" o--o "1" GameManager
 
 ' GameManager
 
+enum GameState {
+    Connecting
+    WaitingForOpponent
+    StartGame
+    CodingPhase
+    AwaitingOpponentCommands
+    ExecutionPhase
+    EndGame
+}
+GameState ..> GameManager
+
+note "State" as n3
+n3 .. GameManager
+note "Singleton" as n4
+n4 .. GameManager
+n4 .. BoardManager
+n4 .. RemoteController
+n4 .. CodingPanel
+
 ' also implements MonoBehaviour
 class GameManager {
-    + boardManager : BoardManager
-    - rc : RemoteController
-    + cp : CodingPanel
-    - p1Score : int
-    - p2Score : int
-    + Start() : void
-    - RunGame() : void
-    - EndGame() : void
-    + UpdateScore(player : int, scoreChange: int) : int
-    + GetScore(player: int) : int
+    + bm: BoardManager
+    - rc: Opponent
+    + cp: CodingPanel
+    - codeProcessor: CodeProcessor
+    + ConnectingUI: GameObject
+    + nameInput: InputField
+    - nameSubmitted: bool = false
+    + WaitingUI: GameObject
+    + GameOverUI: GameObject
+    + CodingUI: GameObject
+    + SubmitButton: GameObject
+    + isRunningTurn: bool = false
+    - playerName: string
+    - myPlayerOrder: int = 0
+    - seed: double = 0
+    - currentState: GameState
+    - previousState: GameState
+    - p1Score: int
+    - p2Score: int
+    - currentTurn: int = 0
+    - turnStartTime: float = -1 * Constants.Game.TURN_DURATION_SECS
+    - timeRemaining: float
+    - clientCmd: string = null
+    - opponentCmd: string = null
+    - SECONDS_TO_OPPONENT_TIMEOUT: int = 45 {readOnly}
+    - codeSubmitted: bool = false
+    + SetCurrentState(state GameState): void
+    + Start(): void
+    + Update(): void
+    + endGameInAMinute(): IEnumerator
+    + EndGame(): void
+    + UpdateScore(player: int, scoreChange: int): int
+    + GetScore(player: int): int
+    + getTimeRemaining(): float
+    + getP1Score(): int
+    + getP2Score(): int
+    + submitCode(): void
+    + setNameSubmitted(b: bool): void
 }
-GameManager "0..1" *-- "1" RemoteController
 GameManager "0..1" *-- "1" CodingPanel
+GameManager "0..1" *-- "1" CodeProcessor
+GameManager "0..1" *-- "1" Opponent
 
 ' CodeProcessor
 
 class CodeProcessor {
-    - code : string = ""
+    - code: string = ""
     - result: string = ""
-    - ProcessCode() : void
-    + GetResult(pCode: string) : string
+    - ProcessCode(): void
+    + GetResult(pCode: string): string
 }
+
+' also implements MonoBehaviour
+class ScoreBoard {
+    + p1: Text
+    + p2: Text
+    + timer: Text
+    + gameManager: GameManager
+    + Update(): void
+}
+ScoreBoard "0..1" o-- "1" GameManager
+
+' Menus
+
+class SceneLoader implements MonoBehaviour {
+    + instance: SceneLoader
+    - menuScene: string
+    - gameScene: string
+    - currentScene: string
+    + Awake(): void
+    + ToSpecificScene(sceneName: string): void
+    + StartGame(): void
+    + GackToMenu(): void
+}
+
+class SettingsHub implements MonoBehaviour {
+    + instance: SettingsHub
+    - currentVolume: float = 0
+    - Awake(): void
+    + UpdateVolume(newValue: float): void
+    + GetVolume(): float
+}
+
+' also implements MonoBehaviour
+class VolumeSettings {
+    + UpdateVolume(vol: float): void
+}
+SettingsHub ..> VolumeSettings
 
 ' Remote Info Classes
 
 class UserInfo {
     + name: string
-    + id: string
-    + playerOrder: string
+    + id: int
+    + playerNumber: int
     + randomSeed: double
-    + UserInfo(name: string, id: string)
+    + commands: string
+    + state: GameState
+    + commandsUpdated: string
+    + UserInfo(name: string, id: int)
+    + exportConnectToServerRequiredInfo(): ServerRequiredUserConnectionInfo
+    + exportTurnInfo(): TurnInfo
 }
 UserInfo ..> RemoteController
 
+class ServerRequiredUserConnectionInfo {
+    + name: string
+    + id: int
+    + commands: string
+    + ServerRequiredUserConnectionInfo(name: string, id: int)
+    + ServerRequiredUserConnectionInfo(name: string, id: int, commands: string)
+}
+ServerRequiredUserConnectionInfo ..> UserInfo
+
 class TurnInfo {
     + commands: string
-    + id: string
+    + id: int
+    + commandsUpdated: string
     + TurnInfo(commands: string, id: string)
 }
-TurnInfo ..> RemoteController
+TurnInfo ..> UserInfo
 
 ' RemoteController
 
-class RemoteController {
+interface Opponent {
+    + SendPlayerCommands_ToServer(commands: string): void
+    + EndCurrentGame_ToServer(): void
+    + GetGameStarted(): bool
+    + GetPlayerNumber(): int
+    + GetOpponentCommands(): string
+    + GetOpponentName(): string
+    + GetRandomSeed(): double
+    + GetGameEnded(): bool
+    + InitializeGame(name: string): IEnumerator
+    + SetCurrentState(state: GameState): void
+}
+
+class RemoteController implements Opponent {
     - socket: QSocket
     - userInfo: UserInfo
     - opponentInfo: UserInfo
-    - turnInfo: TurnInfo
-    - username: string
-    - SERVER_URL: string {readOnly}
-    - opponentCommands: string
     - gameStarted: bool = false
-    + RemoteController(name: string)
-    + SendPlayerCommands_ToServer(commands: string) : void
-    + EndCurrentGame_ToServer() : void
-    + GetGameStarted() : bool
-    + GetPlayerOrder() : int
-    + getOpponentCommands() : string
-    + Start(): void
-    + InitializeGame(): IEnumerator
+    - gameEnded: bool = false
+    + ~RemoteController()
+    + SendPlayerCommands_ToServer(commands: string): void
+    + EndCurrentGame_ToServer(): void
+    + GetGameStarted(): bool
+    + GetPlayerNumber(): int
+    + GetOpponentCommands(): string
+    + GetOpponentName(): string
+    + GetRandomSeed(): double
+    + GetGameEnded(): bool
+    + InitializeGame(name: string): IEnumerator
+    + SetCurrentState(state: GameState): void
     - setupSocket(): void
     - Destroy(): void
 }
