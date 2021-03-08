@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private Opponent rc;
     public CodingPanel cp;
     private CodeProcessor codeProcessor;
+    private Coroutine gameTimeout;
 
     public GameObject ConnectingUI;
     public InputField nameInput;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
         codeProcessor = new CodeProcessor();
         SetCurrentState(GameState.Connecting);
         currentTurn = 1;
+        gameTimeout = null;
     }
 
     // Called every frame. Used to manage the state machine.
@@ -161,8 +163,9 @@ public class GameManager : MonoBehaviour
                     }
                     if (previousState != GameState.ExecutionPhase)
                     {
-                        StopCoroutine("endGameInAMinute");
-                        StartCoroutine("endGameInAMinute");
+                        if (gameTimeout != null)
+                            StopCoroutine(gameTimeout);
+                        gameTimeout = StartCoroutine(endGameInAMinute());
                         // Assume Player 1, swap if not
                         string p1Cmd;
                         string p2Cmd;
