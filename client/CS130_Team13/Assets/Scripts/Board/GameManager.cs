@@ -213,7 +213,8 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy()
     {
-      rc.Destroy();
+      if (rc != null)
+        rc.Destroy();
     }
 
     public IEnumerator endGameInAMinute()

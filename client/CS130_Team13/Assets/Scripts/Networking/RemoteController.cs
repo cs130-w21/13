@@ -99,7 +99,7 @@ public class RemoteController : Opponent
             " has received the opponent's turn data");
       if (opponentTurnInfo.commandsUpdated != null &&
         !String.Equals(opponentTurnInfo.commandsUpdated, opponentInfo.commandsUpdated))
-        opponentInfo.commands = opponentTurnInfo.commands;
+        opponentInfo.setCommands(opponentTurnInfo.commands);
     });
 
     // There is an error. End game.
@@ -154,7 +154,8 @@ public class RemoteController : Opponent
   {
     // Create a TurnInfo object
     Debug.Log("Player " + userInfo.playerNumber + " is submitting their turn");
-    userInfo.commands = commands;
+    userInfo.setCommands(commands);
+    Debug.Log(userInfo.commandsUpdated);
     socket.Emit("submittingTurn", JsonUtility.ToJson(userInfo.exportTurnInfo()));
   }
 
@@ -178,10 +179,12 @@ public class RemoteController : Opponent
   /// </summary>
   public string GetOpponentCommands()
   {
-    string temp = opponentInfo.commands;
-    if (temp != null && temp != "null")
+    string temp = opponentInfo.getCommands();
+    string temp2 = userInfo.getCommands();
+    if (temp != null && temp != "null" && temp2 != null && temp2 != "null")
     {
-      opponentInfo.commands = null;
+      opponentInfo.setCommands(null);
+      userInfo.setCommands(null);
       return temp;
     }
     return null;
