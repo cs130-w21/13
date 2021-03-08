@@ -211,6 +211,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void OnDestroy()
+    {
+      rc.Destroy();
+    }
+
     public IEnumerator endGameInAMinute()
     {
         yield return new WaitForSeconds(Constants.Game.SECONDS_TO_OPPONENT_TIMEOUT);

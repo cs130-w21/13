@@ -18,6 +18,7 @@ public interface Opponent
   double GetRandomSeed();
   bool GetGameEnded();
   void SetCurrentState(GameManager.GameState state);
+  void Destroy();
 }
 //////// CLIENT PEEPS LOOK NO FURTHER :0
 
@@ -118,9 +119,16 @@ public class RemoteController : Opponent
             " has received the instruction to end the game");
       Destroy();
     });
+
+        // this happens on disconnect
+    socket.On(QSocket.EVENT_DISCONNECT, () =>
+    {
+      Debug.Log("Disconnected from server");
+    });
+
   }
 
-  private void Destroy()
+  public void Destroy()
   {
     Debug.Log("User is disconnecting from socket");
     socket.Disconnect();
