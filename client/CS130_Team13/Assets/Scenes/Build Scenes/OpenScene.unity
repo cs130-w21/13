@@ -1243,18 +1243,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772945280}
   m_CullTransparentMesh: 0
---- !u!114 &783682971 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5545503709456810204, guid: cbca74944ba0db74eaade7a1b7c8edb1,
-    type: 3}
-  m_PrefabInstance: {fileID: 5545503709753953607}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674377e45f455d744ac0ca1014652e47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1101468968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,6 +1341,7 @@ GameObject:
   - component: {fileID: 1691728255}
   - component: {fileID: 1691728254}
   - component: {fileID: 1691728253}
+  - component: {fileID: 1691728256}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -1423,8 +1412,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 783682971}
-        m_MethodName: StartGame
+      - m_Target: {fileID: 1691728256}
+        m_MethodName: ToGameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1471,6 +1460,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691728251}
   m_CullTransparentMesh: 0
+--- !u!114 &1691728256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691728251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9cd5dbad8f74140ab1f0a404f6c9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1874422384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,6 +2053,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545503709456810204, guid: cbca74944ba0db74eaade7a1b7c8edb1,
+        type: 3}
+      propertyPath: gameScene
+      value: Game
       objectReference: {fileID: 0}
     - target: {fileID: 5545503709456810205, guid: cbca74944ba0db74eaade7a1b7c8edb1,
         type: 3}
