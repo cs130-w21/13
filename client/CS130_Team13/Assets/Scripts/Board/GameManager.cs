@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
                     {
                         if (gameTimeout != null)
                             StopCoroutine(gameTimeout);
-                        gameTimeout = StartCoroutine(endGameInAMinute());
+                        //gameTimeout = StartCoroutine(endGameInAMinute());
                         // Assume Player 1, swap if not
                         string p1Cmd;
                         string p2Cmd;
