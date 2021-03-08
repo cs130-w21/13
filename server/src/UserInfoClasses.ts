@@ -11,7 +11,7 @@ export default class UserInfo {
   playerNumber!: number;
   randomSeed!: number;
   opponentId!: number;
-  commandsUpdated!: Date;
+  commandsUpdated!: string;
   closed!: boolean;
   closeTime!: Date | null;
   constructor(name: string, id: number, socketId: string, randomSeed: number) {
@@ -22,27 +22,27 @@ export default class UserInfo {
     this.randomSeed = randomSeed;
     this.closed = false;
   }
-  exportClientRequiredUserInfo() : ClientRequiredUserInfo {
+  exportClientRequiredUserInfo(): ClientRequiredUserInfo {
     return new ClientRequiredUserInfo(this.name, this.playerNumber, this.randomSeed);
   }
-  exportClientRequiredTurnInfo() : ClientRequiredTurnInfo {
-    return new ClientRequiredTurnInfo(this.id, this.commands!, this.commandsUpdated);
+  exportClientRequiredTurnInfo(): TurnInfo {
+    return new TurnInfo(this.id, this.commands!, this.commandsUpdated);
   }
-  setPlayerNumber(playerNumber: number) : void {
+  setPlayerNumber(playerNumber: number): void {
     this.playerNumber = playerNumber;
   }
-  setOpponentId(opponentId: number) : void {
+  setOpponentId(opponentId: number): void {
     this.opponentId = opponentId;
   }
-  setCommands(commands : string) : void {
+  setCommands(commands: string, commandsUpdated: string): void {
     this.commands = commands;
-    this.commandsUpdated = new Date();
+    this.commandsUpdated = commandsUpdated;
   }
-  close() : void {
+  close(): void {
     this.closed = true;
     this.closeTime = new Date();
   }
-  open() : void {
+  open(): void {
     this.closed = false;
     this.closeTime = null;
   }
@@ -64,34 +64,29 @@ export class ClientRequiredUserInfo {
     this.randomSeed = randomSeed;
   }
 }
-export class ClientRequiredTurnInfo {
-  id!: number;
-  commands!: string; // TODO UASDOIA UNDEFINED NULL PICKLES
-  commandsUpdated!: Date;
-  constructor(id: number, commands: string, commandsUpdated: Date) {
-    this.id = id;
-    this.commands = commands;
-    this.commandsUpdated = commandsUpdated;
-  }
-}
 
 /******************************************************************************/
 // CLASSES RECEIVED FROM CLIENT
 export class ClientSentUserInfo {
   name!: string;
   id!: number;
-  isInvalid() : boolean {
+  isInvalid(): boolean {
     return !this.name || !this.id;
   }
 }
-export class ClientSentTurnInfo {
+
+/******************************************************************************/
+// TWO WAY CLASSES
+export class TurnInfo {
   id!: number;
   commands!: string;
-  isInvalid() : boolean {
-    return !this.id || !this.commands;
-  }
-  constructor(id: number, commands: string) {
+  commandsUpdated!: string;
+  constructor(id: number, commands: string, commandsUpdated: string) {
     this.id = id;
     this.commands = commands;
+    this.commandsUpdated = commandsUpdated;
+  }
+  isInvalid(): boolean {
+    return !this.id || !this.commands || !this.commandsUpdated;
   }
 }

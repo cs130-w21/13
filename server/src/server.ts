@@ -10,7 +10,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const MutexPromise = require('mutex-promise'); // in NodeJS, in browser this is not needed
 
-import UserInfo, { ClientSentTurnInfo, ClientSentUserInfo } from './UserInfoClasses';
+import UserInfo, { TurnInfo, ClientSentUserInfo } from './UserInfoClasses';
 import * as CONSTANTS from './ServerConstants';
 
 var mutex = new MutexPromise('very-unique-key');
@@ -64,11 +64,17 @@ function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): Use
   let curUser: UserInfo | undefined = idMap.get(info.id);
   if (curUser) {
     curUser.open();
+    curUser.socketId = socketId;
     idMap.set(info.id, curUser);
+    if (!curUser.opponentId) {
+      let temp = new UserInfo("", 0, socketId, 0);
+      return [temp, temp, temp, temp];
+    }
     return [];
   }
   if (finishedUsers.includes(info.id)) {
-    return [];
+    let temp = new UserInfo("", 0, socketId, 0);
+    return [temp, temp, temp];
   }
   if (usersSearchingForGame.length === 0) {
     let temp: UserInfo = new UserInfo(info.name, info.id, socketId, Math.random());
@@ -91,7 +97,7 @@ function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): Use
 
 function getGamePlayers(id: number): UserInfo[] {
   let curUser = idMap.get(id);
-  if (!curUser || !curUser.opponentId) {
+  if (!curUser || (!curUser.opponentId && !usersSearchingForGame.includes(curUser.id))) {
     return [];
   }
   let curOpponent = idMap.get(curUser.opponentId);
@@ -116,7 +122,7 @@ io.attach(http, {
  * Additional players will receive the error event "initiate"
  */
 io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
-  console.log('a user connected');
+  console.log('a user has connected');
   let id;
 
   // The "hello" event is how a user initially connects to the server
@@ -124,6 +130,8 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
     let clientUserInfo: ClientSentUserInfo = JSON.parse(data);
     id = clientUserInfo.id;
     console.log(clientUserInfo);
+    console.log(clientUserInfo.isInvalid);
+
     if (!clientUserInfo.isInvalid) {
       let gamePlayers: UserInfo[] = await mutex.promise()
         .then(function (mutex) {
@@ -132,12 +140,14 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           mutex.unlock();
           return gamePlayers;
         });
-      if (gamePlayers.length !== 0) {
+      if (gamePlayers.length === 0) {
+        socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
+      } else if (gamePlayers.length === 1 || gamePlayers.length === 2) {
         socket.emit(CONSTANTS.PAIRING_EVENT, CONSTANTS.PAIRING_RESPONSE);
+      } else if (gamePlayers.length === 3) {
+        socket.emit(CONSTANTS.GAME_ENDED_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
       }
       if (gamePlayers.length === 2) {
-        console.log(gamePlayers)
-
         let user1: UserInfo = gamePlayers[0];
         let user2: UserInfo = gamePlayers[1];
         socket.to(user1.socketId).emit(CONSTANTS.GAMEPLAY_START_EVENT, user2.exportClientRequiredUserInfo());
@@ -153,7 +163,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   *   players have submitted
   */
   socket.on(CONSTANTS.SUBMIT_TURN_EVENT, async (data: string) => {
-    let socketTurnInfo: ClientSentTurnInfo = JSON.parse(data);
+    let socketTurnInfo: TurnInfo = JSON.parse(data);
     id = socketTurnInfo.id;
     if (!socketTurnInfo.isInvalid) {
       await mutex.promise()
@@ -167,18 +177,16 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           } else if (players.length === 2) {
             let player: UserInfo = players[0];
             let opponent: UserInfo = players[1];
-            let lastUpdatedPlayerCommands = player.commandsUpdated;
-            let lastUpdatedOpponentCommands = opponent.commandsUpdated;
-            player.setCommands(socketTurnInfo.commands);
-            console.log("Received commands from player %s: %s", player.playerNumber);
+            player.setCommands(socketTurnInfo.commands, socketTurnInfo.commandsUpdated);
+            player.socketId = socket.id;
+            console.log("Received commands from player %s: %s", player.playerNumber, player.exportClientRequiredTurnInfo());
 
-            // If we've received both sets of commands, send back to players
-            if (lastUpdatedPlayerCommands !== lastUpdatedOpponentCommands) {
-              socket.emit(CONSTANTS.RECEIVE_TURN_EVENT, opponent.exportClientRequiredTurnInfo());
-              socket.to(opponent.socketId).emit(CONSTANTS.RECEIVE_TURN_EVENT, player.exportClientRequiredTurnInfo());
-              console.log("Sending commands to both players")
-              idMap.set(opponent.id, opponent);
-            }
+            // // If we've received both sets of commands, send back to players
+            // if (lastUpdatedPlayerCommands !== lastUpdatedOpponentCommands) {
+            socket.emit(CONSTANTS.RECEIVE_TURN_EVENT, opponent.exportClientRequiredTurnInfo());
+            socket.to(opponent.socketId).emit(CONSTANTS.RECEIVE_TURN_EVENT, player.exportClientRequiredTurnInfo());
+            idMap.set(opponent.id, opponent);
+            // }
             idMap.set(player.id, player);
           }
           mutex.unlock();

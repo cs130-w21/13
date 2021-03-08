@@ -18,6 +18,7 @@ public interface Opponent
   double GetRandomSeed();
   bool GetGameEnded();
   void SetCurrentState(GameManager.GameState state);
+  void Destroy();
 }
 //////// CLIENT PEEPS LOOK NO FURTHER :0
 
@@ -62,10 +63,10 @@ public class RemoteController : Opponent
     socket.On(QSocket.EVENT_CONNECT, () =>
     {
       Debug.Log("Connected to server");
-          // The "hello" event is how a user first contacts the server to connect to a game
+      // The "hello" event is how a user first contacts the server to connect to a game
       if (userInfo.state != GameManager.GameState.AwaitingOpponentCommands)
         socket.Emit("hello", JsonUtility.ToJson(userInfo.exportConnectToServerRequiredInfo()));
-      else 
+      else
         socket.Emit("submittingTurn", JsonUtility.ToJson(userInfo.exportTurnInfo()));
     });
 
@@ -80,11 +81,14 @@ public class RemoteController : Opponent
     // We retreive the opponent info from this
     socket.On("gameplay", (data) =>
     {
-      gameStarted = true;
-      opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
-      userInfo.playerNumber = (opponentInfo.playerNumber == 1) ? 2 : 1;
-      Debug.Log("Player " + userInfo.playerNumber
-            + " sees that the game has started");
+      if (gameStarted == false)
+      {
+        gameStarted = true;
+        opponentInfo = JsonUtility.FromJson<UserInfo>(data.ToString());
+        userInfo.playerNumber = (opponentInfo.playerNumber == 1) ? 2 : 1;
+        Debug.Log("Player " + userInfo.playerNumber
+              + " sees that the game has started");
+      }
     });
 
     // We receive opponent's commands from the server
@@ -95,7 +99,15 @@ public class RemoteController : Opponent
             " has received the opponent's turn data");
       if (opponentTurnInfo.commandsUpdated != null &&
         !String.Equals(opponentTurnInfo.commandsUpdated, opponentInfo.commandsUpdated))
-        opponentInfo.commands = opponentTurnInfo.commands;
+        opponentInfo.setCommands(opponentTurnInfo.commands, opponentTurnInfo.commandsUpdated);
+    });
+
+    // There is an error. End game.
+    socket.On("client error", (data) =>
+    {
+      gameEnded = true;
+      Debug.Log(data.ToString());
+      Destroy();
     });
 
     // End the current game.
@@ -107,9 +119,16 @@ public class RemoteController : Opponent
             " has received the instruction to end the game");
       Destroy();
     });
+
+    // this happens on disconnect
+    socket.On(QSocket.EVENT_DISCONNECT, () =>
+    {
+      Debug.Log("Disconnected from server");
+    });
+
   }
 
-  private void Destroy()
+  public void Destroy()
   {
     Debug.Log("User is disconnecting from socket");
     socket.Disconnect();
@@ -135,7 +154,8 @@ public class RemoteController : Opponent
   {
     // Create a TurnInfo object
     Debug.Log("Player " + userInfo.playerNumber + " is submitting their turn");
-    userInfo.commands = commands;
+    userInfo.setCommands(commands);
+    Debug.Log(userInfo.commandsUpdated);
     socket.Emit("submittingTurn", JsonUtility.ToJson(userInfo.exportTurnInfo()));
   }
 
@@ -159,10 +179,12 @@ public class RemoteController : Opponent
   /// </summary>
   public string GetOpponentCommands()
   {
-    string temp = opponentInfo.commands;
-    if (temp != null && temp != "null")
+    string temp = opponentInfo.getCommands();
+    string temp2 = userInfo.getCommands();
+    if (temp != null && temp != "null" && temp2 != null && temp2 != "null")
     {
-      opponentInfo.commands = null;
+      opponentInfo.setCommands(null);
+      userInfo.setCommands(null);
       return temp;
     }
     return null;

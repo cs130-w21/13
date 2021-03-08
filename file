@@ -1,0 +1,13 @@
+qdiff --git a/client/CS130_Team13/Assets/Scripts/Board/GameManager.cs b/client/CS130_Team13/Assets/Scripts/Board/GameManager.cs
+index 7004e31..b4f19c6 100644
+--- a/client/CS130_Team13/Assets/Scripts/Board/GameManager.cs
++++ b/client/CS130_Team13/Assets/Scripts/Board/GameManager.cs
+@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
+                     if (previousState != GameState.ExecutionPhase)
+                     {
+                         StopCoroutine("endGameInAMinute");
+-                        StartCoroutine("endGameInAMinute");
++                        StartCoroutine(endGameInAMinute());
+                         // Assume Player 1, swap if not
+                         string p1Cmd;
+                         string p2Cmd;

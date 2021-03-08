@@ -2,7 +2,7 @@
  * This is the test file corresponding to ../server.ts.
  */
 
-import { ClientSentTurnInfo } from "../src/UserInfoClasses";
+import { TurnInfo } from "../src/UserInfoClasses";
 
 const { http, io, intervalCheck } = require("../src/server");
 const Client = require("socket.io-client");
@@ -109,8 +109,8 @@ describe("test-gameplay-socket-events", () => {
    * Tests whether server sends moves after both clients send their moves
    */
   it("gameplay-test-send-info", async () => {
-    const player1Turn = new ClientSentTurnInfo(1, "LELELEAP");
-    const player2Turn = new ClientSentTurnInfo(2, "DUE VLA");
+    const player1Turn = new TurnInfo(1, "LELELEAP", "rn");
+    const player2Turn = new TurnInfo(2, "DUE VLA", "now");
     clientSocket1.emit('submittingTurn', JSON.stringify(player1Turn));
     clientSocket2.emit('submittingTurn', JSON.stringify(player2Turn));
     await clientSocket1.on('receiveTurn', (msg) => {
