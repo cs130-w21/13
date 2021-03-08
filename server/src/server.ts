@@ -64,6 +64,7 @@ function attemptAddPlayerToGame(info: ClientSentUserInfo, socketId: string): Use
   let curUser: UserInfo | undefined = idMap.get(info.id);
   if (curUser) {
     curUser.open();
+    curUser.socketId = socketId;
     idMap.set(info.id, curUser);
     return [];
   }
@@ -122,7 +123,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
   // The "hello" event is how a user initially connects to the server
   socket.on(CONSTANTS.CLIENT_INITIATE_EVENT, async (data: string) => {
     let clientUserInfo: ClientSentUserInfo = JSON.parse(data);
-    id = clientUserInfo.id;
+    id = clientUserInfo.id; // TODO: SET SOCKET>ID
     console.log(clientUserInfo);
     if (!clientUserInfo.isInvalid) {
       let gamePlayers: UserInfo[] = await mutex.promise()
@@ -132,14 +133,13 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
           mutex.unlock();
           return gamePlayers;
         });
+      console.log("GAMEPLAYERS" + gamePlayers);
       if (gamePlayers.length === 0) {
         socket.emit(CONSTANTS.GAMEPLAY_START_EVENT, CONSTANTS.NO_PARTICULAR_RESPONSE);
       } else {
         socket.emit(CONSTANTS.PAIRING_EVENT, CONSTANTS.PAIRING_RESPONSE);
       }
       if (gamePlayers.length === 2) {
-        console.log(gamePlayers)
-
         let user1: UserInfo = gamePlayers[0];
         let user2: UserInfo = gamePlayers[1];
         socket.to(user1.socketId).emit(CONSTANTS.GAMEPLAY_START_EVENT, user2.exportClientRequiredUserInfo());
@@ -172,6 +172,7 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
             let lastUpdatedPlayerCommands = player.commandsUpdated;
             let lastUpdatedOpponentCommands = opponent.commandsUpdated;
             player.setCommands(socketTurnInfo.commands);
+            player.socketId = socket.id;
             console.log("Received commands from player %s: %s", player.playerNumber);
 
             // If we've received both sets of commands, send back to players
