@@ -179,13 +179,12 @@ io.on(CONSTANTS.IO_CONNECTED_EVENT, (socket) => {
             let opponent: UserInfo = players[1];
             player.setCommands(socketTurnInfo.commands, socketTurnInfo.commandsUpdated);
             player.socketId = socket.id;
-            console.log("Received commands from player %s: %s, updated %s", player.playerNumber, player.exportClientRequiredTurnInfo());
+            console.log("Received commands from player %s: %s", player.playerNumber, player.exportClientRequiredTurnInfo());
 
             // // If we've received both sets of commands, send back to players
             // if (lastUpdatedPlayerCommands !== lastUpdatedOpponentCommands) {
               socket.emit(CONSTANTS.RECEIVE_TURN_EVENT, opponent.exportClientRequiredTurnInfo());
               socket.to(opponent.socketId).emit(CONSTANTS.RECEIVE_TURN_EVENT, player.exportClientRequiredTurnInfo());
-              console.log("Sending commands to both players")
               idMap.set(opponent.id, opponent);
             // }
             idMap.set(player.id, player);
