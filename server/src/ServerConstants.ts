@@ -21,5 +21,5 @@ export const INVALID_TURN_DATA_ERR = {"error": "invalid turn data"};
 export const COULD_NOT_FIND_USER_IN_GAME_ERR = {"error": "could not find user in game; have we paired a game for you yet?"};
 
 // timeout intervals
-export const CHECK_TIMEOUT_INTERVAL = 60000; // 60 seconds
-export const CONNECTION_TIMEOUT_INTERVAL = 45000; // 45 seconds
+export const CHECK_TIMEOUT_INTERVAL = 80000; // 80 seconds
+export const CONNECTION_TIMEOUT_INTERVAL = 120000; // 100 seconds
